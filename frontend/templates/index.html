@@ -1,0 +1,12 @@
+<!-- index.html -->
+{% extends 'layout.html' %}
+
+{% block content %}
+
+{% if name %}
+    <h1>Hello {{ name }}!</h1>
+{% else %}
+    <h1>Hello, world!</h1>
+{% endif %}
+
+{% endblock %}
