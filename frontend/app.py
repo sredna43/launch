@@ -1,6 +1,9 @@
-from flask import Flask, render_template, flash, request
-app = Flask(__name__, template_folder='/templates')
-DEBUG = True
+from flask import Flask, url_for, render_template, request, Response
+from flask_static_compress import FlaskStaticCompress
+from flask_bootstrap import Bootstrap
+
+app = Flask(__name__, template_folder='templates', static_folder="static")
+Bootstrap(app)
 
 @app.route('/')
 def homepage():
