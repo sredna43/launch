@@ -1,8 +1,9 @@
-from wtforms import Form, StringField, validators, SubmitField
+from flask_wtf import FlaskForm
+from wtforms.fields import StringField, SubmitField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length
 
-class GithubRepo(Form):
+class GithubRepo(FlaskForm):
     # Main form for the tool
-
-    repo = StringField('Github Repository URL', [DataRequired(message=('github.com/<user>/<repo>'))])
-    submit = SubmitField('Go!')
+    user = StringField(label=u'Github Username:', validators=[DataRequired()])
+    repo = StringField(label=u'Repository Name:', validators=[DataRequired()])
+    submit = SubmitField(u'Begin')

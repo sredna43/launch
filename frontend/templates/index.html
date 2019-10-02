@@ -2,11 +2,15 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-
-{% if name %}
-    <h1>Hello {{ name }}!</h1>
-{% else %}
-    <h1>Hello, world!</h1>
-{% endif %}
+<div class="container">
+    <h1>Launch UI</h1>
+</div>
+<div class="jumbotron">
+    <div class="container">
+        <p>Thanks, {{user}}. We are spinning up your project {{repo}}!</p>
+        <br />
+        <a class="button btn-primary btn-lg" href="/">Start Over</a>
+    </div>
+</div>
 
 {% endblock %}

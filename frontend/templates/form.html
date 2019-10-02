@@ -5,12 +5,12 @@
 
 {% block content %}
     <div class="container">
+        <h1>Launch UI</h1>
+    </div>
+    <div class="container">
         <div class="jumbotron">
-            <h1>Enter your Github Repo location to get started:</h1>
-            <p>Note: Please enter the exact url (i.e. github.com/username/reponame)</p>
-        </div>
-        <div class="col-md-12">
-            {{form|render_form()}}
+            <h2>Enter your info:</h2>
+            {{ wtf.quick_form(form) }}
         </div>
     </div>
 {%- endblock %}

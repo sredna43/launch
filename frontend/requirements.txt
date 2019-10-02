@@ -1,3 +1,5 @@
 flask
-wtforms
-flask_bootstrap
+flask-bootstrap
+markupsafe
+flask-wtf
+flask-session
