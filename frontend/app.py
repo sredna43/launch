@@ -1,11 +1,12 @@
 from flask import Flask, flash, url_for, render_template, request, Response, redirect, session
-from flask_static_compress import FlaskStaticCompress
 from flask_bootstrap import Bootstrap
 from markupsafe import escape
 
 from forms import GithubRepo
 import sys
 import json
+
+backend = '127.0.0.1'
 
 app = Flask(__name__, template_folder='templates', static_folder="static")
 Bootstrap(app)
