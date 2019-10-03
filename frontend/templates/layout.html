@@ -1,0 +1,13 @@
+{%- extends "bootstrap/base.html" %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% import "bootstrap/fixes.html" as fixes %}
+
+{% block head %}
+
+{# Make sure we don't lose all our bootstrap #}
+{{super()}}
+{{fixes.ie8()}}
+
+{% endblock %}

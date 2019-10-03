@@ -1,0 +1,16 @@
+<!-- form.html -->
+{% import "bootstrap/wtf.html" as wtf %}
+
+{%- extends "layout.html" %}
+
+{% block content %}
+    <div class="container">
+        <h1>Launch UI</h1>
+    </div>
+    <div class="container">
+        <div class="jumbotron">
+            <h2>Enter your info:</h2>
+            {{ wtf.quick_form(form) }}
+        </div>
+    </div>
+{%- endblock %}
