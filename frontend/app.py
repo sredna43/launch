@@ -25,7 +25,7 @@ def RepoForm():
 @app.route('/submit')
 def Submit():
     # This is where we can reach out to the tool and start spinning up a container!
-    return render_template('index.html', title="Launch UI - Submit", user=session.get('user'), repo=session.get('repo'))
+    return render_template('index.html', title="Launch UI - Spinning Up", user=session.get('user'), repo=session.get('repo'))
 
 if __name__ == '__main__':
     app.debug = True
