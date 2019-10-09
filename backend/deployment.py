@@ -18,8 +18,9 @@ def clone_repo(user, repo):
     else:
         return('Running in dev... \nRight now would be setting up ' + repo + ' from user: ' + user)
 
-def create_image(user, repo, path_to_dockerfile):
+def create_image(repo, path_to_dockerfile):
     client = docker.from_env()
+    path_to_dockerfile = path_to_dockerfile.replace('Dockerfile', '')
     image = client.images.build(path=path_to_dockerfile, rm=True, tag=repo)
     return image
 
