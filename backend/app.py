@@ -1,6 +1,6 @@
 from flask import Flask, request
-import subprocess, sys
-import docker
+import subprocess
+import sys
 
 app = Flask(__name__)
 app.secret_key = "SUPER SECRET KEY"
