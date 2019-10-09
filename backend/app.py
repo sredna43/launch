@@ -30,7 +30,7 @@ def deploy():
                 'git-repo': [repo]
             }
             result = db.collection_users.insert_one(user)
-            dockerfiles = 
+            dockerfiles = find_dockerfiles
         create_image(user, repo, path_to_dockerfile)
 if __name__ == '__main__':
     app.debug = True
