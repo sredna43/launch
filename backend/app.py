@@ -1,11 +1,13 @@
 from flask import Flask, request
-from flask_pymongo import PyMongo
+from pymongo import MongoClient
+import os
 from deployment import *
 
 app = Flask(__name__)
 app.secret_key = "SUPER SECRET KEY"
-app.config["MONGO_URI"] = "mongodb://localhost:27017/Launch"
-mongo = PyMongo(app)
+client = MongoClient("mongodb://localhost:27017/Launch")
+db = client.Launch
+collection_users = db.users
 @app.route('/')
 def home():
     return ("<h1>Hello, World!</h1>")
@@ -19,11 +21,15 @@ def api(query):
 def deploy():
     if request.method == "POST":
         json_data = request.get_json()
-        repo = json_data['repo']
         user = json_data['user']
+        repo = json_data['repo']        
         clone_repo(user, repo)
         if repo is not None and user is not None:
-            mongo.db.
+            user = {
+                'username': user,
+                'git-repo': [repo]
+            }
+            result = db.collection_users.insert_one(user)
             
 if __name__ == '__main__':
     app.debug = True
