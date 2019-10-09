@@ -17,8 +17,8 @@ def api(query):
 # Responds to POST requests that contain JSON data
 @app.route('/deploy', methods=['POST'])
 def deploy():
-    json_data = request.get_json()
     if request.method == "POST":
+        json_data = request.get_json()
         repo = json_data['repo']
         user = json_data['user']
         clone_repo(user, repo)
