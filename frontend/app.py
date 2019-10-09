@@ -1,22 +1,41 @@
 from flask import Flask, flash, url_for, render_template, request, Response, redirect, session
 from flask_bootstrap import Bootstrap
 from markupsafe import escape
+import requests
 
 from forms import GithubRepo
 import sys
 import json
 
-backend = '127.0.0.1'
+''' 
+Current idea is to have something like this set up for each project that we take in.
+Basically, force the user to include some way of handling a backend_ip file being
+placed in their main code folder so that we can dynamically update ip addresses.
 
+Better ideas for this will be gladly accepted.
+'''
+try:
+    f = open('backend_ip', 'r')
+    backend_host = f.readline()
+    backend_port = f.readline()
+except:
+    backend_host = '127.0.0.1'
+    backend_port = '6000'
+
+print("Backend IP is: " + backend_host + ":" + backend_port)
+
+# Create our global variable 'app'
 app = Flask(__name__, template_folder='templates', static_folder="static")
-Bootstrap(app)
-app.secret_key = 'devkey'
+Bootstrap(app) # Bootstraps the entire project, very useful for neat CSS
+app.secret_key = 'devkey' # There are better ways to generate a random string
 
+# App routes are used to handle browser requests at different endpoints in our project
 @app.route('/', methods=('GET', 'POST'))
 def RepoForm():
     form = GithubRepo()
-    if request.method == 'POST':
-        print(form.user.data)
+    if request.method == 'POST': # Once the user has hit 'submit'
+        print(form.user.data, form.repo.data)
+        # Set the Session variables 'user' and 'repo' so that we can use them later
         session['user'] = form.user.data
         session['repo'] = form.repo.data
         return redirect('/submit')
@@ -25,6 +44,8 @@ def RepoForm():
 @app.route('/submit')
 def Submit():
     # This is where we can reach out to the tool and start spinning up a container!
+    send_data = {session.get()}
+    res = requests.post('http://{}:{}/deploy'.format(backend_host, backend_port), json=send_data)
     return render_template('index.html', title="Launch UI - Spinning Up", user=session.get('user'), repo=session.get('repo'))
 
 if __name__ == '__main__':
