@@ -16,8 +16,8 @@ Better ideas for this will be gladly accepted.
 '''
 try:
     f = open('backend_ip', 'r')
-    backend_host = f.readline()
-    backend_port = f.readline()
+    backend_host = f.readline().replace('\n', '').replace(' ', ''). replace('"', '').replace("'", "")
+    backend_port = f.readline().replace('\n', '').replace(' ', ''). replace('"', '').replace("'", "")
 except:
     backend_host = '127.0.0.1'
     backend_port = '6000'
@@ -44,9 +44,13 @@ def RepoForm():
 @app.route('/submit')
 def Submit():
     # This is where we can reach out to the tool and start spinning up a container!
-    send_data = {session.get()}
-    res = requests.post('http://{}:{}/deploy'.format(backend_host, backend_port), json=send_data)
-    return render_template('index.html', title="Launch UI - Spinning Up", user=session.get('user'), repo=session.get('repo'))
+    send_data = {'user': session.get('user'), 'repo': session.get('repo')}
+    try:
+        res = requests.post('http://{}:{}/deploy'.format(backend_host, backend_port), json=send_data)
+    except requests.exceptions.ConnectionError:
+        print("Connection error to backend at {}:{}".format(backend_host, backend_port))
+        return render_template('index.html', title="Launch UI - Error", message="Oops, looks like someone stepped on a crack and broke our back(end)...", btn="Home")
+    return render_template('index.html', title="Launch UI - Spinning Up", message="Thanks {}, {} is now live!".format(session['user'], session['repo']), btn="Start Over")
 
 if __name__ == '__main__':
     app.debug = True

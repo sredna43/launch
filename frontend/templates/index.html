@@ -7,9 +7,11 @@
 </div>
 <div class="jumbotron">
     <div class="container">
-        <p>Thanks, {{user}}. We are spinning up your project {{repo}}!</p>
+        <p>{{message}}</p>
         <br />
-        <a class="button btn-primary btn-lg" href="/">Start Over</a>
+        {% if btn %}
+            <a class="button btn-primary btn-lg" href="/">{{btn}}</a>
+        {% endif %}
     </div>
 </div>
 
