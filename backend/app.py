@@ -30,9 +30,13 @@ def deploy():
                 'git-repo': [repo]
             }
             result = db.collection_users.insert_one(user)
-            dockerfiles = find_dockerfiles(user, repo)
+        
+        dockerfiles = find_dockerfiles(user, repo)
         for dockerfile in dockerfiles: 
             create_image(repo, dockerfile)
+
+        app_ip = '0.0.0.0'
+        return("Containers have been successfully deployed to {}".format(app_ip))
 if __name__ == '__main__':
     app.debug = True
     app.run(use_reloader=True, debug=True, host='0.0.0.0', port=5001)
