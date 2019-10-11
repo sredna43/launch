@@ -25,8 +25,10 @@ def deploy():
         repo = json_data['repo']        
         clone_repo(user, repo)
         dockerfiles = find_dockerfiles(user, repo)
+        images = []
         for dockerfile in dockerfiles: 
-            create_image(repo, dockerfile)
+            images.append(create_image(repo, dockerfile))
+        print(images)
 
         #MongoDB stuff
         if repo is not None and user is not None:
