@@ -36,16 +36,6 @@ def deploy():
                 'username': user,
                 'git-repo': [repo]
             }
-<<<<<<< HEAD
-            result = db.collection_users.insert_one(user)
-        
-        dockerfiles = find_dockerfiles(user, repo)
-        for dockerfile in dockerfiles: 
-            create_image(repo, dockerfile)
-
-        app_ip = '0.0.0.0'
-        return("Containers have been successfully deployed to {}".format(app_ip))
-=======
             # Attempt to connect to the db
             try:
                 result = db.collection_users.insert_one(user)
@@ -54,7 +44,6 @@ def deploy():
     return(str(image for image in images))
             
         
->>>>>>> 7fdec336c4113aa89a8c745f145c315ad46d3732
 if __name__ == '__main__':
     app.debug = True
     app.run(use_reloader=True, debug=True, host='0.0.0.0', port=5001)
