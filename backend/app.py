@@ -1,7 +1,7 @@
 from flask import Flask, request
-from pymongo import MongoClient
+from pymongo import MongoClient, errors
 import os
-from deployment import *
+from deployment import clone_repo, create_image, find_dockerfiles
 
 app = Flask(__name__)
 app.secret_key = "SUPER SECRET KEY"
@@ -24,15 +24,23 @@ def deploy():
         user = json_data['user']
         repo = json_data['repo']        
         clone_repo(user, repo)
+        dockerfiles = find_dockerfiles(user, repo)
+        for dockerfile in dockerfiles: 
+            create_image(repo, dockerfile)
+
+        #MongoDB stuff
         if repo is not None and user is not None:
             user = {
                 'username': user,
                 'git-repo': [repo]
             }
-            result = db.collection_users.insert_one(user)
-            dockerfiles = find_dockerfiles(user, repo)
-        for dockerfile in dockerfiles: 
-            create_image(repo, dockerfile)
+            # Attempt to connect to the db
+            try:
+                result = db.collection_users.insert_one(user)
+            except errors.ServerSelectionTimeoutError:
+                print("MongoDB could not be found")
+            
+        
 if __name__ == '__main__':
     app.debug = True
     app.run(use_reloader=True, debug=True, host='0.0.0.0', port=5001)
