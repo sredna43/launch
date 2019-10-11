@@ -14,7 +14,7 @@ def clone_repo(user, repo):
     if sys.platform.startswith('linux') or sys.platform.startswith('darwin'):
         subprocess.call(['mkdir', '-p', basedir])
         subprocess.call(['git', '-C', basedir, 'init'])
-        subprocess.call(['git', '-C', basedir, 'clone', github_string, '.'])
+        subprocess.call(['git', '-C', basedir, 'clone', github_string, basedir])
         return("cloning {}".format(github_string))
     else:
         return('Running in dev... \nRight now would be setting up ' + repo + ' from user: ' + user)
