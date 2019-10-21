@@ -1,0 +1,17 @@
+datastore:
+  image: mongo:4.0.4
+  ports: 
+    - "27017:27017"
+
+frontend:
+  build: 
+    context: 
+    dockerfile: ./../frontend/Dockerfile
+  command: python -u app.py
+  ports: 
+    - "5000:5000"
+  volumes: 
+    - ./todo
+  links: 
+    - datastore
+    
