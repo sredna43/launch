@@ -27,8 +27,7 @@ def deploy():
         dockerfiles = find_dockerfiles(user, repo)
         images = []
         for path_to_dockerfile in dockerfiles:
-            if 'frontend' in path_to_dockerfile:
-                images.append(create_image(repo, path_to_dockerfile, True, 'placeholder ip'))
+            images.append(create_image(repo, path_to_dockerfile))
         print(images)
 
         #MongoDB stuff

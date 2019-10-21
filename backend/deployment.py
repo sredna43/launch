@@ -20,11 +20,9 @@ def clone_repo(user, repo):
     else:
         return('Running in dev... \nRight now would be setting up ' + repo + ' from user: ' + user)
 
-def create_image(repo, path_to_dockerfile, is_frontend=False, backend_ip='127.0.0.1'):
+def create_image(repo, path_to_dockerfile, is_frontend=False):
     client = docker.from_env()
     path_to_dockerfile = path_to_dockerfile.replace('Dockerfile', '')
-    if is_frontend:
-        subprocess.call('echo', backend_ip, path_to_dockerfile + 'backend_ip')
     image = client.images.build(path=path_to_dockerfile, rm=True, tag=repo)
     return image
 
