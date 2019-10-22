@@ -33,6 +33,7 @@ def create_image(repo, path_to_dockerfile, is_frontend=False):
 # This returns a list of the dockerfiles found, in the form of their file location
 def find_dockerfiles(user, repo):
     basedir = '{}/{}/{}'.format(homedir(), user, repo)
+    print("Searching for Dockerfiles in {} (which is the basedir)".format(basedir))
     result = []
     for root, dirs, files in os.walk(basedir):
         if 'Dockerfile' in files:
