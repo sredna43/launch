@@ -16,11 +16,11 @@ Better ideas for this will be gladly accepted.
 '''
 try:
     f = open('backend_ip', 'r')
-    backend_host = f.readline().replace('\n', '').replace(' ', ''). replace('"', '').replace("'", "")
-    backend_port = f.readline().replace('\n', '').replace(' ', ''). replace('"', '').replace("'", "")
+    backend_host = f.readline().replace('\n', '').replace(' ', '').replace('"', '').replace("'", "")
+    backend_port = f.readline().replace('\n', '').replace(' ', '').replace('"', '').replace("'", "")
 except:
     backend_host = '127.0.0.1'
-    backend_port = '6000'
+    backend_port = '5001'
 
 print("Backend IP is: " + backend_host + ":" + backend_port)
 
