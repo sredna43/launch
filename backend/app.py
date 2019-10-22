@@ -41,7 +41,6 @@ def deploy():
                 result = db.collection_users.insert_one(user)
             except errors.ServerSelectionTimeoutError:
                 print("MongoDB could not be found")
-    return(str(image for image in images))
             
         
 if __name__ == '__main__':
