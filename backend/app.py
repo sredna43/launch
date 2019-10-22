@@ -22,14 +22,13 @@ def deploy():
     if request.method == "POST":
         json_data = request.get_json()
         user = json_data['user']
-        repo = json_data['repo']        
-        clone_repo(user, repo)
-        dockerfiles = find_dockerfiles(user, repo)
-        images = []
-        for path_to_dockerfile in dockerfiles:
-            if 'frontend' in path_to_dockerfile:
-                images.append(create_image(repo, path_to_dockerfile, True, 'placeholder ip'))
-        print(images)
+        repo = json_data['repo']
+        images = []     
+        if clone_repo(user, repo):
+            dockerfiles = find_dockerfiles(user, repo)            
+            for path_to_dockerfile in dockerfiles:
+                images.append(create_image(repo, path_to_dockerfile))
+            print(images)
 
         #MongoDB stuff
         if repo is not None and user is not None:
