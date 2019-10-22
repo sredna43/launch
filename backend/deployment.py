@@ -17,14 +17,16 @@ def clone_repo(user, repo):
         subprocess.call(['mkdir', '-p', userdir])
         # subprocess.call(['git', '-C', userdir, 'init'])
         subprocess.call(['git', '-C', userdir, 'clone', github_string])
+        print("Cloned")
         return True
     else:
+        print("Must be running on Windows")
         return False
 
 def create_image(repo, path_to_dockerfile, is_frontend=False):
     print("Creating image: {}".format(path_to_dockerfile))
     client = docker.from_env()
-    path_to_dockerfile = path_to_dockerfile.replace('Dockerfile', '')
+    # path_to_dockerfile = path_to_dockerfile.replace('Dockerfile', '')
     image = client.images.build(path=path_to_dockerfile, rm=True, tag=repo)
     return image
 
@@ -34,5 +36,6 @@ def find_dockerfiles(user, repo):
     result = []
     for root, dirs, files in os.walk(basedir):
         if 'Dockerfile' in files:
+            print("Found Dockerfile at: {} ".format(root))
             result.append(os.path.join(root, 'Dockerfile'))
     return result
