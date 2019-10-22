@@ -17,7 +17,7 @@ def clone_repo(user, repo):
         subprocess.call(['mkdir', '-p', userdir])
         # subprocess.call(['git', '-C', userdir, 'init'])
         subprocess.call(['git', '-C', userdir, 'clone', github_string])
-        print("Cloned")
+        print("Repo successfully cloned")
         return True
     else:
         print("Must be running on Windows")
