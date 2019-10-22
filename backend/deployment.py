@@ -9,13 +9,13 @@ def homedir():
     return os.path.expanduser("~")
 
 def clone_repo(user, repo):
-    basedir = '{}/{}/{}'.format(homedir(), user, repo) # = '/home/<user>/<repo>'
-    userdir = '{}/{}'.format(homedir(), user) # = '/home/<user>'
+    basedir = '{}/{}/{}'.format(homedir(), user, repo) # = '/home/<linux user>/<github user>/<repo>'
+    userdir = '{}/{}'.format(homedir(), user) # = '/home/<linux user>/<github user>'
     github_string = 'https://github.com/{}/{}.git'.format(user,repo)
     if sys.platform.startswith('linux') or sys.platform.startswith('darwin'):
         subprocess.call(['rm', '-rf', basedir])
         subprocess.call(['mkdir', '-p', userdir])
-        subprocess.call(['git', '-C', basedir, 'init'])
+        # subprocess.call(['git', '-C', userdir, 'init'])
         subprocess.call(['git', '-C', userdir, 'clone', github_string])
         return True
     else:
