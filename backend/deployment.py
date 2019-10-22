@@ -11,14 +11,14 @@ def homedir():
 def clone_repo(user, repo):
     basedir = '{}/{}/{}'.format(homedir(), user, repo)
     userdir = '{}/{}'.format(homedir(), user)
-    github_string = 'git@github.com:{}/{}.git'.format(user,repo)
+    github_string = 'https://github.com/{}/{}.git'.format(user,repo)
     if sys.platform.startswith('linux') or sys.platform.startswith('darwin'):
         subprocess.call(['mkdir', '-p', userdir])
         subprocess.call(['git', '-C', basedir, 'init'])
         subprocess.call(['git', '-C', userdir, 'clone', github_string])
-        return("cloning {}".format(github_string))
+        return True
     else:
-        return('Running in dev... \nRight now would be setting up ' + repo + ' from user: ' + user)
+        return False
 
 def create_image(repo, path_to_dockerfile, is_frontend=False):
     client = docker.from_env()
@@ -26,7 +26,7 @@ def create_image(repo, path_to_dockerfile, is_frontend=False):
     image = client.images.build(path=path_to_dockerfile, rm=True, tag=repo)
     return image
 
-# This returns a list of the dockerfiles found
+# This returns a list of the dockerfiles found, in the form of their file location
 def find_dockerfiles(user, repo):
     basedir = '{}/{}/{}'.format(homedir(), user, repo)
     result = []
