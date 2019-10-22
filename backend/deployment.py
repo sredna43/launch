@@ -41,4 +41,5 @@ def find_dockerfiles(user, repo):
             if name == 'Dockerfile':
                 print("Found Dockerfile at: {} ".format(root))
                 result.append(os.path.join(root, 'Dockerfile'))
+    print("Result of Dockerfile search: ", result)
     return result
