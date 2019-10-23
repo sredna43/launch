@@ -23,6 +23,8 @@ def deploy():
         json_data = request.get_json()
         user = json_data['user']
         repo = json_data['repo']
+        db = json_data['db']
+        print("User selected database: " + db)
         images = []     
         if clone_repo(user, repo):
             dockerfiles = find_dockerfiles(user, repo)            
