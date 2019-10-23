@@ -34,17 +34,18 @@ app.secret_key = 'devkey' # There are better ways to generate a random string
 def RepoForm():
     form = GithubRepo()
     if request.method == 'POST': # Once the user has hit 'submit'
-        print(form.user.data, form.repo.data)
+        print(form.user.data, form.repo.data,form.db.data)
         # Set the Session variables 'user' and 'repo' so that we can use them later
         session['user'] = form.user.data
         session['repo'] = form.repo.data
+        session['db'] = form.db.data
         return redirect('/submit')
     return render_template('form.html', form=form, title="Launch UI")
 
 @app.route('/submit')
 def Submit():
     # This is where we can reach out to the tool and start spinning up a container!
-    send_data = {'user': session.get('user'), 'repo': session.get('repo')}
+    send_data = {'user': session.get('user'), 'repo': session.get('repo'), 'db': session.get('db')}
     try:
         res = requests.post('http://{}:{}/deploy'.format(backend_host, backend_port), json=send_data)
     except requests.exceptions.ConnectionError:

@@ -3,10 +3,8 @@ datastore:
   ports: 
     - "27017:27017"
 
-frontend:
-  build: 
-    context: 
-    dockerfile: ./../frontend/Dockerfile
+backend:
+  build: .
   command: python -u app.py
   ports: 
     - "5000:5000"
