@@ -32,9 +32,9 @@ def deploy():
 
         #MongoDB stuff
         if repo is not None and user is not None:
-            user_param = collection_users.find({'username': {$in:[user]}})
+            user_param = collection_users.find({'username': {"$in" :[user]}})
             if user_param:
-                collection_users.update({'username':user},{$push:{'git-repo':{$each:[repo]}}})
+                collection_users.update({'username':user},{"$push" :{'git-repo':{"$each" :[repo]}}})
             else:
                 user = {
                     'username': user,
