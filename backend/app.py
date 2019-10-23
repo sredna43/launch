@@ -5,7 +5,7 @@ from deployment import clone_repo, create_image, find_dockerfiles
 
 app = Flask(__name__)
 app.secret_key = "SUPER SECRET KEY"
-client = MongoClient("mongodb://localhost:27017/Launch")
+client = MongoClient("mongodb://datastore:27017/Launch")
 db = client.Launch
 collection_users = db.users
 @app.route('/')
@@ -32,16 +32,20 @@ def deploy():
 
         #MongoDB stuff
         if repo is not None and user is not None:
-            user = {
-                'username': user,
-                'git-repo': [repo]
-            }
-            # Attempt to connect to the db
-            try:
-                result = db.collection_users.insert_one(user)
-            except errors.ServerSelectionTimeoutError:
-                print("MongoDB could not be found")
-    return str(image for image in images)
+            user_param = collection_users.find({'username': {$in:[user]}})
+            if user_param:
+                collection_users.update({'username':user},{$push:{'git-repo':{$each:[repo]}}})
+            else:
+                user = {
+                    'username': user,
+                    'git-repo': [repo]
+                }
+                # Attempt to connect to the db
+                try:
+                    result = db.collection_users.insert_one(user)
+                except errors.ServerSelectionTimeoutError:
+                    print("MongoDB could not be found")
+    return(str(image for image in images))
             
         
 if __name__ == '__main__':
