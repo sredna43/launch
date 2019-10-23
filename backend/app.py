@@ -29,6 +29,8 @@ def deploy():
             for path_to_dockerfile in dockerfiles:
                 images.append(create_image(repo, path_to_dockerfile))
             print(images)
+        else:
+            return("Something got messed up!")
 
         #MongoDB stuff
         if repo is not None and user is not None:

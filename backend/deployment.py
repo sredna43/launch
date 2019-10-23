@@ -4,6 +4,8 @@ import subprocess
 import sys
 import docker
 import os
+import yaml
+import kubernetes
 
 def homedir():
     return os.path.expanduser("~")
@@ -43,3 +45,6 @@ def find_dockerfiles(user, repo):
                 result.append(os.path.join(root, 'Dockerfile'))
     print("Result of Dockerfile search: ", result)
     return result
+
+def create_deployment(images):
+    print(image for image in images)
