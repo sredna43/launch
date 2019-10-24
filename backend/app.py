@@ -15,6 +15,18 @@ def home():
 @app.route('/api/<query>')
 def api(query):
     return("Placeholder")
+# finds all objects in database, then makes jsonfile with all objects
+@app.route('/api/getAll',methods=['GET'])
+def getAllObj():
+    json_data = collection_users.find()
+    writeTOJSONFile(json_data)
+def writeTOJSONFile(json_data):
+    file = open("all_objects.json", "w")
+    file.write('[')
+    for document in json_data:
+        file.write(json.dumps(document))
+        file.write(',')
+    file.write(']')
 
 # Responds to POST requests that contain JSON data
 @app.route('/deploy', methods=['POST'])
