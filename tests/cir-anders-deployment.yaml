@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cir-anders-openmp
+  namespace: cir-anders-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cir-anders
+  template:
+    metadata:
+      labels:
+        app: cir-anders
+    spec:
+      containers:
+      - name: cir-anders-openmp
+        image: docker.cs.stolaf.edu:443/c-kubed/openmp:demo
+        command: [ "/bin/bash", "-c", "--" ]
+        args: [ "while true; do sleep 30; done;" ]
+        ports:
+        - containerPort: 22
+      imagePullSecrets:
+      - name: regcred
+
+

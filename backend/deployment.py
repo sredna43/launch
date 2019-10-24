@@ -5,7 +5,7 @@ import sys
 import docker
 import os
 import yaml
-import kubernetes
+from kubernetes import client, config
 
 def homedir():
     return os.path.expanduser("~")
@@ -25,11 +25,11 @@ def clone_repo(user, repo):
         print("Must be running on Windows")
         return False
 
-def create_image(repo, path_to_dockerfile, is_frontend=False):
+def create_image(repo, user, path_to_dockerfile, is_frontend=False):
     print("Creating image: {}".format(path_to_dockerfile))
     client = docker.from_env()
     path_to_dockerfile = path_to_dockerfile.replace('Dockerfile', '')
-    tag = path_to_dockerfile.replace(homedir(), '').replace(repo, '').replace('/','')
+    tag = path_to_dockerfile.replace(homedir(), '').replace(user, '').replace(repo, '')
     image = client.images.build(path=path_to_dockerfile, rm=True, tag=tag)
     return image
 
@@ -46,5 +46,9 @@ def find_dockerfiles(user, repo):
     print("Result of Dockerfile search: ", result)
     return result
 
-def create_deployment(images):
-    print(image for image in images)
+def create_deployment(user, repo, images=None):
+    contents = [{}]
+    yaml_file = '{}/{}/{}/deployment.yaml'.format(homedir(), user, repo)
+    with open(yaml_file, 'w') as file:
+        documents = yaml.dump(contents, file)
+    #yaml stuff incoming

@@ -2,3 +2,4 @@ docker
 flask
 kubernetes
 pymongo
+pyyaml
