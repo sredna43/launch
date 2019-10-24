@@ -13,6 +13,11 @@
             <a class="button btn-primary btn-lg" href="/">{{btn}}</a>
         {% endif %}
     </div>
+    <div class="container">
+        {% if spinner %}
+            <img src="loadingspinner.gif" width=120px />
+        {% endif %}
+    </div>
 </div>
 
 {% endblock %}
