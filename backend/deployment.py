@@ -46,7 +46,7 @@ def find_dockerfiles(user, repo):
     print("Result of Dockerfile search: ", result)
     return result
 
-def create_deployment(user, repo, images=None):
+def create_deployment_object(user, repo, images=None):
     contents = [{}]
     yaml_file = '{}/{}/{}/deployment.yaml'.format(homedir(), user, repo)
     with open(yaml_file, 'w') as file:
