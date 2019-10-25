@@ -56,8 +56,4 @@ def find_dockerfiles(user, repo):
     return result
 
 def create_deployment_object(user, repo, images=None):
-    contents = [{}]
-    yaml_file = '{}/{}/{}/deployment.yaml'.format(homedir(), user, repo)
-    with open(yaml_file, 'w') as file:
-        documents = yaml.dump(contents, file)
-    #yaml stuff incoming
+    pass
