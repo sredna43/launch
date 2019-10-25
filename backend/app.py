@@ -29,7 +29,7 @@ def deploy():
         if clone_repo(user, repo):
             dockerfiles = find_dockerfiles(user, repo)            
             for path_to_dockerfile in dockerfiles:
-                images.append(create_image(repo, path_to_dockerfile))
+                images.append(create_image(repo, user, path_to_dockerfile))
             print(images)
         else:
             return("Something got messed up!")
