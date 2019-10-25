@@ -26,6 +26,8 @@ def clone_repo(user, repo):
         return False
 
 def create_image(repo, user, path_to_dockerfile, is_frontend=False):
+    if not is_frontend:
+        is_frontend = 'frontend' in path_to_dockerfile
     print("Creating image: {}".format(path_to_dockerfile))
     client = docker.from_env()
     path_to_dockerfile = path_to_dockerfile.replace('Dockerfile', '')
@@ -37,7 +39,7 @@ def create_image(repo, user, path_to_dockerfile, is_frontend=False):
         tag += "-backend"
     print("Image tag is: {}".format(tag))
     image = client.images.build(path=path_to_dockerfile, rm=True, tag=tag)
-    return image
+    return tag
 
 # This returns a list of the dockerfiles found, in the form of their file location
 def find_dockerfiles(user, repo):
