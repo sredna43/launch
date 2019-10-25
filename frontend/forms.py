@@ -4,7 +4,7 @@ from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Le
 
 class GithubRepo(FlaskForm):
     # Main form for the tool
-    URL = concat('https://api.github.com/users/', user, '/repos?fbclid=IwAR3SPL798z1jfxRrhU8-K6oDDud5sHrzAvnpEkKJtDCOOmORkBjtUftHaSU')
+    URL = 'https://api.github.com/users/' + session['user'] + '/repos?fbclid=IwAR3SPL798z1jfxRrhU8-K6oDDud5sHrzAvnpEkKJtDCOOmORkBjtUftHaSU'
     r = requests.get(url = URL) 
     repo_list = r.json()
     print(repo_list)
