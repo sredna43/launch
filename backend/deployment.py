@@ -25,6 +25,7 @@ def clone_repo(user, repo):
         print("Must be running on Windows")
         return False
 
+# Returns a string with the image tag (name of the image created)
 def create_image(repo, user, path_to_dockerfile, is_frontend=False):
     if not is_frontend:
         is_frontend = 'frontend' in path_to_dockerfile
