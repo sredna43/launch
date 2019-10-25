@@ -1,7 +1,9 @@
 from flask import Flask, request
 from pymongo import MongoClient, errors
 import os
-from deployment import clone_repo, create_image, find_dockerfiles
+from docker_helper import clone_repo, create_image, find_dockerfiles
+from kubernetes_helper import create_deployment_object, create_deployment, delete_deployment
+
 
 app = Flask(__name__)
 app.secret_key = "SUPER SECRET KEY"
@@ -33,6 +35,8 @@ def deploy():
             print(images)
         else:
             return("Something got messed up!")
+        deployment_name = repo = "-deployment"
+        dep = create_deployment(create_deployment_object(images, deployment_name'))
 
         #MongoDB stuff
         try:
@@ -49,7 +53,7 @@ def deploy():
                 result = db.collection_users.insert_one(user)
         except errors.ServerSelectionTimeoutError:
             print("MongoDB could not be found")
-    return(str(image for image in images))
+    return(str(dep))
             
         
 if __name__ == '__main__':
