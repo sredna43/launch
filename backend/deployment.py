@@ -31,6 +31,7 @@ def create_image(repo, user, path_to_dockerfile, is_frontend=False):
     path_to_dockerfile = path_to_dockerfile.replace('Dockerfile', '')
     print("Dockerfile path: %s" % path_to_dockerfile)
     tag = path_to_dockerfile.replace(homedir(), '').replace(user, '').replace(repo, '')
+    print("Image tag is: {}".format(tag))
     image = client.images.build(path=path_to_dockerfile, rm=True, tag=tag)
     return image
 
