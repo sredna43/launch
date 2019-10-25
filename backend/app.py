@@ -35,20 +35,20 @@ def deploy():
             return("Something got messed up!")
 
         #MongoDB stuff
-        if repo is not None and user is not None:
-            user_param = collection_users.find({'username': {"$in" :[user]}})
-            if user_param:
-                collection_users.update({'username':user},{"$push" :{'git-repo':{"$each" :[repo]}}})
-            else:
-                user = {
-                    'username': user,
-                    'git-repo': [repo]
-                }
+        try:
+            if repo is not None and user is not None:
+                user_param = collection_users.find({'username': {"$in" :[user]}})
+                if user_param:
+                    collection_users.update({'username':user},{"$push" :{'git-repo':{"$each" :[repo]}}})
+                else:
+                    user = {
+                        'username': user,
+                        'git-repo': [repo]
+                    }
                 # Attempt to connect to the db
-                try:
-                    result = db.collection_users.insert_one(user)
-                except errors.ServerSelectionTimeoutError:
-                    print("MongoDB could not be found")
+                result = db.collection_users.insert_one(user)
+        except errors.ServerSelectionTimeoutError:
+            print("MongoDB could not be found")
     return(str(image for image in images))
             
         
