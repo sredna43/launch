@@ -9,6 +9,6 @@ class GithubRepo(FlaskForm):
     db = SelectField(label=u'Database:', choices=database_list, default=0)
     submit = SubmitField(u'Begin')
 
-class UserEntry(FlaskForm):
+class User(FlaskForm):
     user = StringField(label=u'Github Username:', validators=[DataRequired()])
     submit = SubmitField(u'Begin')
