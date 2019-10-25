@@ -22,12 +22,15 @@ def getAllObj():
     writeTOJSONFile(json_data)
 def writeTOJSONFile(json_data):
     file = open("all_objects.json", "w")
+    json_docs = []
     file.write('[')
     for document in json_data:
+        json_docs = json.dumps(document, default=json_util.default)
+        json_docs.append(json_docs)
         file.write(json.dumps(document))
         file.write(',')
     file.write(']')
-
+    return json_docs
 # Responds to POST requests that contain JSON data
 @app.route('/deploy', methods=['POST'])
 def deploy():
