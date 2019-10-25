@@ -3,7 +3,7 @@ from flask_bootstrap import Bootstrap
 from markupsafe import escape
 import requests
 
-from forms import GithubRepo
+from forms import GithubRepo, User
 import sys
 import json
 
@@ -32,14 +32,12 @@ app.secret_key = 'devkey' # There are better ways to generate a random string
 # App routes are used to handle browser requests at different endpoints in our project
 @app.route('/', methods=('GET', 'POST'))
 def RepoForm():
-    form = GithubRepo()
+    form = User(session['user'])
     if request.method == 'POST': # Once the user has hit 'submit'
-        print(form.user.data, form.repo.data,form.db.data)
+        print(form.user.data)
         # Set the Session variables 'user' and 'repo' so that we can use them later
         session['user'] = form.user.data
-        session['repo'] = form.repo.data
-        session['db'] = form.db.data
-        return redirect('/submit')
+        return redirect('/repo')
     return render_template('form.html', form=form, title="Launch UI")
 
 @app.route('/submit')
@@ -52,6 +50,13 @@ def Submit():
         print("Connection error to backend at {}:{}".format(backend_host, backend_port))
         return render_template('index.html', title="Launch UI - Error", message="Oops, looks like someone stepped on a crack and broke our back(end)...", btn="Home")
     return render_template('index.html', title="Launch UI - Spinning Up", message="Thanks {}, {} is now live!".format(session['user'], session['repo']), btn="Start Over")
+
+@app.route('/repo', methods=('GET', 'POST'))
+def repo():
+    # This is where we can reach out to the tool and start spinning up a container!
+    form = GithubRepo()
+    
+
 
 if __name__ == '__main__':
     app.debug = True
