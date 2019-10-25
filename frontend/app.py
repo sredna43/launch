@@ -3,7 +3,7 @@ from flask_bootstrap import Bootstrap
 from markupsafe import escape
 import requests
 
-from forms import GithubRepo
+from forms import GithubRepo, User
 import sys
 import json
 
@@ -30,13 +30,32 @@ Bootstrap(app) # Bootstraps the entire project, very useful for neat CSS
 app.secret_key = 'devkey' # There are better ways to generate a random string
 
 # App routes are used to handle browser requests at different endpoints in our project
-@app.route('/', methods=('GET', 'POST'))
-def RepoForm():
-    form = GithubRepo()
-    if request.method == 'POST': # Once the user has hit 'submit'
-        print(form.user.data, form.repo.data,form.db.data)
-        # Set the Session variables 'user' and 'repo' so that we can use them later
+@app.route('/', methods = ('GET', 'POST'))
+def UserForm():
+    form = User()
+    if request.method == 'POST':
         session['user'] = form.user.data
+        return redirect('/repo')
+    return render_template('form.html', form=form, title="Launch UI")
+
+@app.route('/repo', methods=('GET', 'POST'))
+def RepoForm():
+    URL = 'https://api.github.com/users/' + session['user'] + '/repos'
+    try:
+        r = requests.get(URL)        
+    except:
+        return render_template('index.html', message='We had some trouble getting to Github...', title='Launch UI - Connection Error', btn="Try again")
+    repo_json = r.json()
+    try:
+        select_field_repos = [(repo['name'], repo['name']) for repo in repo_json]
+        select_field_repos.insert(0,('','Select a Repository'))
+    except:
+        return render_template('index.html', message='We had some trouble getting to Github, try checking your username.', title='Launch UI - Username Error', btn="Try again")
+
+    form = GithubRepo()
+    form.repo.choices = select_field_repos
+    if request.method == 'POST': # Once the user has hit 'submit'
+        # Set the Session variables 'user' and 'repo' so that we can use them later
         session['repo'] = form.repo.data
         session['db'] = form.db.data
         return redirect('/submit')
@@ -55,4 +74,4 @@ def Submit():
 
 if __name__ == '__main__':
     app.debug = True
-    app.run(use_reloader=True, host='0.0.0.0')
+    app.run(use_reloader=True, host='0.0.0.0', port=5000)
