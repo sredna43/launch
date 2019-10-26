@@ -34,7 +34,7 @@ def deploy():
                 images.append(create_image(repo, user, path_to_dockerfile))
         else:
             return("Something got messed up!")
-        deployment_name = repo = "-deployment"
+        deployment_name = repo + "-deployment"
         if sys.argv[1] is not None:
             config_location = sys.argv[1]
         else:
