@@ -43,8 +43,13 @@ def create_image(repo, user, path_to_dockerfile, is_frontend=False):
         is_frontend = 'frontend' in path_to_dockerfile
     # Get the port from the Dockerfile
     with open(path_to_dockerfile, 'r') as file:
-        match = re.search('EXPOSE (\d+)',file.read())
-        container_port = match.group(1)
+        contents = file.read()
+        match = re.search('EXPOSE (\d+)',contents)
+        print(contents)
+        if contents is not None:
+            container_port = match.group(1)
+        else:
+            container_port = 5000
         
     print("Creating image: {}".format(path_to_dockerfile))
     client = docker.from_env()
