@@ -42,8 +42,9 @@ def create_image(repo, user, path_to_dockerfile, is_frontend=False):
         is_frontend = 'frontend' in path_to_dockerfile
     # Get the port from the Dockerfile
     with open(path_to_dockerfile, 'r') as file:
-        line = file.readline()
-        while line:
+        lines = file.readlines()
+        for line in lines:
+            print(line)
             if 'EXPOSE' in line:
                 container_port = int(line.replace('EXPOSE', ''))
             if 'expose' in line:
