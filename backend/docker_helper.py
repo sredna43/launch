@@ -60,6 +60,7 @@ def create_image(repo, user, path_to_dockerfile, is_frontend=False):
         tag += "-backend"
     client.images.build(path=path_to_dockerfile, rm=True, tag=tag)
     print("Image tag is: {}".format(tag))
-    client.images.push("asfolson/launch", tag=tag)
-    print("Pushed image to asfolson/launch:{}".format(tag))
+    client.login(username="stolaunch", password="launchpass")
+    client.images.push("stolaunch/"+tag+":latest")
+    print("Pushed image to stolaunch/{}:latest".format(tag))
     return (tag, container_port)
