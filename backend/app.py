@@ -2,7 +2,7 @@ from flask import Flask, request
 from pymongo import MongoClient, errors
 import os, sys
 from docker_helper import clone_repo, create_image, find_dockerfiles
-from kubernetes_helper import create_deployment_object, create_deployment, delete_deployment
+from kubernetes_helper import create_deployment_object, create_deployment, delete_deployment, update_deployment
 
 
 app = Flask(__name__)
@@ -40,10 +40,14 @@ def deploy():
         except:
             config_location = None
         try:
-            delete_deployment(deployment_name)
+            delete_deployment(deployment_name, config_location)
         except:
+            print("Delete didn't work... unsure why")
             pass
-        create_deployment(create_deployment_object(images, deployment_name, config_location=config_location), config_location=config_location)
+        try:
+            create_deployment(create_deployment_object(images, deployment_name, config_location=config_location), config_location=config_location)
+        except:
+            update_deployment(create_deployment_object(images, deployment_name, config_location=config_location), deployment_name, config_location=config_location)
 
         #MongoDB stuff
         try:
