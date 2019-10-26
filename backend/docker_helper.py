@@ -61,6 +61,6 @@ def create_image(repo, user, path_to_dockerfile, is_frontend=False):
     client.images.build(path=path_to_dockerfile, rm=True, tag=tag)
     print("Image tag is: {}".format(tag))
     client.login(username="stolaunch", password="launchpass")
-    client.images.push("stolaunch/"+tag+":latest")
+    client.images.push("stolaunch/{}".format(tag))
     print("Pushed image to stolaunch/{}:latest".format(tag))
     return (tag, container_port)
