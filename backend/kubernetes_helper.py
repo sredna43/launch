@@ -13,7 +13,7 @@ def create_deployment_object(images, app_name, config_location):
         containers.append(client.V1Container(
             name=image[0],
             image=image[0],
-            ports=[client.V1ContainerPort(container_port=str(image[1]))]
+            ports=[client.V1ContainerPort(container_port=int(image[1]))]
         ))
     # Create metadata and spec
     template = client.V1PodTemplateSpec(
