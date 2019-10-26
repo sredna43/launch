@@ -50,16 +50,15 @@ def create_deployment(deployment, config_location):
     print("Created deployment. Status={}".format(str(api_resp.status)))
     return
 
-def delete_deployment(deployment_name): #deployment_name is just <repo>-deployment
-    config.load_kube_config()
+def delete_deployment(deployment_name, config_location): #deployment_name is just <repo>-deployment
+    if config_location != None:
+        config.load_kube_config(config_location)
+    else:
+        config.load_kube_config()
     v1 = client.AppsV1Api()
     api_resp = v1.delete_namespaced_deployment(
         name=deployment_name,
-        namespace='cir-anders-namespace',
-        body=client.V1DeleteOptions(
-            propogation_policy='Foreground',
-            grace_period_seconds=5
-        )
+        namespace='cir-anders-namespace'
     )
     print("Deployment deleted. Status={}".format(str(api_resp.status)))
     return
