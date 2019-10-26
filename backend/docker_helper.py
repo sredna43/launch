@@ -46,9 +46,9 @@ def create_image(repo, user, path_to_dockerfile, is_frontend=False):
         contents = file.read()
         match = re.search('EXPOSE (\d+)',contents)
         print(contents)
-        if contents is not None:
+        try:
             container_port = match.group(1)
-        else:
+        except:
             container_port = 5000
         
     print("Creating image: {}".format(path_to_dockerfile))
