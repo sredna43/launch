@@ -36,10 +36,11 @@ def deploy():
         else:
             return("Something got messed up!")
         deployment_name = repo = "-deployment"
-        dep = create_deployment(create_deployment_object(images, deployment_name))
         if sys.argv[1] is not None:
             config_location = sys.argv[1]
-            create_deployment(create_deployment_object(images, deployment_name, config_location), config_location)
+        else:
+            config_location = None
+        create_deployment(create_deployment_object(images, deployment_name, config_location=config_location), config_location=config_location)
 
         #MongoDB stuff
         try:
