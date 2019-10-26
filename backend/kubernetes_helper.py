@@ -5,7 +5,6 @@ def create_deployment_object(images, app_name, config_location):
         config.load_kube_config(config_location)
     else:
         config.load_kube_config()
-    v1 = client.AppsV1Api()
     containers = []
     # Create a container for each image
     for image in images:
@@ -15,16 +14,18 @@ def create_deployment_object(images, app_name, config_location):
             image="stolaunch/{}:latest".format(image[0]),
             ports=[client.V1ContainerPort(container_port=int(image[1]))]
         ))
+    print(containers)
     # Create metadata and spec
     template = client.V1PodTemplateSpec(
-        metadata=client.V1ObjectMeta(labels={"app":app_name}),
+        metadata=client.V1ObjectMeta(labels={'app': app_name}),
         spec=client.V1PodSpec(containers=containers)
     )
     # Create the specification section
     spec = client.V1DeploymentSpec(
         replicas=1,
-        template=template,
-        selector={'matchLabels': {'app': app_name}}
+        selector={'matchLabels': {'app': app_name}},
+        template=template
+        
     )
     # Create and instantiate the deployment object
     deployment = client.V1Deployment(
