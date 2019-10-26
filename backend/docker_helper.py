@@ -4,6 +4,7 @@ import subprocess
 import sys
 import docker
 import os
+import re
 
 def homedir():
     return os.path.expanduser("~")
@@ -41,14 +42,10 @@ def create_image(repo, user, path_to_dockerfile, is_frontend=False):
     if not is_frontend:
         is_frontend = 'frontend' in path_to_dockerfile
     # Get the port from the Dockerfile
-    with open(path_to_dockerfile, 'r') as file:
-        lines = file.readlines()
-        for line in lines:
-            print(line)
-            if 'EXPOSE' in line:
-                container_port = int(line.replace('EXPOSE', ''))
-            if 'expose' in line:
-                container_port = int(line.replace('expose', ''))
+    with open('Dockerfile', 'r') as file:
+        match = re.search('EXPOSE (\d+)',file.read())
+        container_port = match.group(1)
+        
     print("Creating image: {}".format(path_to_dockerfile))
     client = docker.from_env()
     path_to_dockerfile = path_to_dockerfile.replace('Dockerfile', '')
