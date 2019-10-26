@@ -41,6 +41,8 @@ def deploy():
             config_location = None
         try:
             delete_deployment(deployment_name)
+        except:
+            pass
         create_deployment(create_deployment_object(images, deployment_name, config_location=config_location), config_location=config_location)
 
         #MongoDB stuff
