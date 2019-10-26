@@ -1,7 +1,7 @@
 from kubernetes import client, config
 
 def create_deployment_object(images, app_name, config_location=None):
-    if config_location is not None:
+    if config_location:
         config.load_kube_config(config_location)
     else:
         config.load_kube_config()
@@ -35,8 +35,11 @@ def create_deployment_object(images, app_name, config_location=None):
     # Return our deployment object
     return deployment
 
-def create_deployment(deployment):
-    config.load_kube_config()
+def create_deployment(deployment, config_location=None):
+    if config_location:
+        config.load_kube_config(config_location)
+    else:
+        config.load_kube_config()
     v1 = client.AppsV1Api()
     api_resp = v1.create_namespaced_deployment(
         body=deployment,
