@@ -56,7 +56,7 @@ def deploy():
                 result = db.collection_users.insert_one(user)
         except errors.ServerSelectionTimeoutError:
             print("MongoDB could not be found")
-    return(str(dep))
+    return("Done!")
             
         
 if __name__ == '__main__':

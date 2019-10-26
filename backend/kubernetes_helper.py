@@ -14,6 +14,7 @@ def create_deployment_object(images, app_name, config_location):
             name=image[0],
             image=image[0],
             ports=[client.V1ContainerPort(container_port=int(image[1]))]
+            image_pull_policy="Never"
         ))
     # Create metadata and spec
     template = client.V1PodTemplateSpec(

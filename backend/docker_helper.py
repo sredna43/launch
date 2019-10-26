@@ -58,6 +58,6 @@ def create_image(repo, user, path_to_dockerfile, is_frontend=False):
         tag += "-frontend"
     else:
         tag += "-backend"
-    print("Image tag is: {}".format(tag))
     client.images.build(path=path_to_dockerfile, rm=True, tag=tag)
+    print("Image tag is: {}".format(tag))
     return (tag, container_port)
