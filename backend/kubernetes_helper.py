@@ -1,7 +1,10 @@
 from kubernetes import client, config
 
-def create_deployment_object(images, app_name):
-    config.load_kube_config()
+def create_deployment_object(images, app_name, config_location=None):
+    if config_location is not None:
+        config.load_kube_config(config_location)
+    else:
+        config.load_kube_config()
     v1 = client.AppsV1Api()
     containers = []
     # Create a container for each image

@@ -1,6 +1,6 @@
 from flask import Flask, request
 from pymongo import MongoClient, errors
-import os
+import os, sys
 from docker_helper import clone_repo, create_image, find_dockerfiles
 from kubernetes_helper import create_deployment_object, create_deployment, delete_deployment
 
@@ -36,7 +36,10 @@ def deploy():
         else:
             return("Something got messed up!")
         deployment_name = repo = "-deployment"
-        dep = create_deployment(create_deployment_object(images, deployment_name'))
+        dep = create_deployment(create_deployment_object(images, deployment_name))
+        if sys.argv[1] is not None:
+            config_location = sys.argv[1]
+            create_deployment(create_deployment_object(images, deployment_name, config_location), config_location)
 
         #MongoDB stuff
         try:
