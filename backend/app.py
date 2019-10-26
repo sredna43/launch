@@ -32,7 +32,6 @@ def deploy():
             dockerfiles = find_dockerfiles(user, repo)            
             for path_to_dockerfile in dockerfiles:
                 images.append(create_image(repo, user, path_to_dockerfile))
-            print(images)
         else:
             return("Something got messed up!")
         deployment_name = repo = "-deployment"

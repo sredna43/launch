@@ -9,6 +9,7 @@ def create_deployment_object(images, app_name, config_location):
     containers = []
     # Create a container for each image
     for image in images:
+        print("Adding container to deployment with image {}...".format(image[0]))
         containers.append(client.V1Container(
             name=image[0],
             image=image[0] + ":latest",
