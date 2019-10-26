@@ -12,7 +12,7 @@ def create_deployment_object(images, app_name, config_location):
         print("Adding container to deployment with image {}...".format(image[0]))
         containers.append(client.V1Container(
             name=image[0],
-            image=image[0] + ":latest",
+            image=image[0],
             ports=[client.V1ContainerPort(container_port=image[1])]
         ))
     # Create metadata and spec
@@ -37,6 +37,7 @@ def create_deployment_object(images, app_name, config_location):
     return deployment
 
 def create_deployment(deployment, config_location):
+    print("Creating deployment")
     if config_location != None:
         config.load_kube_config(config_location)
     else:
