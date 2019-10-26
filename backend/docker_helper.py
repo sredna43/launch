@@ -45,16 +45,14 @@ def create_image(repo, user, path_to_dockerfile, is_frontend=False):
     with open(path_to_dockerfile, 'r') as file:
         contents = file.read()
         match = re.search('EXPOSE (\d+)',contents)
-        print(contents)
         try:
             container_port = match.group(1)
         except:
             container_port = 5000
         
-    print("Creating image: {}".format(path_to_dockerfile))
+    print("Creating image from: {}".format(path_to_dockerfile))
     client = docker.from_env()
     path_to_dockerfile = path_to_dockerfile.replace('Dockerfile', '')
-    print("Dockerfile path: %s" % path_to_dockerfile)
     tag = path_to_dockerfile.replace(homedir(), '').replace(user, '').replace('/', '')
     if is_frontend:
         tag += "-frontend"
