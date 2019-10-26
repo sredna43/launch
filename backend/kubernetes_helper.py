@@ -12,7 +12,7 @@ def create_deployment_object(images, app_name, config_location):
         print("Adding container to deployment with image {}...".format(image[0]))
         containers.append(client.V1Container(
             name=image[0],
-            image="asfolson/launch:"+image[0],
+            image="stolaunch/{}:latest".format(image[0]),
             ports=[client.V1ContainerPort(container_port=int(image[1]))]
         ))
     # Create metadata and spec
