@@ -7,8 +7,8 @@ from kubernetes_helper import create_deployment_object, create_deployment, delet
 
 app = Flask(__name__)
 app.secret_key = "SUPER SECRET KEY"
-client = MongoClient("mongodb://datastore:27017/Launch")
-db = client.Launch
+client = MongoClient("mongodb://localhost:27017/")
+db = client.Launch_Collection
 collection_users = db.users
 @app.route('/')
 def home():
@@ -84,4 +84,4 @@ def deploy():
         
 if __name__ == '__main__':
     app.debug = True
-    app.run(use_reloader=True, debug=True, host='0.0.0.0', port=5001)
+    app.run(use_reloader=True, debug=True, host='0.0.0.0', port=2701)
