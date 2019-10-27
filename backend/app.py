@@ -1,7 +1,9 @@
 from flask import Flask, request
 from pymongo import MongoClient, errors
-import os
-from deployment import clone_repo, create_image, find_dockerfiles
+import os, sys
+from docker_helper import clone_repo, create_image, find_dockerfiles
+from kubernetes_helper import create_deployment_object, create_deployment, delete_deployment, update_deployment
+
 
 app = Flask(__name__)
 app.secret_key = "SUPER SECRET KEY"
@@ -44,27 +46,40 @@ def deploy():
         if clone_repo(user, repo):
             dockerfiles = find_dockerfiles(user, repo)            
             for path_to_dockerfile in dockerfiles:
-                images.append(create_image(repo, path_to_dockerfile))
-            print(images)
+                images.append(create_image(repo, user, path_to_dockerfile))
         else:
             return("Something got messed up!")
+        deployment_name = repo + "-deployment"
+        try:
+            config_location = sys.argv[1]
+        except:
+            config_location = None
+        try:
+            delete_deployment(deployment_name, config_location)
+        except:
+            print("Delete didn't work... unsure why")
+            pass
+        try:
+            create_deployment(create_deployment_object(images, deployment_name, config_location=config_location), config_location=config_location)
+        except:
+            update_deployment(create_deployment_object(images, deployment_name, config_location=config_location), deployment_name, config_location=config_location)
 
         #MongoDB stuff
-        if repo is not None and user is not None:
-            user_param = collection_users.find({'username': {"$in" :[user]}})
-            if user_param:
-                collection_users.update({'username':user},{"$push" :{'git-repo':{"$each" :[repo]}}})
-            else:
-                user = {
-                    'username': user,
-                    'git-repo': [repo]
-                }
+        try:
+            if repo is not None and user is not None:
+                user_param = collection_users.find({'username': {"$in" :[user]}})
+                if user_param:
+                    collection_users.update({'username':user},{"$push" :{'git-repo':{"$each" :[repo]}}})
+                else:
+                    user = {
+                        'username': user,
+                        'git-repo': [repo]
+                    }
                 # Attempt to connect to the db
-                try:
-                    result = db.collection_users.insert_one(user)
-                except errors.ServerSelectionTimeoutError:
-                    print("MongoDB could not be found")
-    return(str(image for image in images))
+                result = db.collection_users.insert_one(user)
+        except errors.ServerSelectionTimeoutError:
+            print("MongoDB could not be found")
+    return("Done!")
             
         
 if __name__ == '__main__':
