@@ -4,8 +4,7 @@ import subprocess
 import sys
 import docker
 import os
-import yaml
-from kubernetes import client, config
+import re
 
 def homedir():
     return os.path.expanduser("~")
@@ -25,23 +24,6 @@ def clone_repo(user, repo):
         print("Must be running on Windows")
         return False
 
-# Returns a string with the image tag (name of the image created)
-def create_image(repo, user, path_to_dockerfile, is_frontend=False):
-    if not is_frontend:
-        is_frontend = 'frontend' in path_to_dockerfile
-    print("Creating image: {}".format(path_to_dockerfile))
-    client = docker.from_env()
-    path_to_dockerfile = path_to_dockerfile.replace('Dockerfile', '')
-    print("Dockerfile path: %s" % path_to_dockerfile)
-    tag = path_to_dockerfile.replace(homedir(), '').replace(user, '').replace('/', '')
-    if is_frontend:
-        tag += "-frontend"
-    else:
-        tag += "-backend"
-    print("Image tag is: {}".format(tag))
-    image = client.images.build(path=path_to_dockerfile, rm=True, tag=tag)
-    return tag
-
 # This returns a list of the dockerfiles found, in the form of their file location
 def find_dockerfiles(user, repo):
     basedir = '{}/{}/{}'.format(homedir(), user, repo)
@@ -55,5 +37,30 @@ def find_dockerfiles(user, repo):
     print("Result of Dockerfile search: ", result)
     return result
 
-def create_deployment_object(user, repo, images=None):
-    pass
+# Returns a string with the image tag (name of the image created)
+def create_image(repo, user, path_to_dockerfile, is_frontend=False):
+    if not is_frontend:
+        is_frontend = 'frontend' in path_to_dockerfile
+    # Get the port from the Dockerfile
+    with open(path_to_dockerfile, 'r') as file:
+        contents = file.read()
+        match = re.search('EXPOSE (\d+)',contents)
+        try:
+            container_port = match.group(1)
+        except:
+            container_port = 5000
+        
+    print("Creating image from: {}".format(path_to_dockerfile))
+    client = docker.from_env()
+    path_to_dockerfile = path_to_dockerfile.replace('Dockerfile', '')
+    tag = path_to_dockerfile.replace(homedir(), '').replace(user, '').replace('/', '')
+    if is_frontend:
+        tag += "-frontend"
+    else:
+        tag += "-backend"
+    client.images.build(path=path_to_dockerfile, rm=True, tag=tag)
+    print("Image tag is: {}".format(tag))
+    client.login(username="stolaunch", password="launchpass")
+    client.images.push("stolaunch/{}".format(tag))
+    print("Pushed image to stolaunch/{}:latest".format(tag))
+    return (tag, container_port)
