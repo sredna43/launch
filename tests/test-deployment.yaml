@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: test-deployment-2
-        image: nginx:latest
+        image: stolaunch/test-deploy:latest
         ports:
         - containerPort: 80
