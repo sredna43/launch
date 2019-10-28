@@ -1,5 +1,6 @@
 from flask import Flask, request
 from pymongo import MongoClient, errors
+from flask_pymongo  import PyMongo
 import os, sys
 from docker_helper import clone_repo, create_image, find_dockerfiles
 from kubernetes_helper import create_deployment_object, create_deployment, delete_deployment, update_deployment
@@ -7,9 +8,9 @@ from kubernetes_helper import create_deployment_object, create_deployment, delet
 
 app = Flask(__name__)
 app.secret_key = "SUPER SECRET KEY"
-client = MongoClient("mongodb://datastore:27017/Launch")
-db = client.Launch
-collection_users = db.users
+app.config["MONGO_URI"] = "mongodb://localhost:27017/Launch_DB"
+mongo = PyMongo(app)
+
 @app.route('/')
 def home():
     return ("<h1>Hello, World!</h1>")
@@ -17,7 +18,22 @@ def home():
 @app.route('/api/<query>')
 def api(query):
     return("Placeholder")
-
+# finds all objects in database, then makes jsonfile with all objects
+@app.route('/api/getAll',methods=['GET'])
+def getAllObj():
+    json_data = mongo.db.users.find()
+    writeTOJSONFile(json_data)
+def writeTOJSONFile(json_data):
+    file = open("all_objects.json", "w")
+    json_docs = []
+    file.write('[')
+    for document in json_data:
+        json_docs = json.dumps(document, default=json_util.default)
+        json_docs.append(json_docs)
+        file.write(json.dumps(document))
+        file.write(',')
+    file.write(']')
+    return json_docs
 # Responds to POST requests that contain JSON data
 @app.route('/deploy', methods=['POST'])
 def deploy():
@@ -52,16 +68,16 @@ def deploy():
         #MongoDB stuff
         try:
             if repo is not None and user is not None:
-                user_param = collection_users.find({'username': {"$in" :[user]}})
+                user_param = mongo.db.users.find({'username': {"$in" :[user]}})
                 if user_param:
-                    collection_users.update({'username':user},{"$push" :{'git-repo':{"$each" :[repo]}}})
+                   mongo.db.users.update({'username':user},{"$push" :{'git-repo':{"$each" :[repo]}}})
                 else:
                     user = {
                         'username': user,
                         'git-repo': [repo]
                     }
                 # Attempt to connect to the db
-                result = db.collection_users.insert_one(user)
+                result = mongo.db.users.insert_one(user)
         except errors.ServerSelectionTimeoutError:
             print("MongoDB could not be found")
     return("Done!")

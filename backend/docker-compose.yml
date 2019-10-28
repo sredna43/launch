@@ -1,4 +1,4 @@
-datastore:
+localhost:
   image: mongo:4.0.4
   ports: 
     - "27017:27017"
@@ -7,9 +7,9 @@ backend:
   build: .
   command: python -u app.py
   ports: 
-    - "5000:5000"
+    - "27017:27017
   volumes: 
     - ./todo
   links: 
-    - datastore
+    - localhost
     

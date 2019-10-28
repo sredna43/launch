@@ -70,7 +70,7 @@ def Submit():
     except requests.exceptions.ConnectionError:
         print("Connection error to backend at {}:{}".format(backend_host, backend_port))
         return render_template('index.html', title="Launch UI - Error", message="Oops, looks like someone stepped on a crack and broke our back(end)...", btn="Home")
-    return render_template('index.html', title="Launch UI - Spinning Up", message="Thanks {}, {} is now live!".format(session['user'], session['repo']), btn="Start Over")
+    return render_template('index.html', title="Launch UI - Spinning Up", message="Thanks {}, {} is now live!".format(session['user'], session['repo']), btn="Start Over", spinner="loading")
 
 if __name__ == '__main__':
     app.debug = True
