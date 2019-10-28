@@ -62,7 +62,7 @@ def deploy():
             pass
         try:
             create_deployment(create_deployment_object(images, deployment_name, config_location=config_location), config_location=config_location)
-        except:
+        except: # This deployment likely already exists
             update_deployment(create_deployment_object(images, deployment_name, config_location=config_location), deployment_name, config_location=config_location)
 
         #MongoDB stuff
@@ -81,7 +81,6 @@ def deploy():
         except errors.ServerSelectionTimeoutError:
             print("MongoDB could not be found")
     return("Done!")
-            
         
 if __name__ == '__main__':
     app.debug = True

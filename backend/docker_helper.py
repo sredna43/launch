@@ -49,7 +49,6 @@ def create_image(repo, user, path_to_dockerfile, is_frontend=False):
             container_port = match.group(1)
         except:
             container_port = 5000
-        
     print("Creating image from: {}".format(path_to_dockerfile))
     client = docker.from_env()
     path_to_dockerfile = path_to_dockerfile.replace('Dockerfile', '')
@@ -58,7 +57,7 @@ def create_image(repo, user, path_to_dockerfile, is_frontend=False):
         tag += "-frontend"
     else:
         tag += "-backend"
-    client.images.build(path=path_to_dockerfile, rm=True, tag=tag)
+    client.images.build(path=path_to_dockerfile, rm=True, tag=tag, platform="linux/amd64")
     print("Image tag is: {}".format(tag))
     client.login(username="stolaunch", password="launchpass")
     client.images.push("stolaunch/{}".format(tag))
