@@ -63,7 +63,10 @@ def deploy():
         try:
             create_deployment(create_deployment_object(images, deployment_name, config_location=config_location), config_location=config_location)
         except: # This deployment likely already exists
-            update_deployment(create_deployment_object(images, deployment_name, config_location=config_location), deployment_name, config_location=config_location)
+            try:
+                update_deployment(create_deployment_object(images, deployment_name, config_location=config_location), deployment_name, config_location=config_location)
+            except:
+                print("Error creating/updating deployment")
 
         #MongoDB stuff
         try:
