@@ -1,1 +1,32 @@
-apiVersion: 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: launch
+  namespace: cir-anders-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: launch
+  template:
+    metadata:
+      labels:
+        app: launch
+    spec:
+      containers:
+      - name: launch-frontend
+        image: stolaunch/launch-frontend:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 5000
+      - name: launch-backend
+        image: stolaunch/launch-backend:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 5001
