@@ -1,4 +1,4 @@
-# This is going to house kubernetes and docker commands
+# Functions used to clone the github repository and create a container from a Dockerfile
 
 import subprocess
 import sys
@@ -57,9 +57,14 @@ def create_image(repo, user, path_to_dockerfile, is_frontend=False):
         tag += "-frontend"
     else:
         tag += "-backend"
-    client.images.build(path=path_to_dockerfile, rm=True, tag=tag, platform="linux/amd/64")
+    client.images.build(path=path_to_dockerfile, rm=True, tag=tag, platform='amd64')
     print("Image tag is: {}".format(tag))
     client.login(username="stolaunch", password="launchpass")
     client.images.push("stolaunch/{}".format(tag))
     print("Pushed image to stolaunch/{}:latest".format(tag))
+    basedir = '{}/{}/{}'.format(homedir(), user, repo)
+    if sys.platform.startswith('linux') or sys.platform.startswith('darwin'):
+        subprocess.call(['rm', '-rf', basedir])
+    else:
+        print("Running in Windows, likely dev")
     return (tag, container_port)

@@ -1,6 +1,10 @@
-FROM python:3
+FROM docker:git
 COPY . /app
 WORKDIR /app
-RUN pip install -r requirements.txt
+RUN apk add --no-cache \
+                    git \
+                    openssh-client \
+                    python3
+RUN pip3 install -r requirements.txt
 EXPOSE 5001
-CMD ["python", "./app.py"]
+CMD ["python3", "./app.py", "./config"]

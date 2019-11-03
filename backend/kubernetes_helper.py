@@ -1,3 +1,5 @@
+# Functions used to create, update, and delete deploymenets
+
 from kubernetes import client, config
 
 def create_deployment_object(images, app_name, config_location):
@@ -65,7 +67,7 @@ def update_deployment(deployment, deployment_name, config_location):
     print("Deployment updated. Status={}".format(api_resp.status))
     return
 
-def delete_deployment(deployment_name, config_location): #deployment_name is just <repo>-deployment
+def delete_deployment(deployment_name, config_location): # deployment_name is just <repo>-deployment
     if config_location != None:
         config.load_kube_config(config_location)
     else:
