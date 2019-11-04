@@ -4,6 +4,8 @@ from flask_pymongo  import PyMongo
 import os, sys
 from docker_helper import clone_repo, create_image, find_dockerfiles
 from kubernetes_helper import create_deployment_object, create_deployment, delete_deployment, update_deployment
+import logging
+
 
 
 app = Flask(__name__)

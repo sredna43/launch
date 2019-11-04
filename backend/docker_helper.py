@@ -10,18 +10,17 @@ def homedir():
     return os.path.expanduser("~")
 
 def clone_repo(user, repo):
-    basedir = '{}/{}/{}'.format(homedir(), user, repo) # = '/home/<linux user>/<github user>/<repo>'
-    userdir = '{}/{}'.format(homedir(), user) # = '/home/<linux user>/<github user>'
-    github_string = 'https://github.com/{}/{}.git'.format(user,repo)
     if sys.platform.startswith('linux') or sys.platform.startswith('darwin'):
+        basedir = '{}/{}/{}'.format(homedir(), user, repo) # = '/home/<linux user>/<github user>/<repo>'
+        userdir = '{}/{}'.format(homedir(), user) # = '/home/<linux user>/<github user>'
+        github_string = 'https://github.com/{}/{}.git'.format(user,repo)
         subprocess.call(['rm', '-rf', basedir])
         subprocess.call(['mkdir', '-p', userdir])
-        # subprocess.call(['git', '-C', userdir, 'init'])
         subprocess.call(['git', '-C', userdir, 'clone', github_string])
-        print("Repo successfully cloned")
+        print("Repo successfully cloned to {}".format(userdir))
         return True
     else:
-        print("Must be running on Windows")
+        print("Running on Windows, is this dev?")
         return False
 
 # This returns a list of the dockerfiles found, in the form of their file location

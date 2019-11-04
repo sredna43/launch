@@ -1,4 +1,4 @@
-FROM docker:git
+FROM docker:dind
 COPY . /app
 WORKDIR /app
 RUN apk add --no-cache \
