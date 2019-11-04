@@ -1,22 +1,29 @@
 # Functions used to create, update, and delete deploymenets
 
 from kubernetes import client, config
+import logging
+
+logging.basicConfig(filename="backend.log", format='%(levelname)s: %(asctime)s %(message)s', filemode='w')
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
 
 def create_deployment_object(images, app_name, config_location):
     if config_location != None:
+        logger.info("Loading k8s config from {}".format(config_location))
         config.load_kube_config(config_location)
     else:
+        logger.info("Loading k8s config from $HOME/.kube (or your default location)")
         config.load_kube_config()
     containers = []
     # Create a container for each image
     for image in images:
-        print("Adding container to deployment with image {}...".format(image[0]))
+        logger.info("Adding container to deployment with image {}...".format(image[0]))
         containers.append(client.V1Container(
             name=image[0],
             image="stolaunch/{}:latest".format(image[0]),
             ports=[client.V1ContainerPort(container_port=int(image[1]))]
         ))
-    print(containers)
+    logger.info(containers)
     # Create metadata and spec
     template = client.V1PodTemplateSpec(
         metadata=client.V1ObjectMeta(labels={'app': app_name}),
@@ -40,7 +47,7 @@ def create_deployment_object(images, app_name, config_location):
     return deployment
 
 def create_deployment(deployment, config_location):
-    print("Creating deployment")
+    logger.debug("Creating deployment")
     if config_location != None:
         config.load_kube_config(config_location)
     else:
@@ -50,7 +57,7 @@ def create_deployment(deployment, config_location):
         body=deployment,
         namespace='cir-anders-namespace'
     )
-    print("Created deployment. Status={}".format(str(api_resp.status)))
+    logger.info("Created deployment. Status={}".format(str(api_resp.status)))
     return
 
 def update_deployment(deployment, deployment_name, config_location):
@@ -64,7 +71,7 @@ def update_deployment(deployment, deployment_name, config_location):
         namespace='cir-anders-namespace',
         body=deployment
     )
-    print("Deployment updated. Status={}".format(api_resp.status))
+    logger.info("Deployment updated. Status={}".format(api_resp.status))
     return
 
 def delete_deployment(deployment_name, config_location): # deployment_name is just <repo>-deployment
@@ -77,5 +84,5 @@ def delete_deployment(deployment_name, config_location): # deployment_name is ju
         name=deployment_name,
         namespace='cir-anders-namespace'
     )
-    print("Deployment deleted. Status={}".format(str(api_resp.status)))
+    logger.info("Deployment deleted. Status={}".format(str(api_resp.status)))
     return

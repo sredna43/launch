@@ -7,6 +7,12 @@ from forms import GithubRepo, User
 import sys
 import json
 
+import logging
+
+logging.basicConfig(filename="app.log", format='%(levelname)s: %(asctime)s %(message)s', filemode='w')
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
+
 ''' 
 Current idea is to have something like this set up for each project that we take in.
 Basically, force the user to include some way of handling a backend_ip file being
@@ -22,7 +28,7 @@ except:
     backend_host = '127.0.0.1'
     backend_port = '5001'
 
-print("Backend IP is: " + backend_host + ":" + backend_port)
+logger.info("Backend IP is: " + backend_host + ":" + backend_port)
 
 # Create our global variable 'app'
 app = Flask(__name__, template_folder='templates', static_folder="static")
@@ -40,7 +46,7 @@ def UserForm():
 
 @app.route('/repo', methods=('GET', 'POST'))
 def RepoForm():
-    URL = 'https://api.github.com/users/' + session['user'] + '/repos'
+    URL = "https://api.github.com/users/{}/repos".format(session['user'])
     try:
         r = requests.get(URL)        
     except:
@@ -58,6 +64,7 @@ def RepoForm():
         # Set the Session variables 'user' and 'repo' so that we can use them later
         session['repo'] = form.repo.data
         session['db'] = form.db.data
+        logger.info("User entered repo: {} and database: {}".format(session['repo'], session['db']))
         return redirect('/submit')
     return render_template('form.html', form=form, title="Launch UI")
 
@@ -66,9 +73,11 @@ def Submit():
     # This is where we can reach out to the tool and start spinning up a container!
     send_data = {'user': session.get('user'), 'repo': session.get('repo'), 'db': session.get('db')}
     try:
+        logger.info("Sending {} to {}:{}".format(send_data, backend_host, backend_port))
         res = requests.post('http://{}:{}/deploy'.format(backend_host, backend_port), json=send_data)
     except requests.exceptions.ConnectionError:
-        print("Connection error to backend at {}:{}".format(backend_host, backend_port))
+        logger.debug("Backend was either disconnected, or never connected to in the first place.")
+        logger.error("Connection error to backend at {}:{}".format(backend_host, backend_port))
         return render_template('index.html', title="Launch UI - Error", message="Oops, looks like someone stepped on a crack and broke our back(end)...", btn="Home")
     return render_template('index.html', title="Launch UI - Spinning Up", message="Thanks {}, {} is now live!".format(session['user'], session['repo']), btn="Start Over", spinner="loading")
 

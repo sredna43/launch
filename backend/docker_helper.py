@@ -7,7 +7,7 @@ import os
 import re
 import logging
 
-logging.basicConfig(filename="docker.log", format='%(levelname)s: %(asctime)s %(message)s', filemode='w')
+logging.basicConfig(filename="backend.log", format='%(levelname)s: %(asctime)s %(message)s', filemode='w')
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 

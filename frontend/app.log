@@ -1,0 +1,19 @@
+INFO: 2019-11-04 16:51:13,991 Backend IP is: localhost:5001
+WARNING: 2019-11-04 16:51:14,001  * Debugger is active!
+INFO: 2019-11-04 16:51:14,014  * Debugger PIN: 670-921-078
+INFO: 2019-11-04 16:51:14,850  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO: 2019-11-04 16:51:19,692 127.0.0.1 - - [04/Nov/2019 16:51:19] "GET / HTTP/1.1" 200 -
+INFO: 2019-11-04 16:51:23,042 127.0.0.1 - - [04/Nov/2019 16:51:23] "POST / HTTP/1.1" 302 -
+DEBUG: 2019-11-04 16:51:23,050 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-04 16:51:23,275 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-04 16:51:23,279 127.0.0.1 - - [04/Nov/2019 16:51:23] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-04 16:51:27,004 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-04 16:51:27,220 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-04 16:51:27,223 User entered repo: test-deploy and database: custom
+INFO: 2019-11-04 16:51:27,224 127.0.0.1 - - [04/Nov/2019 16:51:27] "POST /repo HTTP/1.1" 302 -
+INFO: 2019-11-04 16:51:27,227 Sending {'user': 'sredna43', 'repo': 'test-deploy', 'db': 'custom'} to localhost:5001
+DEBUG: 2019-11-04 16:51:27,229 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-04 16:51:29,234 http://localhost:5001 "POST /deploy HTTP/1.1" 200 24
+INFO: 2019-11-04 16:51:29,236 127.0.0.1 - - [04/Nov/2019 16:51:29] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-04 16:51:29,256 127.0.0.1 - - [04/Nov/2019 16:51:29] "GET /loadingspinner.gif HTTP/1.1" 404 -
+INFO: 2019-11-04 16:51:36,856 127.0.0.1 - - [04/Nov/2019 16:51:36] "GET / HTTP/1.1" 200 -

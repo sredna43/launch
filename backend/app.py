@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.secret_key = "SUPER SECRET KEY"
 app.config["MONGO_URI"] = "mongodb://localhost:27017/Launch_DB"
 mongo = PyMongo(app)
-logging.basicConfig(filename="app.log", format='%(levelname)s: %(asctime)s %(message)s', filemode='w')
+logging.basicConfig(filename="backend.log", format='%(levelname)s: %(asctime)s %(message)s', filemode='w')
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
