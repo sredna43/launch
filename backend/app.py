@@ -6,23 +6,27 @@ from docker_helper import clone_repo, create_image, find_dockerfiles
 from kubernetes_helper import create_deployment_object, create_deployment, delete_deployment, update_deployment
 import logging
 
-
-
 app = Flask(__name__)
 app.secret_key = "SUPER SECRET KEY"
 app.config["MONGO_URI"] = "mongodb://localhost:27017/Launch_DB"
 mongo = PyMongo(app)
+logging.basicConfig(filename="app.log", format='%(levelname)s: %(asctime)s %(message)s', filemode='w')
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
 
 @app.route('/')
 def home():
+    logger.debug("GET request to '/'")
     return ("<h1>Hello, World!</h1>")
 
 @app.route('/api/<query>')
 def api(query):
+    logger.debug("GET request to '/api/{}".format(query))
     return("Placeholder")
 # finds all objects in database, then makes jsonfile with all objects
 @app.route('/api/getAll',methods=['GET'])
 def getAllObj():
+    logger.debug("GET request to '/api/getAll")
     json_data = mongo.db.users.find()
     writeTOJSONFile(json_data)
 def writeTOJSONFile(json_data):
@@ -44,15 +48,17 @@ def deploy():
         user = json_data['user']
         repo = json_data['repo']
         db = json_data['db']
-        print("User selected database: " + db)
+        logger.debug("User selected database: {}".format(db))
         images = []     
         if clone_repo(user, repo):
             dockerfiles = find_dockerfiles(user, repo)            
             for path_to_dockerfile in dockerfiles:
                 images.append(create_image(repo, user, path_to_dockerfile))
         else:
+            logger.debug("clone_repo({}, {}) returned FALSE".format(user, repo))
             return("Something got messed up!")
         deployment_name = repo + "-deployment"
+        logger.debug("Contents of variable 'images': {}".format(images))
         try:
             config_location = sys.argv[1]
         except:
@@ -60,7 +66,7 @@ def deploy():
         try:
             delete_deployment(deployment_name, config_location)
         except:
-            print("Delete didn't work... unsure why")
+            logger.error("Tried to delete deployment, but threw an error")
             pass
         try:
             create_deployment(create_deployment_object(images, deployment_name, config_location=config_location), config_location=config_location)
@@ -68,7 +74,7 @@ def deploy():
             try:
                 update_deployment(create_deployment_object(images, deployment_name, config_location=config_location), deployment_name, config_location=config_location)
             except:
-                print("Error creating/updating deployment")
+                logger.error("Could not create or update a deployment object, check the status of the cluster.")
 
         #MongoDB stuff
         try:
