@@ -44,6 +44,8 @@ def find_dockerfiles(user, repo):
 
 # Returns a string with the image tag (name of the image created)
 def create_image(repo, user, path_to_dockerfile, is_frontend=False):
+    username = "stolaunch"
+    password = "launchpass"
     if not is_frontend:
         is_frontend = 'frontend' in path_to_dockerfile
     # Get the port from the Dockerfile
@@ -57,16 +59,17 @@ def create_image(repo, user, path_to_dockerfile, is_frontend=False):
     logger.debug("Creating image from: {}".format(path_to_dockerfile))
     client = docker.from_env()
     path_to_dockerfile = path_to_dockerfile.replace('Dockerfile', '')
-    tag = path_to_dockerfile.replace(homedir(), '').replace(user, '').replace('/', '')
+    tag = username + "/" + path_to_dockerfile.replace(homedir(), '').replace(user, '').replace('/', '')
     if is_frontend:
         tag += "-frontend"
     else:
         tag += "-backend"
+    tag += ":latest"
     client.images.build(path=path_to_dockerfile, rm=True, tag=tag, platform='amd64')
     logger.info("Image tag is: {}".format(tag))
-    client.login(username="stolaunch", password="launchpass")
-    client.images.push("stolaunch/{}".format(tag))
-    logger.info("Pushed image to stolaunch/{}:latest".format(tag))
+    client.login(username=username, password=password)
+    client.images.push(tag)
+    logger.info("Pushed image to {}:latest".format(tag))
     basedir = '{}/{}/{}'.format(homedir(), user, repo)
     if sys.platform.startswith('linux') or sys.platform.startswith('darwin'):
         subprocess.call(['rm', '-rf', basedir])
