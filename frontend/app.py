@@ -29,7 +29,11 @@ except:
     backend_port = '5001'
 
 logger.info("Backend IP is: " + backend_host + ":" + backend_port)
-
+try:
+    r = requests.get(backend_host + ":" + backend_port)
+    logger.info("Response from Backend: {}".format(r))
+except:
+    logger.critical("Not connected to backend")
 # Create our global variable 'app'
 app = Flask(__name__, template_folder='templates', static_folder="static")
 Bootstrap(app) # Bootstraps the entire project, very useful for neat CSS
