@@ -8,6 +8,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
 def create_deployment_object(images, app_name, config_location):
+    username = "stolaunch"
     if config_location != None:
         logger.info("Loading k8s config from {}".format(config_location))
         config.load_kube_config(config_location)
@@ -19,8 +20,8 @@ def create_deployment_object(images, app_name, config_location):
     for image in images:
         logger.info("Adding container to deployment with image {}...".format(image[0]))
         containers.append(client.V1Container(
-            name=image[0],
-            image="stolaunch/{}:latest".format(image[0]),
+            name=image[0].replace(":latest", '').replace(username, '').replace('/', ''),
+            image=image[0],
             ports=[client.V1ContainerPort(container_port=int(image[1]))]
         ))
     logger.info(containers)
@@ -46,7 +47,7 @@ def create_deployment_object(images, app_name, config_location):
     # Return our deployment object
     return deployment
 
-def create_deployment(deployment, config_location):
+def create_deployment(deployment, config_location, namespace="cir-anders-namespace"):
     logger.debug("Creating deployment")
     if config_location != None:
         config.load_kube_config(config_location)
@@ -55,7 +56,7 @@ def create_deployment(deployment, config_location):
     v1 = client.AppsV1Api()
     api_resp = v1.create_namespaced_deployment(
         body=deployment,
-        namespace='cir-anders-namespace'
+        namespace=namespace
     )
     logger.info("Created deployment. Status={}".format(str(api_resp.status)))
     return
