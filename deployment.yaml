@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: launch-frontend
-        image: stolaunch/launch-frontend:latest
+        image: stolaunch/launchfrontend:latest
         resources:
           limits:
             memory: "128Mi"
@@ -23,10 +23,20 @@ spec:
         ports:
         - containerPort: 5000
       - name: launch-backend
-        image: stolaunch/launch-backend:latest
+        image: stolaunch/launchbackend:latest
         resources:
           limits:
             memory: "128Mi"
             cpu: "500m"
         ports:
         - containerPort: 5001
+        volumeMounts:
+          - mountPath: /var/run/docker.sock
+            name: docker-socket-volume
+        securityContext:
+            privileged: true
+      volumes:
+        - name: docker-socket-volume
+          hostPath:
+              path: /var/run/docker.sock
+              type: File

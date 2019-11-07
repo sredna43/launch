@@ -57,7 +57,7 @@ def deploy():
         else:
             logger.debug("clone_repo({}, {}) returned FALSE".format(user, repo))
             return("Something got messed up!")
-        deployment_name = repo + "-deployment"
+        deployment_name = repo
         logger.debug("Contents of variable 'images': {}".format(images))
         try:
             config_location = sys.argv[1]
