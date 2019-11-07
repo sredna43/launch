@@ -75,3 +75,54 @@ DEBUG: 2019-11-06 13:50:10,303 http://localhost:5001 "POST /deploy HTTP/1.1" 200
 INFO: 2019-11-06 13:50:10,307 127.0.0.1 - - [06/Nov/2019 13:50:10] "GET /submit HTTP/1.1" 200 -
 INFO: 2019-11-06 13:50:10,651 127.0.0.1 - - [06/Nov/2019 13:50:10] "GET /loadingspinner.gif HTTP/1.1" 404 -
 INFO: 2019-11-06 13:51:59,432 127.0.0.1 - - [06/Nov/2019 13:51:59] "GET / HTTP/1.1" 200 -
+INFO: 2019-11-06 13:56:05,826 127.0.0.1 - - [06/Nov/2019 13:56:05] "POST / HTTP/1.1" 302 -
+DEBUG: 2019-11-06 13:56:05,832 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-06 13:56:06,341 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-06 13:56:06,347 127.0.0.1 - - [06/Nov/2019 13:56:06] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-06 14:01:56,134 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-06 14:01:56,402 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-06 14:01:56,405 User entered repo: launch and database: custom
+INFO: 2019-11-06 14:01:56,406 127.0.0.1 - - [06/Nov/2019 14:01:56] "POST /repo HTTP/1.1" 302 -
+INFO: 2019-11-06 14:01:56,411 Sending {'user': 'sredna43', 'repo': 'launch', 'db': 'custom'} to localhost:5001
+DEBUG: 2019-11-06 14:01:56,413 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-06 14:02:23,483 http://localhost:5001 "POST /deploy HTTP/1.1" 500 None
+INFO: 2019-11-06 14:02:23,486 127.0.0.1 - - [06/Nov/2019 14:02:23] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-06 14:02:23,816 127.0.0.1 - - [06/Nov/2019 14:02:23] "GET /loadingspinner.gif HTTP/1.1" 404 -
+INFO: 2019-11-06 14:13:50,240 Sending {'user': 'sredna43', 'repo': 'launch', 'db': 'custom'} to localhost:5001
+DEBUG: 2019-11-06 14:13:50,243 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-06 14:13:53,228 http://localhost:5001 "POST /deploy HTTP/1.1" 500 None
+INFO: 2019-11-06 14:13:53,230 127.0.0.1 - - [06/Nov/2019 14:13:53] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-06 14:13:53,264 127.0.0.1 - - [06/Nov/2019 14:13:53] "GET /loadingspinner.gif HTTP/1.1" 404 -
+INFO: 2019-11-06 14:29:04,820 Sending {'user': 'sredna43', 'repo': 'launch', 'db': 'custom'} to localhost:5001
+DEBUG: 2019-11-06 14:29:04,822 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-06 14:29:06,827 Backend was either disconnected, or never connected to in the first place.
+ERROR: 2019-11-06 14:29:06,827 Connection error to backend at localhost:5001
+INFO: 2019-11-06 14:29:06,829 127.0.0.1 - - [06/Nov/2019 14:29:06] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-06 14:29:10,212 127.0.0.1 - - [06/Nov/2019 14:29:10] "GET / HTTP/1.1" 200 -
+INFO: 2019-11-06 14:34:24,446 127.0.0.1 - - [06/Nov/2019 14:34:24] "POST / HTTP/1.1" 302 -
+DEBUG: 2019-11-06 14:34:24,462 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-06 14:34:24,891 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-06 14:34:24,895 127.0.0.1 - - [06/Nov/2019 14:34:24] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-06 14:34:30,185 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-06 14:34:30,539 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-06 14:34:30,544 User entered repo: launch and database: custom
+INFO: 2019-11-06 14:34:30,546 127.0.0.1 - - [06/Nov/2019 14:34:30] "POST /repo HTTP/1.1" 302 -
+INFO: 2019-11-06 14:34:30,555 Sending {'user': 'sredna43', 'repo': 'launch', 'db': 'custom'} to localhost:5001
+DEBUG: 2019-11-06 14:34:30,558 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-06 14:34:55,321 http://localhost:5001 "POST /deploy HTTP/1.1" 500 None
+INFO: 2019-11-06 14:34:55,324 127.0.0.1 - - [06/Nov/2019 14:34:55] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-06 14:34:55,660 127.0.0.1 - - [06/Nov/2019 14:34:55] "GET /loadingspinner.gif HTTP/1.1" 404 -
+INFO: 2019-11-06 14:43:08,806 127.0.0.1 - - [06/Nov/2019 14:43:08] "GET / HTTP/1.1" 200 -
+INFO: 2019-11-06 14:43:11,396 127.0.0.1 - - [06/Nov/2019 14:43:11] "POST / HTTP/1.1" 302 -
+DEBUG: 2019-11-06 14:43:11,403 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-06 14:43:11,701 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-06 14:43:11,708 127.0.0.1 - - [06/Nov/2019 14:43:11] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-06 14:43:15,930 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-06 14:43:16,198 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-06 14:43:16,201 User entered repo: launch and database: custom
+INFO: 2019-11-06 14:43:16,202 127.0.0.1 - - [06/Nov/2019 14:43:16] "POST /repo HTTP/1.1" 302 -
+INFO: 2019-11-06 14:43:16,207 Sending {'user': 'sredna43', 'repo': 'launch', 'db': 'custom'} to localhost:5001
+DEBUG: 2019-11-06 14:43:16,208 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-06 14:44:25,060 http://localhost:5001 "POST /deploy HTTP/1.1" 200 5
+INFO: 2019-11-06 14:44:25,064 127.0.0.1 - - [06/Nov/2019 14:44:25] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-06 14:44:25,403 127.0.0.1 - - [06/Nov/2019 14:44:25] "GET /loadingspinner.gif HTTP/1.1" 404 -

@@ -46,34 +46,28 @@ def find_dockerfiles(user, repo):
 def create_image(repo, user, path_to_dockerfile, is_frontend=False):
     username = "stolaunch"
     password = "launchpass"
-    if not is_frontend:
-        is_frontend = 'frontend' in path_to_dockerfile
     # Get the port from the Dockerfile
-    with open(path_to_dockerfile, 'r') as file:
-        contents = file.read()
-        match = re.search('EXPOSE (\d+)',contents)
-        try:
-            container_port = match.group(1)
-        except:
-            container_port = 5000
+    try:
+        with open(path_to_dockerfile, 'r') as file:
+            contents = file.read()
+            match = re.search('EXPOSE (\d+)',contents)
+            try:
+                container_port = match.group(1)
+            except:
+                container_port = 5000
+            file.close()
+    except FileNotFoundError:
+        logger.critical("FileNotFoundError: Could not find Dockerfile in expected path: {}".format(path_to_dockerfile))
+    except:
+        logger.critical("Could not open Dockerfile")
     logger.debug("Creating image from: {}".format(path_to_dockerfile))
     client = docker.from_env()
     path_to_dockerfile = path_to_dockerfile.replace('Dockerfile', '')
-    tag = username + "/" + path_to_dockerfile.replace(homedir(), '').replace(user, '').replace('/', '')
-    if is_frontend:
-        tag += "-frontend"
-    else:
-        tag += "-backend"
-    tag += ":latest"
+    tag = username + "/" + path_to_dockerfile.replace(homedir(), '').replace(user, '').replace('/', '') + ":latest"
     client.images.build(path=path_to_dockerfile, rm=True, tag=tag, platform='amd64')
     logger.info("Image tag is: {}".format(tag))
     client.login(username=username, password=password)
     client.images.push(tag)
-    logger.info("Pushed image to {}:latest".format(tag))
+    logger.info("Pushed image to {}".format(tag))
     basedir = '{}/{}/{}'.format(homedir(), user, repo)
-    if sys.platform.startswith('linux') or sys.platform.startswith('darwin'):
-        subprocess.call(['rm', '-rf', basedir])
-        logger.info("called rm -rf {}".format(basedir))
-    else:
-        logger.debug("Running in Windows, likely dev")
     return (tag, container_port)

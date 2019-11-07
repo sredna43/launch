@@ -1,7 +1,7 @@
 from flask import Flask, request
 from pymongo import MongoClient, errors
 from flask_pymongo  import PyMongo
-import os, sys
+import os, sys, subprocess
 from docker_helper import clone_repo, create_image, find_dockerfiles
 from kubernetes_helper import create_deployment_object, create_deployment, delete_deployment, update_deployment
 import logging
@@ -53,7 +53,12 @@ def deploy():
         if clone_repo(user, repo):
             dockerfiles = find_dockerfiles(user, repo)            
             for path_to_dockerfile in dockerfiles:
+                logger.info("calling create_image({}, {}, {})".format(repo, user, path_to_dockerfile))
                 images.append(create_image(repo, user, path_to_dockerfile))
+                logger.info("Added image {} to list".format(images[-1]))
+            userdir = os.path.expanduser("~") + '/' + user
+            if sys.platform.startswith('linux') or sys.platform.startswith('darwin'):
+                subprocess.call(['rm', '-rf', userdir])
         else:
             logger.debug("clone_repo({}, {}) returned FALSE".format(user, repo))
             return("Something got messed up!")
