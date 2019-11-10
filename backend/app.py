@@ -14,6 +14,11 @@ logging.basicConfig(filename="backend.log", format='%(levelname)s: %(asctime)s %
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
+try:
+    config_location = sys.argv[1]
+except:
+    config_location = None
+
 @app.route('/')
 def home():
     logger.debug("GET request to '/'")
@@ -60,10 +65,6 @@ def deploy():
         deployment_name = repo
         logger.debug("Contents of variable 'images': {}".format(images))
         try:
-            config_location = sys.argv[1]
-        except:
-            config_location = None
-        try:
             delete_deployment(deployment_name, config_location)
         except:
             logger.error("Tried to delete deployment, but threw an error")
@@ -92,6 +93,14 @@ def deploy():
         except errors.ServerSelectionTimeoutError:
             print("MongoDB could not be found")
     return("Done!")
+
+@app.route("/delete/<deployment>", methods=["POST"])
+def delete(deployment):
+    try:
+        delete_deployment(deployment, config_location)
+        return("Deleted {}".format(deployment))
+    except:
+        return("Error trying to delete deployment {}. Does it exists?".format(deployment))
         
 if __name__ == '__main__':
     app.debug = True
