@@ -1,0 +1,6 @@
+INFO: 2019-11-10 17:29:52,720 Backend IP is: localhost:5001
+CRITICAL: 2019-11-10 17:29:52,723 Not connected to backend
+WARNING: 2019-11-10 17:29:52,740  * Debugger is active!
+INFO: 2019-11-10 17:29:52,762  * Debugger PIN: 670-921-078
+INFO: 2019-11-10 17:29:53,607  * Running on httpINFO: 2019-11-10 17:31:00,432  * Restarting with stat
+10 17:31:00,381  * Detected change in 'C:\\Users\\ao-du\\Desktop\\Code\\websites\\launch\\frontend\\app.py', reloading
