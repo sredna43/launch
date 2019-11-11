@@ -88,7 +88,7 @@ def Submit():
         logger.debug("Backend was either disconnected, or never connected to in the first place.")
         logger.error("Connection error to backend at {}:{}".format(backend_host, backend_port))
         return render_template('index.html', title="Launch UI - Error", message="Oops, looks like someone stepped on a crack and broke our back(end)...\nMessage from server: {}".format(res.content), btn="Home")
-    return render_template('index.html', title="Launch UI - Spinning Up", message="Thanks {}, {} is now live!".format(session['user'], session['repo'], res.content, btn="Start Over", spinner="loading")
+    return render_template('index.html', title="Launch UI - Spinning Up", message="Thanks {}, {} is now live!".format(session['user'], session['repo'], res.content), btn="Start Over", spinner="loading")
 
 if __name__ == '__main__':
     app.debug = True
