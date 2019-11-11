@@ -44,8 +44,13 @@ def find_dockerfiles(user, repo):
 
 # Returns a string with the image tag (name of the image created)
 def create_image(repo, user, path_to_dockerfile, is_frontend=False):
-    username = "stolaunch"
-    password = "launchpass"
+    try:
+        username = os.environ['DOCKERUSER']
+        password = os.environ['DOCKERPASS']
+        logger.info("Logged into registry as {}".format(username))
+    except:
+        logger.critical("Could not log into registry!")
+        return
     # Get the port from the Dockerfile
     try:
         with open(path_to_dockerfile, 'r') as file:

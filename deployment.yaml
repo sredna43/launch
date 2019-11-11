@@ -24,6 +24,11 @@ spec:
         - containerPort: 5000
       - name: launch-backend
         image: stolaunch/launchbackend:latest
+        env:
+        - name: DOCKERUSER
+          value: "stolaunch"
+        - name: DOCKERPASS
+          value: "launchpass"
         resources:
           limits:
             memory: "128Mi"

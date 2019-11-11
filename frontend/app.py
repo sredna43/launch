@@ -29,11 +29,7 @@ except:
     backend_port = '5001'
 
 logger.info("Backend IP is: " + backend_host + ":" + backend_port)
-try:
-    r = requests.get(backend_host + ":" + backend_port)
-    logger.info("Response from Backend: {}".format(r))
-except:
-    logger.critical("Not connected to backend")
+
 # Create our global variable 'app'
 app = Flask(__name__, template_folder='templates', static_folder="static")
 Bootstrap(app) # Bootstraps the entire project, very useful for neat CSS
@@ -77,7 +73,7 @@ def Submit():
     # This is where we can reach out to the tool and start spinning up a container!
     send_data = {'user': session.get('user'), 'repo': session.get('repo'), 'db': session.get('db')}
     try:
-        logger.info("Sending {} to {}:{}".format(send_data, backend_host, backend_port))
+        logger.info("Sending {} to http://{}:{}".format(send_data, backend_host, backend_port))
         res = requests.post('http://{}:{}/deploy'.format(backend_host, backend_port), json=send_data)
     except requests.exceptions.ConnectionError:
         logger.debug("Backend was either disconnected, or never connected to in the first place.")

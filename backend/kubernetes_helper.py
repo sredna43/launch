@@ -2,13 +2,14 @@
 
 from kubernetes import client, config
 import logging
+import os
 
 logging.basicConfig(filename="backend.log", format='%(levelname)s: %(asctime)s %(message)s', filemode='w')
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
 def create_deployment_object(images, app_name, config_location):
-    username = "stolaunch"
+    username = os.environ['DOCKERUSER']
     if config_location != None:
         logger.info("Loading k8s config from {}".format(config_location))
         config.load_kube_config(config_location)
