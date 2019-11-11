@@ -64,6 +64,7 @@ def RepoForm():
         # Set the Session variables 'user' and 'repo' so that we can use them later
         session['repo'] = form.repo.data
         session['db'] = form.db.data
+        session['crud'] = form.crud.data
         logger.info("User entered repo: {} and database: {}".format(session['repo'], session['db']))
         return redirect('/submit')
     return render_template('form.html', form=form, title="Launch UI")
@@ -73,13 +74,17 @@ def Submit():
     # This is where we can reach out to the tool and start spinning up a container!
     send_data = {'user': session.get('user'), 'repo': session.get('repo'), 'db': session.get('db')}
     try:
-        logger.info("Sending {} to http://{}:{}".format(send_data, backend_host, backend_port))
-        res = requests.post('http://{}:{}/deploy'.format(backend_host, backend_port), json=send_data)
-    except requests.exceptions.ConnectionError:
+        if session.get('crud') != 'delete':
+            logger.info("Sending {} to {}:{}".format(send_data, backend_host, backend_port))
+            res = requests.post('http://{}:{}/deploy'.format(backend_host, backend_port), json=send_data)
+        else:
+            logger.info("Sending a request to delete {}".format(session.get('repo')))
+            res = requests.post('http://{}:{}/delete/{}'.format(backend_host, backend_port, session.get('repo')))
+    except requests.exceptions.ConnectionError as e:
         logger.debug("Backend was either disconnected, or never connected to in the first place.")
         logger.error("Connection error to backend at {}:{}".format(backend_host, backend_port))
-        return render_template('index.html', title="Launch UI - Error", message="Oops, looks like someone stepped on a crack and broke our back(end)...", btn="Home")
-    return render_template('index.html', title="Launch UI - Spinning Up", message="Thanks {}, {} is now live!".format(session['user'], session['repo']), btn="Start Over", spinner="loading")
+        return render_template('index.html', title="Launch UI - Error", message="Oops, looks like someone stepped on a crack and broke our back(end)...\nMessage from server: {}".format(str(e)), btn="Home")
+    return render_template('index.html', title="Launch UI - Spinning Up", message="Thanks {}, {} is now live! Response from server: {}".format(session['user'], session['repo'], res.content), btn="Start Over", spinner="loading")
 
 if __name__ == '__main__':
     app.debug = True

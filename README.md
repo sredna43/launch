@@ -2,14 +2,14 @@
 
 Deploy custom web applications using a simple user interface that connects to Git
 
-## Senior capstone project Fall 2019
+## Getting started:
 
-Roger Becerra, Charlie Carlson, Hannah Dettmann, Anders Olson
+In order to get started with Launch, you first must have access to a Kubernetes cluster.
 
 ## Contributing
 
-## Connecting Docker and MongoDB
- The below allows to store volume on host system
- $docker run --name some-mongo -v /my/own/datadir:/data/db -d mongo
- some-mongo is the name of container
- 
+If you would like to contribute, please refer to our contributing guidelines.
+
+## Senior capstone project Fall 2019
+
+Roger Becerra, Charlie Carlson, Hannah Dettmann, Anders Olson

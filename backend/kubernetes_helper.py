@@ -8,6 +8,8 @@ logging.basicConfig(filename="backend.log", format='%(levelname)s: %(asctime)s %
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
+namespace = os.environ['NAMESPACE']
+
 def create_deployment_object(images, app_name, config_location):
     username = os.environ['DOCKERUSER']
     if config_location != None:
@@ -48,7 +50,7 @@ def create_deployment_object(images, app_name, config_location):
     # Return our deployment object
     return deployment
 
-def create_deployment(deployment, config_location, namespace="cir-anders-namespace"):
+def create_deployment(deployment, config_location):
     logger.debug("Creating deployment")
     if config_location != None:
         config.load_kube_config(config_location)
@@ -70,13 +72,13 @@ def update_deployment(deployment, deployment_name, config_location):
         v1 = client.AppsV1Api()
     api_resp = v1.patch_namespaced_deployment(
         name=deployment_name,
-        namespace='cir-anders-namespace',
+        namespace=namespace,
         body=deployment
     )
     logger.info("Deployment updated. Status={}".format(api_resp.status))
     return
 
-def delete_deployment(deployment_name, config_location): # deployment_name is just <repo>-deployment
+def delete_deployment(deployment_name, config_location): # deployment_name is just <repo>
     if config_location != None:
         config.load_kube_config(config_location)
     else:
@@ -84,7 +86,7 @@ def delete_deployment(deployment_name, config_location): # deployment_name is ju
     v1 = client.AppsV1Api()
     api_resp = v1.delete_namespaced_deployment(
         name=deployment_name,
-        namespace='cir-anders-namespace'
+        namespace=namespace
     )
     logger.info("Deployment deleted. Status={}".format(str(api_resp.status)))
     return
