@@ -61,7 +61,7 @@ def create_deployment(deployment, config_location, namespace="cir-anders-namespa
     logger.info("Created deployment. Status={}".format(str(api_resp.status)))
     return
 
-def update_deployment(deployment, deployment_name, config_location):
+def update_deployment(deployment, deployment_name, config_location, namespace='cir-anders-namespace'):
     if config_location != None:
         config.load_kube_config(config_location)
     else:
@@ -69,13 +69,13 @@ def update_deployment(deployment, deployment_name, config_location):
         v1 = client.AppsV1Api()
     api_resp = v1.patch_namespaced_deployment(
         name=deployment_name,
-        namespace='cir-anders-namespace',
+        namespace=namespace,
         body=deployment
     )
     logger.info("Deployment updated. Status={}".format(api_resp.status))
     return
 
-def delete_deployment(deployment_name, config_location): # deployment_name is just <repo>-deployment
+def delete_deployment(deployment_name, config_location, namespace='cir-anders-namespace'): # deployment_name is just <repo>
     if config_location != None:
         config.load_kube_config(config_location)
     else:
@@ -83,7 +83,7 @@ def delete_deployment(deployment_name, config_location): # deployment_name is ju
     v1 = client.AppsV1Api()
     api_resp = v1.delete_namespaced_deployment(
         name=deployment_name,
-        namespace='cir-anders-namespace'
+        namespace=namespace
     )
     logger.info("Deployment deleted. Status={}".format(str(api_resp.status)))
     return

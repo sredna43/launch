@@ -1,0 +1,24 @@
+INFO: 2019-11-11 00:42:40,386 Backend IP is: localhost:5001
+CRITICAL: 2019-11-11 00:42:40,392 Not connected to backend
+WARNING: 2019-11-11 00:42:40,417  * Debugger is active!
+INFO: 2019-11-11 00:42:40,453  * Debugger PIN: 670-921-078
+INFO: 2019-11-11 00:42:40,475  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+DEBUG: 2019-11-11 00:42:40,850 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-11 00:42:41,184 https://api.github.com:443 "GET /users/hannahdettmann/repos HTTP/1.1" 200 None
+INFO: 2019-11-11 00:42:41,343 127.0.0.1 - - [11/Nov/2019 00:42:41] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-11 12:54:46,893 Starting new HTTPS connection (1): api.github.com:443
+INFO: 2019-11-11 12:54:46,898 127.0.0.1 - - [11/Nov/2019 12:54:46] "GET /repo HTTP/1.1" 200 -
+INFO: 2019-11-11 12:54:49,547 127.0.0.1 - - [11/Nov/2019 12:54:49] "GET / HTTP/1.1" 200 -
+INFO: 2019-11-11 12:55:08,317 127.0.0.1 - - [11/Nov/2019 12:55:08] "POST / HTTP/1.1" 302 -
+DEBUG: 2019-11-11 12:55:08,553 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-11 12:55:08,853 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-11 12:55:08,858 127.0.0.1 - - [11/Nov/2019 12:55:08] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-11 12:55:43,993 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-11 12:55:44,221 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-11 12:55:44,223 User entered repo: test-deploy and database: 0
+INFO: 2019-11-11 12:55:44,224 127.0.0.1 - - [11/Nov/2019 12:55:44] "POST /repo HTTP/1.1" 302 -
+INFO: 2019-11-11 12:55:44,256 Sending {'user': 'sredna43', 'repo': 'test-deploy', 'db': '0'} to localhost:5001
+DEBUG: 2019-11-11 12:55:44,258 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-11 12:55:48,272 Backend was either disconnected, or never connected to in the first place.
+ERROR: 2019-11-11 12:55:48,272 Connection error to backend at localhost:5001
+INFO: 2019-11-11 12:55:48,273 127.0.0.1 - - [11/Nov/2019 12:55:48] "GET /submit HTTP/1.1" 200 -
