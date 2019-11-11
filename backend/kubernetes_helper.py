@@ -2,6 +2,9 @@
 
 from kubernetes import client, config
 import logging
+from os import environ
+
+namespace = environ[]
 
 logging.basicConfig(filename="backend.log", format='%(levelname)s: %(asctime)s %(message)s', filemode='w')
 logger = logging.getLogger()
@@ -47,7 +50,7 @@ def create_deployment_object(images, app_name, config_location):
     # Return our deployment object
     return deployment
 
-def create_deployment(deployment, config_location, namespace="cir-anders-namespace"):
+def create_deployment(deployment, config_location):
     logger.debug("Creating deployment")
     if config_location != None:
         config.load_kube_config(config_location)
@@ -61,7 +64,7 @@ def create_deployment(deployment, config_location, namespace="cir-anders-namespa
     logger.info("Created deployment. Status={}".format(str(api_resp.status)))
     return
 
-def update_deployment(deployment, deployment_name, config_location, namespace='cir-anders-namespace'):
+def update_deployment(deployment, deployment_name, config_location):
     if config_location != None:
         config.load_kube_config(config_location)
     else:
@@ -75,7 +78,7 @@ def update_deployment(deployment, deployment_name, config_location, namespace='c
     logger.info("Deployment updated. Status={}".format(api_resp.status))
     return
 
-def delete_deployment(deployment_name, config_location, namespace='cir-anders-namespace'): # deployment_name is just <repo>
+def delete_deployment(deployment_name, config_location): # deployment_name is just <repo>
     if config_location != None:
         config.load_kube_config(config_location)
     else:
