@@ -31,6 +31,8 @@ spec:
           value: "launchpass"
         - name: NAMESPACE
           value: "cir-anders-namespace"
+        - name: DEPLYOED
+          value: "True"
         resources:
           limits:
             memory: "128Mi"

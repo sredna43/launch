@@ -14,8 +14,11 @@ except:
     namespace = 'cir-anders-namespace'
 
 def create_deployment_object(images, app_name, config_location):
-    username = os.environ['DOCKERUSER'] or 'stolaunch'
-    if config_location != None:
+    username = os.environ['DOCKERUSER']
+    if 'DEPLOYED' in os.environ:
+        logger.info("Running in a k8s cluster")
+        config.load_incluster_config()
+    elif config_location != None:
         logger.info("Loading k8s config from {}".format(config_location))
         config.load_kube_config(config_location)
     else:
@@ -55,7 +58,10 @@ def create_deployment_object(images, app_name, config_location):
 
 def create_deployment(deployment, config_location):
     logger.debug("Creating deployment")
-    if config_location != None:
+    if 'DEPLOYED' in os.environ:
+        logger.info("Running in a k8s cluster")
+        config.load_incluster_config()
+    elif config_location != None:
         config.load_kube_config(config_location)
     else:
         config.load_kube_config()
@@ -68,7 +74,11 @@ def create_deployment(deployment, config_location):
     return
 
 def update_deployment(deployment, deployment_name, config_location):
-    if config_location != None:
+    if 'DEPLOYED' in os.environ:
+        logger.info("Running in a k8s cluster")
+        config.load_incluster_config()
+    elif config_location != None:
+        logger.info("Loading k8s config from {}".format(config_location))
         config.load_kube_config(config_location)
     else:
         config.load_kube_config()
@@ -82,7 +92,11 @@ def update_deployment(deployment, deployment_name, config_location):
     return
 
 def delete_deployment(deployment_name, config_location): # deployment_name is just <repo>
-    if config_location != None:
+    if 'DEPLOYED' in os.environ:
+        logger.info("Running in a k8s cluster")
+        config.load_incluster_config()
+    elif config_location != None:
+        logger.info("Loading k8s config from {}".format(config_location))
         config.load_kube_config(config_location)
     else:
         config.load_kube_config()
