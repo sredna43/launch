@@ -1,0 +1,4 @@
+WARNING: 2019-11-11 14:48:29,352 Docker username set by hard-coded value: stolaunch
+WARNING: 2019-11-11 14:48:29,694  * Debugger is active!
+INFO: 2019-11-11 14:48:29,742  * Debugger PIN: 120-455-526
+INFO: 2019-11-11 14:48:30,606  * Running on http://0.0.0.0:5001/ (Press CTRL+C to quit)

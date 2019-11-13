@@ -13,7 +13,10 @@ mongo = PyMongo(app)
 logging.basicConfig(filename="backend.log", format='%(levelname)s: %(asctime)s %(message)s', filemode='w')
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
-logger.info("Docker username is {}".format(os.environ['DOCKERUSER']))
+try:
+    logger.info("Docker username set by environment variables: {}".format(os.environ['DOCKERUSER']))
+except:
+    logger.warning("Docker username set by hard-coded value: {}".format('stolaunch'))
 
 try:
     config_location = sys.argv[1]

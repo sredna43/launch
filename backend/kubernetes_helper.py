@@ -8,10 +8,13 @@ logging.basicConfig(filename="backend.log", format='%(levelname)s: %(asctime)s %
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
-namespace = os.environ['NAMESPACE']
+try:
+    namespace = os.environ['NAMESPACE']
+except:
+    namespace = 'cir-anders-namespace'
 
 def create_deployment_object(images, app_name, config_location):
-    username = os.environ['DOCKERUSER']
+    username = os.environ['DOCKERUSER'] or 'stolaunch'
     if config_location != None:
         logger.info("Loading k8s config from {}".format(config_location))
         config.load_kube_config(config_location)
