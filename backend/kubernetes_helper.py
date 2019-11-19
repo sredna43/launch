@@ -3,6 +3,7 @@
 from kubernetes import client, config
 import logging
 import os
+import re
 
 logging.basicConfig(filename="backend.log", format='%(levelname)s: %(asctime)s %(message)s', filemode='w')
 logger = logging.getLogger()
@@ -107,3 +108,42 @@ def delete_deployment(deployment_name, config_location): # deployment_name is ju
     )
     logger.info("Deployment deleted. Status={}".format(str(api_resp.status)))
     return
+
+def create_service(deployment_name, port, config_location): # Returns the port to find this service at
+    if 'DEPLOYED' in os.environ:
+        logger.info("Running in a k8s cluster")
+        config.load_incluster_config()
+    elif config_location != None:
+        logger.info("Loading k8s config from {}".format(config_location))
+        config.load_kube_config(config_location)
+    else:
+        config.load_kube_config()
+    v1 = client.CoreV1Api()
+    try:
+        v1.delete_namespaced_service(
+            name=deployment_name+"-exp",
+            namespace=namespace
+        )
+    except:
+        logger.error("Could not delete existing service")
+    body = client.V1Service(
+        api_version="v1",
+        kind="Service",
+        metadata=client.V1ObjectMeta(
+            name=deployment_name+"-exp"
+        ),
+        spec=client.V1ServiceSpec(
+            selector={"app": deployment_name},
+            ports=[client.V1ServicePort(
+                port=port,
+                target_port=port
+            )],
+            type="NodePort"
+        )
+    )
+    return_value = str(v1.create_namespaced_service(namespace=namespace, body=body))
+    node_port = re.search("'node_port': (\d+)", return_value)
+    try:
+        return node_port.group(1)
+    except:
+        return 1
