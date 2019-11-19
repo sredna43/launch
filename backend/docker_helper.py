@@ -20,6 +20,7 @@ def clone_repo(user, repo):
         basedir = '{}/{}/{}'.format(homedir(), user, repo) # = '/home/<linux user>/<github user>/<repo>'
         userdir = '{}/{}'.format(homedir(), user) # = '/home/<linux user>/<github user>'
         github_string = 'https://github.com/{}/{}.git'.format(user,repo)
+        logger.debug("Reaching out to {}".format(github_string))
         subprocess.call(['rm', '-rf', basedir])
         subprocess.call(['mkdir', '-p', userdir])
         subprocess.call(['git', '-C', userdir, 'clone', github_string])
