@@ -1,24 +1,393 @@
-INFO: 2019-11-11 00:42:40,386 Backend IP is: localhost:5001
-CRITICAL: 2019-11-11 00:42:40,392 Not connected to backend
-WARNING: 2019-11-11 00:42:40,417  * Debugger is active!
-INFO: 2019-11-11 00:42:40,453  * Debugger PIN: 670-921-078
-INFO: 2019-11-11 00:42:40,475  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
-DEBUG: 2019-11-11 00:42:40,850 Starting new HTTPS connection (1): api.github.com:443
-DEBUG: 2019-11-11 00:42:41,184 https://api.github.com:443 "GET /users/hannahdettmann/repos HTTP/1.1" 200 None
-INFO: 2019-11-11 00:42:41,343 127.0.0.1 - - [11/Nov/2019 00:42:41] "GET /repo HTTP/1.1" 200 -
-DEBUG: 2019-11-11 12:54:46,893 Starting new HTTPS connection (1): api.github.com:443
-INFO: 2019-11-11 12:54:46,898 127.0.0.1 - - [11/Nov/2019 12:54:46] "GET /repo HTTP/1.1" 200 -
-INFO: 2019-11-11 12:54:49,547 127.0.0.1 - - [11/Nov/2019 12:54:49] "GET / HTTP/1.1" 200 -
-INFO: 2019-11-11 12:55:08,317 127.0.0.1 - - [11/Nov/2019 12:55:08] "POST / HTTP/1.1" 302 -
-DEBUG: 2019-11-11 12:55:08,553 Starting new HTTPS connection (1): api.github.com:443
-DEBUG: 2019-11-11 12:55:08,853 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
-INFO: 2019-11-11 12:55:08,858 127.0.0.1 - - [11/Nov/2019 12:55:08] "GET /repo HTTP/1.1" 200 -
-DEBUG: 2019-11-11 12:55:43,993 Starting new HTTPS connection (1): api.github.com:443
-DEBUG: 2019-11-11 12:55:44,221 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
-INFO: 2019-11-11 12:55:44,223 User entered repo: test-deploy and database: 0
-INFO: 2019-11-11 12:55:44,224 127.0.0.1 - - [11/Nov/2019 12:55:44] "POST /repo HTTP/1.1" 302 -
-INFO: 2019-11-11 12:55:44,256 Sending {'user': 'sredna43', 'repo': 'test-deploy', 'db': '0'} to localhost:5001
-DEBUG: 2019-11-11 12:55:44,258 Starting new HTTP connection (1): localhost:5001
-DEBUG: 2019-11-11 12:55:48,272 Backend was either disconnected, or never connected to in the first place.
-ERROR: 2019-11-11 12:55:48,272 Connection error to backend at localhost:5001
-INFO: 2019-11-11 12:55:48,273 127.0.0.1 - - [11/Nov/2019 12:55:48] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-19 00:51:30,603 Backend IP is: localhost:5001
+WARNING: 2019-11-19 00:51:31,058  * Debugger is active!
+INFO: 2019-11-19 00:51:31,066  * Debugger PIN: 120-455-526
+INFO: 2019-11-19 00:51:31,952  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO: 2019-11-19 00:51:34,606 127.0.0.1 - - [19/Nov/2019 00:51:34] "GET / HTTP/1.1" 200 -
+INFO: 2019-11-19 00:51:36,427 127.0.0.1 - - [19/Nov/2019 00:51:36] "POST / HTTP/1.1" 302 -
+DEBUG: 2019-11-19 00:51:36,436 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 00:51:37,095 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 00:51:37,100 127.0.0.1 - - [19/Nov/2019 00:51:37] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-19 00:56:38,911 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 00:56:39,218 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 00:56:39,225 127.0.0.1 - - [19/Nov/2019 00:56:39] "GET /repo HTTP/1.1" 200 -
+INFO: 2019-11-19 00:57:24,372 127.0.0.1 - - [19/Nov/2019 00:57:24] "POST /load HTTP/1.1" 404 -
+DEBUG: 2019-11-19 00:57:45,347 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 00:57:45,625 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 00:57:45,649 127.0.0.1 - - [19/Nov/2019 00:57:45] "GET /repo HTTP/1.1" 500 -
+INFO: 2019-11-19 00:57:45,685 127.0.0.1 - - [19/Nov/2019 00:57:45] "GET /repo?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO: 2019-11-19 00:57:45,688 127.0.0.1 - - [19/Nov/2019 00:57:45] "GET /repo?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO: 2019-11-19 00:57:45,991 127.0.0.1 - - [19/Nov/2019 00:57:45] "GET /repo?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO: 2019-11-19 00:57:46,340 127.0.0.1 - - [19/Nov/2019 00:57:46] "GET /repo?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO: 2019-11-19 00:57:46,378 127.0.0.1 - - [19/Nov/2019 00:57:46] "GET /repo?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO: 2019-11-19 00:57:46,592 127.0.0.1 - - [19/Nov/2019 00:57:46] "GET /repo?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+DEBUG: 2019-11-19 00:57:54,304 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 00:57:54,558 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 00:57:54,566 127.0.0.1 - - [19/Nov/2019 00:57:54] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:01:21,109 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:01:21,452 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:01:21,459 127.0.0.1 - - [19/Nov/2019 01:01:21] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:02:34,871 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:02:35,123 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:02:35,131 127.0.0.1 - - [19/Nov/2019 01:02:35] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:02:42,060 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:02:42,335 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:02:42,341 User entered repo: test-deploy database: 0 and crud: create
+INFO: 2019-11-19 01:02:42,344 127.0.0.1 - - [19/Nov/2019 01:02:42] "POST /repo HTTP/1.1" 302 -
+INFO: 2019-11-19 01:02:42,353 Sending {'user': 'sredna43', 'repo': 'test-deploy', 'db': '0'} to localhost:5001
+DEBUG: 2019-11-19 01:02:42,357 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-19 01:02:44,371 Backend was either disconnected, or never connected to in the first place.
+ERROR: 2019-11-19 01:02:44,371 Connection error to backend at localhost:5001
+INFO: 2019-11-19 01:02:44,376 127.0.0.1 - - [19/Nov/2019 01:02:44] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-19 01:02:48,260 127.0.0.1 - - [19/Nov/2019 01:02:48] "GET / HTTP/1.1" 200 -
+INFO: 2019-11-19 01:02:53,030 127.0.0.1 - - [19/Nov/2019 01:02:53] "POST / HTTP/1.1" 302 -
+DEBUG: 2019-11-19 01:02:53,038 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:02:53,323 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:02:53,327 127.0.0.1 - - [19/Nov/2019 01:02:53] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:02:57,197 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:02:57,480 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:02:57,484 User entered repo: test-deploy database: 0 and crud: create
+INFO: 2019-11-19 01:02:57,485 127.0.0.1 - - [19/Nov/2019 01:02:57] "POST /repo HTTP/1.1" 302 -
+INFO: 2019-11-19 01:02:57,492 Sending {'user': 'sredna43', 'repo': 'test-deploy', 'db': '0'} to localhost:5001
+DEBUG: 2019-11-19 01:02:57,494 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-19 01:02:59,498 Backend was either disconnected, or never connected to in the first place.
+ERROR: 2019-11-19 01:02:59,498 Connection error to backend at localhost:5001
+INFO: 2019-11-19 01:02:59,499 127.0.0.1 - - [19/Nov/2019 01:02:59] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-19 01:03:11,450 Sending {'user': 'sredna43', 'repo': 'test-deploy', 'db': '0'} to localhost:5001
+DEBUG: 2019-11-19 01:03:11,452 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-19 01:03:13,455 Backend was either disconnected, or never connected to in the first place.
+ERROR: 2019-11-19 01:03:13,456 Connection error to backend at localhost:5001
+INFO: 2019-11-19 01:03:13,459 127.0.0.1 - - [19/Nov/2019 01:03:13] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-19 01:03:17,046 127.0.0.1 - - [19/Nov/2019 01:03:17] "GET / HTTP/1.1" 200 -
+INFO: 2019-11-19 01:03:19,594 127.0.0.1 - - [19/Nov/2019 01:03:19] "POST / HTTP/1.1" 302 -
+DEBUG: 2019-11-19 01:03:19,866 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:03:20,106 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:03:20,114 127.0.0.1 - - [19/Nov/2019 01:03:20] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:03:23,566 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:03:23,834 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:03:23,838 User entered repo: test-deploy database: 0 and crud: create
+INFO: 2019-11-19 01:03:23,840 127.0.0.1 - - [19/Nov/2019 01:03:23] "POST /repo HTTP/1.1" 302 -
+INFO: 2019-11-19 01:03:23,844 Sending {'user': 'sredna43', 'repo': 'test-deploy', 'db': '0'} to localhost:5001
+DEBUG: 2019-11-19 01:03:23,846 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-19 01:03:25,855 Backend was either disconnected, or never connected to in the first place.
+ERROR: 2019-11-19 01:03:25,855 Connection error to backend at localhost:5001
+INFO: 2019-11-19 01:03:25,856 127.0.0.1 - - [19/Nov/2019 01:03:25] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-19 01:03:28,260 127.0.0.1 - - [19/Nov/2019 01:03:28] "GET / HTTP/1.1" 200 -
+INFO: 2019-11-19 01:03:31,603 127.0.0.1 - - [19/Nov/2019 01:03:31] "POST / HTTP/1.1" 302 -
+DEBUG: 2019-11-19 01:03:31,901 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:03:32,167 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:03:32,175 127.0.0.1 - - [19/Nov/2019 01:03:32] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:03:38,879 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:03:39,303 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:03:39,311 User entered repo: test-deploy database: 0 and crud: create
+INFO: 2019-11-19 01:03:39,315 127.0.0.1 - - [19/Nov/2019 01:03:39] "POST /repo HTTP/1.1" 302 -
+INFO: 2019-11-19 01:03:39,328 Sending {'user': 'sredna43', 'repo': 'test-deploy', 'db': '0'} to localhost:5001
+DEBUG: 2019-11-19 01:03:39,331 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-19 01:03:39,596 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:03:39,849 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:03:39,852 User entered repo: test-deploy database: 0 and crud: create
+INFO: 2019-11-19 01:03:39,853 127.0.0.1 - - [19/Nov/2019 01:03:39] "POST /repo HTTP/1.1" 302 -
+INFO: 2019-11-19 01:03:39,888 Sending {'user': 'sredna43', 'repo': 'test-deploy', 'db': '0'} to localhost:5001
+DEBUG: 2019-11-19 01:03:39,889 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-19 01:03:40,547 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:03:40,798 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:03:40,801 User entered repo: test-deploy database: 0 and crud: create
+INFO: 2019-11-19 01:03:40,802 127.0.0.1 - - [19/Nov/2019 01:03:40] "POST /repo HTTP/1.1" 302 -
+DEBUG: 2019-11-19 01:03:40,805 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:03:40,990 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:03:41,068 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:03:41,073 User entered repo: test-deploy database: 0 and crud: create
+INFO: 2019-11-19 01:03:41,075 127.0.0.1 - - [19/Nov/2019 01:03:41] "POST /repo HTTP/1.1" 302 -
+DEBUG: 2019-11-19 01:03:41,141 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:03:41,274 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:03:41,277 User entered repo: test-deploy database: 0 and crud: create
+INFO: 2019-11-19 01:03:41,278 127.0.0.1 - - [19/Nov/2019 01:03:41] "POST /repo HTTP/1.1" 302 -
+DEBUG: 2019-11-19 01:03:41,285 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:03:41,340 Backend was either disconnected, or never connected to in the first place.
+ERROR: 2019-11-19 01:03:41,340 Connection error to backend at localhost:5001
+INFO: 2019-11-19 01:03:41,341 127.0.0.1 - - [19/Nov/2019 01:03:41] "GET /submit HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:03:41,391 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:03:41,394 User entered repo: test-deploy database: 0 and crud: create
+INFO: 2019-11-19 01:03:41,395 127.0.0.1 - - [19/Nov/2019 01:03:41] "POST /repo HTTP/1.1" 302 -
+DEBUG: 2019-11-19 01:03:41,429 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:03:41,540 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:03:41,543 User entered repo: test-deploy database: 0 and crud: create
+INFO: 2019-11-19 01:03:41,544 127.0.0.1 - - [19/Nov/2019 01:03:41] "POST /repo HTTP/1.1" 302 -
+DEBUG: 2019-11-19 01:03:41,592 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:03:41,715 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:03:41,718 User entered repo: test-deploy database: 0 and crud: create
+INFO: 2019-11-19 01:03:41,719 127.0.0.1 - - [19/Nov/2019 01:03:41] "POST /repo HTTP/1.1" 302 -
+DEBUG: 2019-11-19 01:03:41,878 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:03:41,883 User entered repo: test-deploy database: 0 and crud: create
+INFO: 2019-11-19 01:03:41,884 127.0.0.1 - - [19/Nov/2019 01:03:41] "POST /repo HTTP/1.1" 302 -
+INFO: 2019-11-19 01:03:41,888 Sending {'user': 'sredna43', 'repo': 'test-deploy', 'db': '0'} to localhost:5001
+DEBUG: 2019-11-19 01:03:41,889 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-19 01:03:41,902 Backend was either disconnected, or never connected to in the first place.
+ERROR: 2019-11-19 01:03:41,902 Connection error to backend at localhost:5001
+INFO: 2019-11-19 01:03:41,903 127.0.0.1 - - [19/Nov/2019 01:03:41] "GET /submit HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:03:43,893 Backend was either disconnected, or never connected to in the first place.
+ERROR: 2019-11-19 01:03:43,893 Connection error to backend at localhost:5001
+INFO: 2019-11-19 01:03:43,894 127.0.0.1 - - [19/Nov/2019 01:03:43] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-19 01:03:47,134 127.0.0.1 - - [19/Nov/2019 01:03:47] "GET / HTTP/1.1" 200 -
+INFO: 2019-11-19 01:04:21,021 127.0.0.1 - - [19/Nov/2019 01:04:21] "POST / HTTP/1.1" 302 -
+DEBUG: 2019-11-19 01:04:21,026 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:04:21,351 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:04:21,369 127.0.0.1 - - [19/Nov/2019 01:04:21] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:04:26,167 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:04:26,430 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:04:26,439 User entered repo: CS300 database: 0 and crud: create
+INFO: 2019-11-19 01:04:26,443 127.0.0.1 - - [19/Nov/2019 01:04:26] "POST /repo HTTP/1.1" 302 -
+INFO: 2019-11-19 01:04:26,456 Sending {'user': 'sredna43', 'repo': 'CS300', 'db': '0'} to localhost:5001
+DEBUG: 2019-11-19 01:04:26,459 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-19 01:04:28,463 Backend was either disconnected, or never connected to in the first place.
+ERROR: 2019-11-19 01:04:28,463 Connection error to backend at localhost:5001
+INFO: 2019-11-19 01:04:28,466 127.0.0.1 - - [19/Nov/2019 01:04:28] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-19 01:04:56,539 127.0.0.1 - - [19/Nov/2019 01:04:56] "GET / HTTP/1.1" 200 -
+INFO: 2019-11-19 01:04:58,230 127.0.0.1 - - [19/Nov/2019 01:04:58] "POST / HTTP/1.1" 302 -
+DEBUG: 2019-11-19 01:04:58,237 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:04:58,496 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:04:58,501 127.0.0.1 - - [19/Nov/2019 01:04:58] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:05:02,272 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:05:02,550 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:05:02,556 User entered repo: test-deploy database: 0 and crud: create
+INFO: 2019-11-19 01:05:02,558 127.0.0.1 - - [19/Nov/2019 01:05:02] "POST /repo HTTP/1.1" 302 -
+INFO: 2019-11-19 01:05:02,567 Sending {'user': 'sredna43', 'repo': 'test-deploy', 'db': '0'} to localhost:5001
+DEBUG: 2019-11-19 01:05:02,570 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-19 01:05:04,575 Backend was either disconnected, or never connected to in the first place.
+ERROR: 2019-11-19 01:05:04,576 Connection error to backend at localhost:5001
+INFO: 2019-11-19 01:05:04,579 127.0.0.1 - - [19/Nov/2019 01:05:04] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-19 01:06:49,922 127.0.0.1 - - [19/Nov/2019 01:06:49] "GET / HTTP/1.1" 200 -
+INFO: 2019-11-19 01:06:58,966 127.0.0.1 - - [19/Nov/2019 01:06:58] "GET / HTTP/1.1" 200 -
+INFO: 2019-11-19 01:07:01,741 127.0.0.1 - - [19/Nov/2019 01:07:01] "POST / HTTP/1.1" 302 -
+DEBUG: 2019-11-19 01:07:01,746 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:07:02,055 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:07:02,059 127.0.0.1 - - [19/Nov/2019 01:07:02] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:08:19,019 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:08:19,683 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:08:19,701 127.0.0.1 - - [19/Nov/2019 01:08:19] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:08:45,983 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:08:46,236 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:08:46,243 127.0.0.1 - - [19/Nov/2019 01:08:46] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:09:38,090 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:09:38,388 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:09:38,394 127.0.0.1 - - [19/Nov/2019 01:09:38] "GET /repo HTTP/1.1" 200 -
+INFO: 2019-11-19 01:09:38,413 127.0.0.1 - - [19/Nov/2019 01:09:38] "GET /loadingspinner.gif HTTP/1.1" 404 -
+DEBUG: 2019-11-19 01:09:46,617 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:09:46,908 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:09:46,917 127.0.0.1 - - [19/Nov/2019 01:09:46] "GET /repo HTTP/1.1" 200 -
+INFO: 2019-11-19 01:09:46,951 127.0.0.1 - - [19/Nov/2019 01:09:46] "GET /loadingspinner.gif HTTP/1.1" 404 -
+DEBUG: 2019-11-19 01:11:20,553 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:11:20,898 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:11:20,906 127.0.0.1 - - [19/Nov/2019 01:11:20] "GET /repo HTTP/1.1" 200 -
+INFO: 2019-11-19 01:11:20,931 127.0.0.1 - - [19/Nov/2019 01:11:20] "GET /static/loadingspinner.gif/ HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:11:51,911 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:11:52,190 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:11:52,198 127.0.0.1 - - [19/Nov/2019 01:11:52] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:12:08,084 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:12:08,376 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:12:08,390 127.0.0.1 - - [19/Nov/2019 01:12:08] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:12:15,026 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:12:15,579 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:12:15,584 User entered repo: test-deploy database: 0 and crud: create
+INFO: 2019-11-19 01:12:15,585 127.0.0.1 - - [19/Nov/2019 01:12:15] "POST /repo HTTP/1.1" 302 -
+INFO: 2019-11-19 01:12:15,590 Sending {'user': 'sredna43', 'repo': 'test-deploy', 'db': '0'} to localhost:5001
+DEBUG: 2019-11-19 01:12:15,591 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-19 01:12:17,597 Backend was either disconnected, or never connected to in the first place.
+ERROR: 2019-11-19 01:12:17,597 Connection error to backend at localhost:5001
+INFO: 2019-11-19 01:12:17,598 127.0.0.1 - - [19/Nov/2019 01:12:17] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-19 01:12:22,757 127.0.0.1 - - [19/Nov/2019 01:12:22] "GET / HTTP/1.1" 200 -
+INFO: 2019-11-19 01:12:24,301 127.0.0.1 - - [19/Nov/2019 01:12:24] "POST / HTTP/1.1" 302 -
+DEBUG: 2019-11-19 01:12:24,312 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:12:24,592 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:12:24,597 127.0.0.1 - - [19/Nov/2019 01:12:24] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:13:13,325 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:13:13,565 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:13:13,568 User entered repo: test-deploy database: 0 and crud: create
+INFO: 2019-11-19 01:13:13,569 127.0.0.1 - - [19/Nov/2019 01:13:13] "POST /repo HTTP/1.1" 302 -
+INFO: 2019-11-19 01:13:13,574 Sending {'user': 'sredna43', 'repo': 'test-deploy', 'db': '0'} to localhost:5001
+DEBUG: 2019-11-19 01:13:13,576 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-19 01:13:15,581 Backend was either disconnected, or never connected to in the first place.
+ERROR: 2019-11-19 01:13:15,582 Connection error to backend at localhost:5001
+INFO: 2019-11-19 01:13:15,584 127.0.0.1 - - [19/Nov/2019 01:13:15] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-19 01:13:17,933 127.0.0.1 - - [19/Nov/2019 01:13:17] "GET / HTTP/1.1" 200 -
+INFO: 2019-11-19 01:13:19,917 127.0.0.1 - - [19/Nov/2019 01:13:19] "POST / HTTP/1.1" 302 -
+DEBUG: 2019-11-19 01:13:20,212 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:13:20,455 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:13:20,459 127.0.0.1 - - [19/Nov/2019 01:13:20] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:13:28,327 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:13:29,100 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:13:29,136 User entered repo: test-deploy database: 0 and crud: create
+INFO: 2019-11-19 01:13:29,138 127.0.0.1 - - [19/Nov/2019 01:13:29] "POST /repo HTTP/1.1" 302 -
+INFO: 2019-11-19 01:13:29,142 Sending {'user': 'sredna43', 'repo': 'test-deploy', 'db': '0'} to localhost:5001
+DEBUG: 2019-11-19 01:13:29,143 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-19 01:13:31,146 Backend was either disconnected, or never connected to in the first place.
+ERROR: 2019-11-19 01:13:31,146 Connection error to backend at localhost:5001
+INFO: 2019-11-19 01:13:31,147 127.0.0.1 - - [19/Nov/2019 01:13:31] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-19 01:13:32,770 127.0.0.1 - - [19/Nov/2019 01:13:32] "GET / HTTP/1.1" 200 -
+INFO: 2019-11-19 01:14:30,120 127.0.0.1 - - [19/Nov/2019 01:14:30] "POST / HTTP/1.1" 302 -
+DEBUG: 2019-11-19 01:14:30,126 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:14:30,433 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:14:30,446 127.0.0.1 - - [19/Nov/2019 01:14:30] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:14:35,864 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:14:36,138 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:14:36,140 User entered repo: test-deploy database: 0 and crud: create
+INFO: 2019-11-19 01:14:36,141 127.0.0.1 - - [19/Nov/2019 01:14:36] "POST /repo HTTP/1.1" 302 -
+INFO: 2019-11-19 01:14:36,162 Sending {'user': 'sredna43', 'repo': 'test-deploy', 'db': '0'} to localhost:5001
+DEBUG: 2019-11-19 01:14:36,164 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-19 01:14:38,170 Backend was either disconnected, or never connected to in the first place.
+ERROR: 2019-11-19 01:14:38,170 Connection error to backend at localhost:5001
+INFO: 2019-11-19 01:14:38,171 127.0.0.1 - - [19/Nov/2019 01:14:38] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-19 01:14:40,287 127.0.0.1 - - [19/Nov/2019 01:14:40] "GET / HTTP/1.1" 200 -
+INFO: 2019-11-19 01:16:24,921 127.0.0.1 - - [19/Nov/2019 01:16:24] "POST / HTTP/1.1" 302 -
+DEBUG: 2019-11-19 01:16:24,926 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:16:25,204 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:16:25,213 127.0.0.1 - - [19/Nov/2019 01:16:25] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:16:34,631 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:16:34,880 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:16:34,882 User entered repo: test-deploy database: 0 and crud: create
+INFO: 2019-11-19 01:16:34,883 127.0.0.1 - - [19/Nov/2019 01:16:34] "POST /repo HTTP/1.1" 302 -
+INFO: 2019-11-19 01:16:34,925 Sending {'user': 'sredna43', 'repo': 'test-deploy', 'db': '0'} to localhost:5001
+DEBUG: 2019-11-19 01:16:34,927 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-19 01:16:36,930 Backend was either disconnected, or never connected to in the first place.
+ERROR: 2019-11-19 01:16:36,930 Connection error to backend at localhost:5001
+INFO: 2019-11-19 01:16:36,932 127.0.0.1 - - [19/Nov/2019 01:16:36] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-19 01:16:38,716 127.0.0.1 - - [19/Nov/2019 01:16:38] "GET / HTTP/1.1" 200 -
+INFO: 2019-11-19 01:16:40,960 127.0.0.1 - - [19/Nov/2019 01:16:40] "POST / HTTP/1.1" 302 -
+DEBUG: 2019-11-19 01:16:40,968 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:16:41,290 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:16:41,294 127.0.0.1 - - [19/Nov/2019 01:16:41] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:17:19,188 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:17:19,456 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:17:19,459 User entered repo: test-deploy database: 0 and crud: create
+INFO: 2019-11-19 01:17:19,460 127.0.0.1 - - [19/Nov/2019 01:17:19] "POST /repo HTTP/1.1" 302 -
+INFO: 2019-11-19 01:17:19,464 Sending {'user': 'sredna43', 'repo': 'test-deploy', 'db': '0'} to localhost:5001
+DEBUG: 2019-11-19 01:17:19,465 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-19 01:17:21,466 Backend was either disconnected, or never connected to in the first place.
+ERROR: 2019-11-19 01:17:21,466 Connection error to backend at localhost:5001
+INFO: 2019-11-19 01:17:21,467 127.0.0.1 - - [19/Nov/2019 01:17:21] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-19 01:17:22,606 127.0.0.1 - - [19/Nov/2019 01:17:22] "GET / HTTP/1.1" 200 -
+INFO: 2019-11-19 01:17:24,649 127.0.0.1 - - [19/Nov/2019 01:17:24] "POST / HTTP/1.1" 302 -
+DEBUG: 2019-11-19 01:17:24,957 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:17:25,237 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:17:25,242 127.0.0.1 - - [19/Nov/2019 01:17:25] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:17:28,833 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:17:29,133 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:17:29,135 User entered repo: test-deploy database: 0 and crud: update
+INFO: 2019-11-19 01:17:29,136 127.0.0.1 - - [19/Nov/2019 01:17:29] "POST /repo HTTP/1.1" 302 -
+INFO: 2019-11-19 01:17:29,142 Sending {'user': 'sredna43', 'repo': 'test-deploy', 'db': '0'} to localhost:5001
+DEBUG: 2019-11-19 01:17:29,144 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-19 01:17:31,148 Backend was either disconnected, or never connected to in the first place.
+ERROR: 2019-11-19 01:17:31,148 Connection error to backend at localhost:5001
+INFO: 2019-11-19 01:17:31,149 127.0.0.1 - - [19/Nov/2019 01:17:31] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-19 01:18:25,096 127.0.0.1 - - [19/Nov/2019 01:18:25] "GET / HTTP/1.1" 200 -
+INFO: 2019-11-19 01:18:27,048 127.0.0.1 - - [19/Nov/2019 01:18:27] "POST / HTTP/1.1" 302 -
+DEBUG: 2019-11-19 01:18:27,056 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:18:27,328 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:18:27,332 127.0.0.1 - - [19/Nov/2019 01:18:27] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:18:31,076 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:18:31,331 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:18:31,333 User entered repo: test-deploy database: 0 and crud: create
+INFO: 2019-11-19 01:18:31,334 127.0.0.1 - - [19/Nov/2019 01:18:31] "POST /repo HTTP/1.1" 302 -
+INFO: 2019-11-19 01:18:31,339 Sending {'user': 'sredna43', 'repo': 'test-deploy', 'db': '0'} to localhost:5001
+DEBUG: 2019-11-19 01:18:31,341 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-19 01:18:33,351 Backend was either disconnected, or never connected to in the first place.
+ERROR: 2019-11-19 01:18:33,351 Connection error to backend at localhost:5001
+INFO: 2019-11-19 01:18:33,352 127.0.0.1 - - [19/Nov/2019 01:18:33] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-19 01:18:34,625 127.0.0.1 - - [19/Nov/2019 01:18:34] "GET / HTTP/1.1" 200 -
+INFO: 2019-11-19 01:22:05,845 127.0.0.1 - - [19/Nov/2019 01:22:05] "POST / HTTP/1.1" 302 -
+DEBUG: 2019-11-19 01:22:05,850 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:22:06,158 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:22:06,166 127.0.0.1 - - [19/Nov/2019 01:22:06] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:22:09,382 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:22:09,674 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:22:09,677 User entered repo: test-deploy database: 0 and crud: None
+INFO: 2019-11-19 01:22:09,677 127.0.0.1 - - [19/Nov/2019 01:22:09] "POST /repo HTTP/1.1" 302 -
+INFO: 2019-11-19 01:22:09,681 Sending {'user': 'sredna43', 'repo': 'test-deploy', 'db': '0'} to localhost:5001
+DEBUG: 2019-11-19 01:22:09,683 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-19 01:22:11,686 Backend was either disconnected, or never connected to in the first place.
+ERROR: 2019-11-19 01:22:11,686 Connection error to backend at localhost:5001
+INFO: 2019-11-19 01:22:11,686 127.0.0.1 - - [19/Nov/2019 01:22:11] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-19 01:23:29,935 127.0.0.1 - - [19/Nov/2019 01:23:29] "GET / HTTP/1.1" 200 -
+INFO: 2019-11-19 01:23:32,008 127.0.0.1 - - [19/Nov/2019 01:23:32] "POST / HTTP/1.1" 302 -
+DEBUG: 2019-11-19 01:23:32,015 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:23:32,326 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:23:32,330 127.0.0.1 - - [19/Nov/2019 01:23:32] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:23:40,041 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:23:40,302 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:23:40,304 User entered repo: test-deploy database: 0 and crud: create
+INFO: 2019-11-19 01:23:40,305 127.0.0.1 - - [19/Nov/2019 01:23:40] "POST /repo HTTP/1.1" 302 -
+INFO: 2019-11-19 01:23:40,309 Sending {'user': 'sredna43', 'repo': 'test-deploy', 'db': '0'} to localhost:5001
+DEBUG: 2019-11-19 01:23:40,310 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-19 01:23:42,312 Backend was either disconnected, or never connected to in the first place.
+ERROR: 2019-11-19 01:23:42,312 Connection error to backend at localhost:5001
+INFO: 2019-11-19 01:23:42,315 127.0.0.1 - - [19/Nov/2019 01:23:42] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-19 01:24:18,522 127.0.0.1 - - [19/Nov/2019 01:24:18] "GET / HTTP/1.1" 200 -
+INFO: 2019-11-19 01:24:20,006 127.0.0.1 - - [19/Nov/2019 01:24:20] "POST / HTTP/1.1" 302 -
+DEBUG: 2019-11-19 01:24:20,012 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:24:20,273 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:24:20,279 127.0.0.1 - - [19/Nov/2019 01:24:20] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:24:24,625 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:24:25,056 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:24:25,062 User entered repo: Go-Fish database: 0 and crud: create
+INFO: 2019-11-19 01:24:25,064 127.0.0.1 - - [19/Nov/2019 01:24:25] "POST /repo HTTP/1.1" 302 -
+INFO: 2019-11-19 01:24:25,072 Sending {'user': 'sredna43', 'repo': 'Go-Fish', 'db': '0'} to localhost:5001
+DEBUG: 2019-11-19 01:24:25,074 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-19 01:24:27,080 Backend was either disconnected, or never connected to in the first place.
+ERROR: 2019-11-19 01:24:27,080 Connection error to backend at localhost:5001
+INFO: 2019-11-19 01:24:27,082 127.0.0.1 - - [19/Nov/2019 01:24:27] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-19 01:24:39,899 127.0.0.1 - - [19/Nov/2019 01:24:39] "GET / HTTP/1.1" 200 -
+INFO: 2019-11-19 01:24:41,564 127.0.0.1 - - [19/Nov/2019 01:24:41] "POST / HTTP/1.1" 302 -
+DEBUG: 2019-11-19 01:24:41,571 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:24:41,865 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:24:41,871 127.0.0.1 - - [19/Nov/2019 01:24:41] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:24:45,353 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:24:45,596 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:24:45,599 User entered repo: test-deploy database: 0 and crud: create
+INFO: 2019-11-19 01:24:45,600 127.0.0.1 - - [19/Nov/2019 01:24:45] "POST /repo HTTP/1.1" 302 -
+INFO: 2019-11-19 01:24:45,605 Sending {'user': 'sredna43', 'repo': 'test-deploy', 'db': '0'} to localhost:5001
+DEBUG: 2019-11-19 01:24:45,606 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-19 01:24:47,610 Backend was either disconnected, or never connected to in the first place.
+ERROR: 2019-11-19 01:24:47,610 Connection error to backend at localhost:5001
+INFO: 2019-11-19 01:24:47,611 127.0.0.1 - - [19/Nov/2019 01:24:47] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-19 01:25:00,433 127.0.0.1 - - [19/Nov/2019 01:25:00] "GET / HTTP/1.1" 200 -
+INFO: 2019-11-19 01:25:02,158 127.0.0.1 - - [19/Nov/2019 01:25:02] "POST / HTTP/1.1" 302 -
+DEBUG: 2019-11-19 01:25:02,165 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:25:02,411 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:25:02,416 127.0.0.1 - - [19/Nov/2019 01:25:02] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:25:06,190 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:25:06,457 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:25:06,460 User entered repo: test-deploy database: 0 and crud: create
+INFO: 2019-11-19 01:25:06,461 127.0.0.1 - - [19/Nov/2019 01:25:06] "POST /repo HTTP/1.1" 302 -
+INFO: 2019-11-19 01:25:06,464 Sending {'user': 'sredna43', 'repo': 'test-deploy', 'db': '0'} to localhost:5001
+DEBUG: 2019-11-19 01:25:06,466 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-19 01:25:08,468 Backend was either disconnected, or never connected to in the first place.
+ERROR: 2019-11-19 01:25:08,468 Connection error to backend at localhost:5001
+INFO: 2019-11-19 01:25:08,469 127.0.0.1 - - [19/Nov/2019 01:25:08] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-19 01:25:26,432 127.0.0.1 - - [19/Nov/2019 01:25:26] "GET / HTTP/1.1" 200 -
+INFO: 2019-11-19 01:25:28,085 127.0.0.1 - - [19/Nov/2019 01:25:28] "POST / HTTP/1.1" 302 -
+DEBUG: 2019-11-19 01:25:28,090 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:25:28,339 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:25:28,346 127.0.0.1 - - [19/Nov/2019 01:25:28] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:25:31,834 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:25:32,178 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:25:32,180 User entered repo: test-deploy database: 0 and crud: create
+INFO: 2019-11-19 01:25:32,181 127.0.0.1 - - [19/Nov/2019 01:25:32] "POST /repo HTTP/1.1" 302 -
+INFO: 2019-11-19 01:25:32,185 Sending {'user': 'sredna43', 'repo': 'test-deploy', 'db': '0'} to localhost:5001
+DEBUG: 2019-11-19 01:25:32,187 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-19 01:25:34,192 Backend was either disconnected, or never connected to in the first place.
+ERROR: 2019-11-19 01:25:34,192 Connection error to backend at localhost:5001
+INFO: 2019-11-19 01:25:34,193 127.0.0.1 - - [19/Nov/2019 01:25:34] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-19 01:25:53,755 127.0.0.1 - - [19/Nov/2019 01:25:53] "GET / HTTP/1.1" 200 -
+INFO: 2019-11-19 01:25:55,692 127.0.0.1 - - [19/Nov/2019 01:25:55] "POST / HTTP/1.1" 302 -
+DEBUG: 2019-11-19 01:25:55,699 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:25:55,976 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:25:55,985 127.0.0.1 - - [19/Nov/2019 01:25:55] "GET /repo HTTP/1.1" 200 -
+DEBUG: 2019-11-19 01:26:00,262 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-19 01:26:00,525 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-19 01:26:00,527 User entered repo: stoStow-UEC database: 0 and crud: create
+INFO: 2019-11-19 01:26:00,528 127.0.0.1 - - [19/Nov/2019 01:26:00] "POST /repo HTTP/1.1" 302 -
+INFO: 2019-11-19 01:26:00,533 Sending {'user': 'sredna43', 'repo': 'stoStow-UEC', 'db': '0'} to localhost:5001
+DEBUG: 2019-11-19 01:26:00,534 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-11-19 01:26:02,537 Backend was either disconnected, or never connected to in the first place.
+ERROR: 2019-11-19 01:26:02,537 Connection error to backend at localhost:5001
+INFO: 2019-11-19 01:26:02,538 127.0.0.1 - - [19/Nov/2019 01:26:02] "GET /submit HTTP/1.1" 200 -
+INFO: 2019-11-19 01:26:03,935 127.0.0.1 - - [19/Nov/2019 01:26:03] "GET / HTTP/1.1" 200 -

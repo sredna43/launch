@@ -1,3 +1,5 @@
+# Be sure to change the environment variables below for DOCKERUSER and DOCKERPASS
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
