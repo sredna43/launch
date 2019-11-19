@@ -74,7 +74,9 @@ def deploy():
         deployment_name = repo
         logger.debug("Contents of variable 'images': {}".format(images))
         logger.info("Length of images: {}".format(len(images)))
-        if len(images) == 0:
+        try:
+            logger.info("Using {} as frontend image open to the world.".format(images[0][0]))
+        except:
             logger.info("Should be returning...")
             return "No Dockerfiles found, please try again"
         try:
