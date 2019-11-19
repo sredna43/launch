@@ -106,6 +106,14 @@ def delete_deployment(deployment_name, config_location): # deployment_name is ju
         name=deployment_name,
         namespace=namespace
     )
+    try:
+        serv = v1.delete_namespaced_service(
+            name=deployment_name+"-exp",
+            namespace=namespace
+        )
+        logger.info("Delete service status: {}".format(str(serv.status)))
+    except:
+        logger.error("Could not delete existing service tied to this deployment.")
     logger.info("Deployment deleted. Status={}".format(str(api_resp.status)))
     return
 

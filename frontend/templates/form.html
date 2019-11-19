@@ -3,14 +3,39 @@
 
 {%- extends "layout.html" %}
 
+{% block scripts %}
+<script>
+$('#deploy').submit(function() {
+    console.log("LOADING");
+    $('#loading').show();
+    $('#content').hide();
+});
+</script>
+{{super()}}
+{% endblock %}
+
+{% block styles %}
+<style>
+#loading {
+    display: none;
+}
+</style>
+{{super()}}
+{% endblock %}
+
 {% block content %}
     <div class="container">
         <h1>Launch UI</h1>
     </div>
     <div class="container">
-        <div class="jumbotron">
+        <div class="jumbotron" id="content">
             <h2>Enter your info:</h2>
-            {{ wtf.quick_form(form) }}
+            {{ wtf.quick_form(form, id="deploy") }}
         </div>
+        <div class="jumbotron" id="loading" style="cursor: wait;">
+            <img class="media-object" src={{url_for('static',filename='loadingspinner.gif')}}/>
+            <h2>Loading...</h2>
+        </div>
+        
     </div>
 {%- endblock %}
