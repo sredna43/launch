@@ -118,7 +118,7 @@ def delete(deployment):
         delete_deployment(deployment, config_location)
         return("Deleted {}".format(deployment))
     except:
-        return("Error trying to delete deployment {}. Does it exists?".format(deployment))
+        return("Error trying to delete deployment {}. Does it exist?".format(deployment))
         
 if __name__ == '__main__':
     app.debug = True
