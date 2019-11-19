@@ -98,6 +98,7 @@ def deploy():
                 port = int(images[0][1])
             node_port = create_service(deployment_name, port, config_location)
         except:
+            node_port = -1
             logger.critical("Could not create a service for this application.")
         #MongoDB stuff
         try:
