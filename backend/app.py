@@ -60,7 +60,7 @@ def deploy():
         logger.debug("User selected database: {}".format(db))
         images = []     
         if clone_repo(user, repo):
-            dockerfiles = find_dockerfiles(user, repo)            
+            dockerfiles = find_dockerfiles(user, repo)
             for path_to_dockerfile in dockerfiles:
                 logger.info("calling create_image({}, {}, {})".format(repo, user, path_to_dockerfile))
                 images.append(create_image(repo, user, path_to_dockerfile))
@@ -73,6 +73,10 @@ def deploy():
             return("Something got messed up!")
         deployment_name = repo
         logger.debug("Contents of variable 'images': {}".format(images))
+        logger.info("Length of images: {}".format(len(images)))
+        if len(images) == 0:
+            logger.info("Should be returning...")
+            return "No Dockerfiles found, please try again"
         try:
             delete_deployment(deployment_name, config_location)
         except:
