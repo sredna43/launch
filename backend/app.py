@@ -3,7 +3,7 @@ from pymongo import MongoClient, errors
 from flask_pymongo  import PyMongo
 import os, sys, subprocess
 from docker_helper import clone_repo, create_image, find_dockerfiles
-from kubernetes_helper import create_deployment_object, create_deployment, delete_deployment, update_deployment
+from kubernetes_helper import create_deployment_object, create_deployment, delete_deployment, update_deployment, create_service
 import logging
 
 app = Flask(__name__)
@@ -85,7 +85,16 @@ def deploy():
                 update_deployment(create_deployment_object(images, deployment_name, config_location=config_location), deployment_name, config_location=config_location)
             except:
                 logger.error("Could not create or update a deployment object, check the status of the cluster.")
-
+        try:
+            port = -1
+            for image in images:
+                if "frontend" in image[0]:
+                    port = int(image[1])
+            if port == -1:
+                port = int(images[0][1])
+            node_port = create_service(deployment_name, port, config_location)
+        except:
+            logger.critical("Could not create a service for this application.")
         #MongoDB stuff
         try:
             if repo is not None and user is not None:
@@ -101,7 +110,7 @@ def deploy():
                 result = mongo.db.users.insert_one(user)
         except errors.ServerSelectionTimeoutError:
             print("MongoDB could not be found")
-    return("Done!")
+    return("Running on port {}".format(node_port))
 
 @app.route("/delete/<deployment>", methods=["POST"])
 def delete(deployment):

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: launch
-  namespace: default
+  namespace: cir-anders-namespace
 spec:
   replicas: 1
   selector:
@@ -30,7 +30,7 @@ spec:
         - name: DOCKERPASS
           value: "launchpass"
         - name: NAMESPACE
-          value: "default"
+          value: "cir-anders-namespace"
         - name: DEPLOYED
           value: "True"
         resources:
