@@ -19,6 +19,9 @@ $('#deploy').submit(function() {
 #loading {
     display: none;
 }
+#help {
+    
+}
 </style>
 {{super()}}
 {% endblock %}
@@ -27,15 +30,22 @@ $('#deploy').submit(function() {
     <div class="container">
         <h1>Launch UI</h1>
     </div>
-    <div class="container">
-        <div class="jumbotron" id="content">
-            <h2>Enter your info:</h2>
-            {{ wtf.quick_form(form, id="deploy") }}
+    <div class="jumbotron">
+        <div class="container-fluid" id="content">
+            <div class="row">
+                <div class="col-xs-10">
+                    <h2>Enter your info:</h2>
+                </div>
+                <div class="col-xs-2">
+                    <h2><a title="Help!" href="/help" style="cursor: help; color: inherit;"><i class="material-icons help">help</i></a></h2>
+                </div>            
+            </div>  
+                {{ wtf.quick_form(form, id="deploy") }}
         </div>
-        <div class="jumbotron" id="loading" style="cursor: wait;">
+        <div class="container" id="loading" style="cursor: wait;">
             <img class="media-object" src={{url_for('static',filename='loadingspinner.gif')}}/>
             <h2>Loading...</h2>
         </div>
-        
     </div>
+    
 {%- endblock %}

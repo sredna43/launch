@@ -77,16 +77,20 @@ def Submit():
         if session.get('crud') != 'delete':
             logger.info("Sending {} to {}:{}".format(send_data, backend_host, backend_port))
             res = requests.post('http://{}:{}/deploy'.format(backend_host, backend_port), json=send_data)
-            message = "Thanks {}, {} has been spun up. Here's the response from the server: \n\n\t{}!".format(session['user'], session['repo'], res.content.decode('utf-8'))
+            message = "Thanks {}, {} has been spun up. Here's the response from the server: {}!".format(session['user'], session['repo'], res.content.decode('utf-8'))
         else:
             logger.info("Sending a request to delete {}".format(session.get('repo')))
             res = requests.post('http://{}:{}/delete/{}'.format(backend_host, backend_port, session.get('repo')))
-            message = "Request to delete deployment {} has been sent, here's the response from the server: \n\n\t{}".format(session['repo'], res.content.decode('utf-8'))
+            message = "Request to delete deployment {} has been sent, here's the response from the server: {}".format(session['repo'], res.content.decode('utf-8'))
     except requests.exceptions.ConnectionError as e:
         logger.debug("Backend was either disconnected, or never connected to in the first place.")
         logger.error("Connection error to backend at {}:{}".format(backend_host, backend_port))
         return render_template('index.html', title="Launch UI - Error", message="Oops, looks like someone stepped on a crack and broke our back(end)...\nMessage from server: {}".format(str(e)), btn="Home")
     return render_template('index.html', title="Launch UI - Spinning Up", message=message, btn="Start Over")
+
+@app.route('/help')
+def help():
+    return "HALP"
 
 if __name__ == '__main__':
     app.debug = True

@@ -37,7 +37,6 @@ def find_dockerfiles(user, repo):
     result = []
     for root, dirs, files in os.walk(basedir, topdown=False):
         for name in files:
-            logger.info("File {} found".format(name))
             if name == 'Dockerfile':
                 logger.info("Found Dockerfile at: {} ".format(root))
                 result.append(os.path.join(root, 'Dockerfile'))

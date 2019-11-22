@@ -1,0 +1,8 @@
+INFO: 2019-11-21 16:59:52,401 Backend IP is: 127.0.0.1:5001
+WARNING: 2019-11-21 16:59:52,414  * Debugger is active!
+INFO: 2019-11-21 16:59:52,433  * Debugger PIN: 670-921-078
+INFO: 2019-11-21 16:59:53,270  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+DEBUG: 2019-11-21 16:59:53,358 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-11-21 16:59:53,577 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+INFO: 2019-11-21 16:59:53,630 127.0.0.1 - - [21/Nov/2019 16:59:53] "GET /repo HTTP/1.1" 200 -
+INFO: 2019-11-21 16:59:54,662 127.0.0.1 - - [21/Nov/2019 16:59:54] "GET /help HTTP/1.1" 200 -

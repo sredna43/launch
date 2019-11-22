@@ -9,7 +9,7 @@ class GithubRepo(FlaskForm):
     crud_list = [('create', 'Create'), ('update', 'Update'), ('delete', 'Delete')]
     repo = SelectField(label=u'Repository Name:', validators=[DataRequired()])
     db = SelectField(label=u'Database: (Coming soon!)', choices=database_list, default=0, render_kw={'disabled':''})
-    crud = RadioField(label=u'Action:', choices=crud_list)
+    crud = RadioField(label=u'Action:', choices=crud_list, default='create')
     submit = SubmitField(label=u'Go!')
 
 class User(FlaskForm):

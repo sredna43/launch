@@ -37,7 +37,6 @@ spec:
         #  value: "True"
         resources:
           limits:
-            memory: "128Mi"
             cpu: "500m"
         ports:
         - containerPort: 5001
