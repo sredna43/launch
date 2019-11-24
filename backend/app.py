@@ -10,7 +10,7 @@ import config
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 app.secret_key = "SUPER SECRET KEY"
-bcrypt_pw = bcrypt.generate_password_hash(config.pw)
+bcrypt_pw = bcrypt.generate_password_hash(config.password)
 app.config["MONGO_DBNAME"] = 'LaunchDB'
 app.config["MONGO_URI"] = "mongodb+srv://{}:{}@launch-emlpr.gcp.mongodb.net/LaunchDB?retryWrites=true&w=majority".format(config.username,config.password)
 
