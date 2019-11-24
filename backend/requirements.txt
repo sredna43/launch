@@ -1,6 +1,7 @@
 docker
 flask
 kubernetes
-pymongo
+pymongo[tls,srv]
 pyyaml
 Flask-PyMongo
+flask-bcrypt
