@@ -115,6 +115,7 @@ def deploy():
             logger.critical("Could not create a service for this application.")
         #MongoDB stuff
         try:
+            logger.info("inside try for mongo")
             if repo is not None and user is not None:
                 user_param = mongo.db.users.find({'username': {"$in" :[user]}})
                 if user_param:
@@ -126,8 +127,8 @@ def deploy():
                     }
                 # Attempt to connect to the db
                 result = mongo.db.users.insert_one(user)
-        except errors.ServerSelectionTimeoutError:
-            print("MongoDB could not be found")
+        except:
+            logger.info("MongoDB could not be found")
     return("Running on port {}".format(node_port))
 
 @app.route("/delete/<deployment>", methods=["POST"])
