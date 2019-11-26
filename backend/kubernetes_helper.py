@@ -169,7 +169,6 @@ def get_node_port_from_repo(repo, config_location):
     v1 = client.CoreV1Api()
     services = v1.list_namespaced_service(namespace=namespace)
     for service in services.items:
-        logger.info("Service: {}".format(service))
         logger.debug("service name: {}".format(service.metadata.name))
         logger.debug("repo+exp: {}".format(repo + '-exp'))
         if service.metadata.name == repo + '-exp':
