@@ -2,12 +2,11 @@ from flask import Flask, flash, url_for, render_template, request, Response, red
 from flask_bootstrap import Bootstrap
 from markupsafe import escape
 import requests
-
 from forms import GithubRepo, User
 import sys
 import json
-
 import logging
+import re
 
 logging.basicConfig(filename="app.log", format='%(levelname)s: %(asctime)s %(message)s', filemode='w')
 logger = logging.getLogger()
@@ -52,9 +51,34 @@ def RepoForm():
     except:
         return render_template('index.html', message='We had some trouble getting to Github...', title='Launch UI - Connection Error', btn="Try again")
     repo_json = r.json()
+    deployments = None
+    node_ports = None
     try:
         select_field_repos = [(repo['name'], repo['name']) for repo in repo_json]
         select_field_repos.insert(0,('','Select a Repository'))
+        try: 
+            r = requests.get("http://{}:{}/list/{}/ports".format(backend_host, backend_port, session['user']))
+            logger.info("Sent request to http://{}:{}/list/{}/ports".format(backend_host, backend_port, session['user']))
+            logger.debug("reponse: {}".format(r))
+            node_ports = r.json()
+            has_services = False
+            for port in node_ports:
+                if node_ports[port] != 'None':
+                    has_services = True
+            if not has_services:
+                node_ports = None
+
+            logger.info("node_ports: {}".format(node_ports))
+        except:
+            node_ports = "None"
+        #try:
+        #    for repo in repo_json:
+        #        r = requests.get("http://{}:{}/list/{}/deployments".format(backend_host, backend_port, repo['name']))
+        #        logger.info("Sent request to http://{}:{}/list/{}/deployments".format(backend_host, backend_port, repo['name']))
+        #        logger.debug("response: {}".format(r))
+        #        deployments = r.content.decode('utf-8')
+        #except:
+        #    deployments = None
     except:
         return render_template('index.html', message='We had some trouble getting to Github, try checking your username.', title='Launch UI - Username Error', btn="Try again")
 
@@ -67,7 +91,14 @@ def RepoForm():
         session['crud'] = form.crud.data
         logger.info("User entered repo: {} database: {} and crud: {}".format(session['repo'], session['db'], session['crud']))
         return redirect('/submit')
-    return render_template('form.html', form=form, title="Launch UI")
+    url_port = re.search(':(\d+)',request.url_root)
+    logger.debug('url_port={}'.format(url_port))
+    try:
+        url = request.url_root.split(url_port.group(1), 1)[0]
+    except:
+        url = '#'
+    logger.debug("url={}".format(url))
+    return render_template('form.html', form=form, node_ports=node_ports, deployments=deployments, url=url, title="Launch UI")
 
 @app.route('/submit')
 def Submit():

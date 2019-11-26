@@ -4,3 +4,4 @@ kubernetes
 pymongo
 pyyaml
 Flask-PyMongo
+flask-bcrypt
