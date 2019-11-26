@@ -1,7 +1,6 @@
 from flask import Flask, request
 from pymongo import MongoClient, errors
 from flask_pymongo  import PyMongo
-from flask_bcrypt import Bcrypt
 import os, sys, subprocess
 from docker_helper import clone_repo, create_image, find_dockerfiles
 from kubernetes_helper import *
@@ -9,16 +8,17 @@ import logging
 import requests
 
 app = Flask(__name__)
+app.secret_key = "SUPER SECRET KEY"
+
 logging.basicConfig(filename="backend.log", format='%(levelname)s: %(asctime)s %(message)s', filemode='w')
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
-print(config)
+
 
 try:
-    bcrypt = Bcrypt(app)
-    app.secret_key = "SUPER SECRET KEY"
-    bcrypt_pw = bcrypt.generate_password_hash(config.pw)
-    app.config["MONGO_URI"] = "mongodb+srv://{}:{}@launch-emlpr.gcp.mongodb.net/test?retryWrites=true&w=majority".format(config.username,bcrypt_pw)
+    mongo_user = "PLACEHOLDER"
+    mongo_pass = "PLACEHOLDER"
+    app.config["MONGO_URI"] = "mongodb+srv://{}:{}@launch-emlpr.gcp.mongodb.net/test?retryWrites=true&w=majority".format(mongo_user, mongo_pass)
     mongo = PyMongo(app)
     logger.info("mongodb set up complete")
 except:
