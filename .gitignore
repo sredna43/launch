@@ -2,3 +2,4 @@ __pychache__/
 *.pyc
 backend/config
 frontend/backend_ip
+*.log
