@@ -12,15 +12,17 @@ app = Flask(__name__)
 logging.basicConfig(filename="backend.log", format='%(levelname)s: %(asctime)s %(message)s', filemode='w')
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
+print(config)
 
-try:
-    bcrypt = Bcrypt(app)
-    app.secret_key = "SUPER SECRET KEY"
-    bcrypt_pw = bcrypt.generate_password_hash('hello')
-    app.config["MONGO_URI"] = "mongodb+srv://{}:{}@launch-emlpr.gcp.mongodb.net/test?retryWrites=true&w=majority".format(config.username,bcrypt_pw)
-    mongo = PyMongo(app)
-except:
-    logger.error("no connection to mongodb")
+#try:
+bcrypt = Bcrypt(app)
+app.secret_key = "SUPER SECRET KEY"
+bcrypt_pw = bcrypt.generate_password_hash(config.pw)
+app.config["MONGO_URI"] = "mongodb+srv://{}:{}@launch-emlpr.gcp.mongodb.net/test?retryWrites=true&w=majority".format(config.username,bcrypt_pw)
+mongo = PyMongo(app)
+logger.info("mongodb set up complete")
+#except:
+#    logger.warning("no connection to mongodb")
 
 try:
     logger.info("Docker username set by environment variables: {}".format(os.environ['DOCKERUSER']))

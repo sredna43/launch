@@ -70,7 +70,7 @@ def RepoForm():
 
             logger.info("node_ports: {}".format(node_ports))
         except:
-            node_ports = "None"
+            node_ports = None
         #try:
         #    for repo in repo_json:
         #        r = requests.get("http://{}:{}/list/{}/deployments".format(backend_host, backend_port, repo['name']))
