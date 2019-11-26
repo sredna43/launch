@@ -48,7 +48,7 @@ $('#deploy').submit(function() {
         </div>
     </div>
     {% if node_ports %}
-    <div class="jumbotron">
+    <div class="jumbotron" id="content">
         <div class="container">
             <h2>Deployments associated with this username:</h2>
             {% for item in node_ports %}
