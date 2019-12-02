@@ -39,7 +39,7 @@ $('#deploy').submit(function() {
                         {% for item in node_ports %}
                             <ul class="list-group">
                             {% if node_ports[item] != "None" %}
-                                <li class="list-group-item"><a href="{{"%s%s"|format(url, node_ports[item])}}">{{item}}, running on port: {{node_ports[item]}}</a></li>
+                                <li class="list-group-item"><a target="_blank" href="{{"%s%s"|format(url, node_ports[item])}}">{{item}}, running on port: {{node_ports[item]}}</a></li>
                             {% endif %}
                             </ul>
                         {% endfor %}
