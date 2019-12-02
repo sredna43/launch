@@ -112,7 +112,7 @@ def Submit():
         url = request.url_root.split(url_port.group(1), 1)[0]
     except:
         url = '#'
-    proj_port = re.search('(\d+)'.res.content.decode('utf-8'))
+    proj_port = re.search('(\d+)',res.content.decode('utf-8'))
     url = url + proj_port.group(1)
     return render_template('index.html', title="Launch UI - Spinning Up", message=message, link=url, btn="Start Over")
 
