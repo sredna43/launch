@@ -32,6 +32,10 @@ Deploy custom web applications using a simple user interface that connects to Gi
 
 - As long as your project contains a Dockerfile, everything should run smoothly!
 
+## Contributing
+
+- If you would like to contribute some of your own changes, either for just yourself or the whole community, you can do so by following the guidelines and instructions found [here](/CONTRIBUTING.md). Happy coding!
+
 ## Senior capstone project Fall 2019
 
 Roger Becerra, Charlie Carlson, Hannah Dettmann, Anders Olson
