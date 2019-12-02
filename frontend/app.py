@@ -47,40 +47,29 @@ def UserForm():
 def RepoForm():
     URL = "https://api.github.com/users/{}/repos".format(session['user'])
     try:
-        r = requests.get(URL)        
+        r = requests.get(URL)
+        repo_json = r.json()
+        select_field_repos = [(repo['name'], repo['name']) for repo in repo_json]
+        select_field_repos.insert(0,('','Select a Repository'))     
     except:
         return render_template('index.html', message='We had some trouble getting to Github...', title='Launch UI - Connection Error', btn="Try again")
-    repo_json = r.json()
     deployments = None
     node_ports = None
-    try:
-        select_field_repos = [(repo['name'], repo['name']) for repo in repo_json]
-        select_field_repos.insert(0,('','Select a Repository'))
-        try: 
-            r = requests.get("http://{}:{}/list/{}/ports".format(backend_host, backend_port, session['user']))
-            logger.info("Sent request to http://{}:{}/list/{}/ports".format(backend_host, backend_port, session['user']))
-            logger.debug("reponse: {}".format(r))
-            node_ports = r.json()
-            has_services = False
-            for port in node_ports:
-                if node_ports[port] != 'None':
-                    has_services = True
-            if not has_services:
-                node_ports = None
-
-            logger.info("node_ports: {}".format(node_ports))
-        except:
+    try: 
+        r = requests.get("http://{}:{}/list/{}/ports".format(backend_host, backend_port, session['user']))
+        logger.info("Sent request to http://{}:{}/list/{}/ports".format(backend_host, backend_port, session['user']))
+        logger.debug("reponse: {}".format(r))
+        node_ports = r.json()
+        has_services = False
+        for port in node_ports:
+            if node_ports[port] != 'None':
+                has_services = True
+        if not has_services:
             node_ports = None
-        #try:
-        #    for repo in repo_json:
-        #        r = requests.get("http://{}:{}/list/{}/deployments".format(backend_host, backend_port, repo['name']))
-        #        logger.info("Sent request to http://{}:{}/list/{}/deployments".format(backend_host, backend_port, repo['name']))
-        #        logger.debug("response: {}".format(r))
-        #        deployments = r.content.decode('utf-8')
-        #except:
-        #    deployments = None
+
+        logger.info("node_ports: {}".format(node_ports))
     except:
-        return render_template('index.html', message='We had some trouble getting to Github, try checking your username.', title='Launch UI - Username Error', btn="Try again")
+        node_ports = None
 
     form = GithubRepo()
     form.repo.choices = select_field_repos
@@ -117,7 +106,15 @@ def Submit():
         logger.debug("Backend was either disconnected, or never connected to in the first place.")
         logger.error("Connection error to backend at {}:{}".format(backend_host, backend_port))
         return render_template('index.html', title="Launch UI - Error", message="Oops, looks like someone stepped on a crack and broke our back(end)...\nMessage from server: {}".format(str(e)), btn="Home")
-    return render_template('index.html', title="Launch UI - Spinning Up", message=message, btn="Start Over")
+    
+    url_port = re.search(':(\d+)',request.url_root)
+    try:
+        url = request.url_root.split(url_port.group(1), 1)[0]
+    except:
+        url = '#'
+    proj_port = re.search('(\d+)'.res.content.decode('utf-8'))
+    url = url + proj_port.group(1)
+    return render_template('index.html', title="Launch UI - Spinning Up", message=message, link=url, btn="Start Over")
 
 @app.route('/help')
 def help():

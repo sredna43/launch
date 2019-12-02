@@ -102,12 +102,13 @@ def delete_deployment(deployment_name, config_location): # deployment_name is ju
     else:
         config.load_kube_config()
     v1 = client.AppsV1Api()
+    corev1 = client.CoreV1Api()
     api_resp = v1.delete_namespaced_deployment(
         name=deployment_name,
         namespace=namespace
     )
     try:
-        serv = v1.delete_namespaced_service(
+        serv = corev1.delete_namespaced_service(
             name=deployment_name+"-exp",
             namespace=namespace
         )
