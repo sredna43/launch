@@ -104,8 +104,11 @@ def Submit():
                 url = request.url_root.split(url_port.group(1), 1)[0]
             except:
                 url = '#'
-            proj_port = re.search('(\d+)',res.content.decode('utf-8'))
-            url = url + proj_port.group(1)
+            try:
+                proj_port = re.search('(\d+)',res.content.decode('utf-8'))
+                url = url + proj_port.group(1)
+            except:
+                url = '#'
         else:
             logger.info("Sending a request to delete {}".format(session.get('repo')))
             res = requests.post('http://{}:{}/delete/{}'.format(backend_host, backend_port, session.get('repo')))
