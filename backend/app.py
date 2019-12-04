@@ -5,10 +5,14 @@ import os, sys, subprocess
 from docker_helper import clone_repo, create_image, find_dockerfiles
 from kubernetes_helper import *
 import logging
+import config
 import requests
 
 app = Flask(__name__)
 app.secret_key = "SUPER SECRET KEY"
+
+app.config["MONGO_URI"] = "mongodb+srv://{}:{}@launch-emlpr.gcp.mongodb.net/LaunchDB?retryWrites=true&w=majority"
+    .format(config.username,config.password)
 
 logging.basicConfig(filename="backend.log", format='%(levelname)s: %(asctime)s %(message)s', filemode='w')
 logger = logging.getLogger()
