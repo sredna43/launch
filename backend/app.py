@@ -17,12 +17,12 @@ logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
 
-#try:
-app.config["MONGO_URI"] = "mongodb+srv://{}:{}@launch-emlpr.gcp.mongodb.net/LaunchDB?retryWrites=true&w=majority".format(config.username,config.password)
-mongo = PyMongo(app)
-logger.info("mongodb set up complete")
-#except:
-#    logger.warning("no connection to mongodb")
+try:
+    app.config["MONGO_URI"] = "mongodb+srv://{}:{}@launch-emlpr.gcp.mongodb.net/LaunchDB?retryWrites=true&w=majority".format(config.username,config.password)
+    mongo = PyMongo(app)
+    logger.info("mongodb set up complete")
+except:
+    logger.warning("no connection to mongodb")
 
 try:
     logger.info("Docker username set by environment variables: {}".format(os.environ['DOCKERUSER']))

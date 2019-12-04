@@ -65,6 +65,7 @@ def create_deployment(deployment, config_location):
     elif config_location != None:
         config.load_kube_config(config_location)
     else:
+        logger.info("Loading k8s config from default")
         config.load_kube_config()
     v1 = client.AppsV1Api()
     api_resp = v1.create_namespaced_deployment(
@@ -82,6 +83,7 @@ def update_deployment(deployment, deployment_name, config_location):
         logger.info("Loading k8s config from {}".format(config_location))
         config.load_kube_config(config_location)
     else:
+        logger.info("Loading k8s config from default")
         config.load_kube_config()
         v1 = client.AppsV1Api()
     api_resp = v1.patch_namespaced_deployment(
@@ -100,6 +102,7 @@ def delete_deployment(deployment_name, config_location): # deployment_name is ju
         logger.info("Loading k8s config from {}".format(config_location))
         config.load_kube_config(config_location)
     else:
+        logger.info("Loading k8s config from default")
         config.load_kube_config()
     v1 = client.AppsV1Api()
     corev1 = client.CoreV1Api()
