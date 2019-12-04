@@ -118,7 +118,7 @@ def Submit():
 
 @app.route('/help')
 def help():
-    return "HALP"
+    return render_template('help.html', title="Launch UI - Help")
 
 if __name__ == '__main__':
     app.debug = True

@@ -1,30 +1,15 @@
-INFO: 2019-12-02 13:14:59,455 Backend IP is: localhost:5001
-WARNING: 2019-12-02 13:14:59,483  * Debugger is active!
-INFO: 2019-12-02 13:14:59,517  * Debugger PIN: 670-921-078
-INFO: 2019-12-02 13:15:00,374  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
-DEBUG: 2019-12-02 13:15:00,526 Starting new HTTPS connection (1): api.github.com:443
-DEBUG: 2019-12-02 13:15:00,768 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
-DEBUG: 2019-12-02 13:15:00,776 Starting new HTTP connection (1): localhost:5001
-DEBUG: 2019-12-02 13:15:04,815 url_port=<re.Match object; span=(16, 21), match=':5000'>
-DEBUG: 2019-12-02 13:15:04,815 url=http://localhost:
-INFO: 2019-12-02 13:15:04,988 127.0.0.1 - - [02/Dec/2019 13:15:04] "GET /repo HTTP/1.1" 200 -
-DEBUG: 2019-12-02 13:15:50,880 Starting new HTTPS connection (1): api.github.com:443
-DEBUG: 2019-12-02 13:15:51,236 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
-DEBUG: 2019-12-02 13:15:51,258 Starting new HTTP connection (1): localhost:5001
-DEBUG: 2019-12-02 13:15:54,346 http://localhost:5001 "GET /list/sredna43/ports HTTP/1.1" 200 187
-INFO: 2019-12-02 13:15:54,347 Sent request to http://localhost:5001/list/sredna43/ports
-DEBUG: 2019-12-02 13:15:54,347 reponse: <Response [200]>
-INFO: 2019-12-02 13:15:54,347 node_ports: {'CS300': 'None', 'Go-Fish': 'None', 'Whist': 'None', 'launch': 'None', 'openemr': 'None', 'orch-sitev2': '32272', 'stoStow-UEC': 'None', 'test-deploy': '31856'}
-DEBUG: 2019-12-02 13:15:54,349 url_port=<re.Match object; span=(16, 21), match=':5000'>
-DEBUG: 2019-12-02 13:15:54,349 url=http://localhost:
-INFO: 2019-12-02 13:15:54,355 127.0.0.1 - - [02/Dec/2019 13:15:54] "GET /repo HTTP/1.1" 200 -
-DEBUG: 2019-12-02 13:16:31,023 Starting new HTTPS connection (1): api.github.com:443
-DEBUG: 2019-12-02 13:16:31,303 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
-DEBUG: 2019-12-02 13:16:31,311 Starting new HTTP connection (1): localhost:5001
-DEBUG: 2019-12-02 13:16:34,257 http://localhost:5001 "GET /list/sredna43/ports HTTP/1.1" 200 187
-INFO: 2019-12-02 13:16:34,259 Sent request to http://localhost:5001/list/sredna43/ports
-DEBUG: 2019-12-02 13:16:34,260 reponse: <Response [200]>
-INFO: 2019-12-02 13:16:34,260 node_ports: {'CS300': 'None', 'Go-Fish': 'None', 'Whist': 'None', 'launch': 'None', 'openemr': 'None', 'orch-sitev2': '32272', 'stoStow-UEC': 'None', 'test-deploy': '31856'}
-DEBUG: 2019-12-02 13:16:34,263 url_port=<re.Match object; span=(16, 21), match=':5000'>
-DEBUG: 2019-12-02 13:16:34,263 url=http://localhost:
-INFO: 2019-12-02 13:16:34,267 127.0.0.1 - - [02/Dec/2019 13:16:34] "GET /repo HTTP/1.1" 200 -
+INFO: 2019-12-03 20:10:55,376 Backend IP is: localhost:5001
+WARNING: 2019-12-03 20:10:55,410  * Debugger is active!
+INFO: 2019-12-03 20:10:55,440  * Debugger PIN: 670-921-078
+INFO: 2019-12-03 20:10:56,583  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+DEBUG: 2019-12-03 20:11:02,953 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-12-03 20:11:03,226 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+DEBUG: 2019-12-03 20:11:03,240 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-12-03 20:11:06,185 http://localhost:5001 "GET /list/sredna43/ports HTTP/1.1" 200 187
+INFO: 2019-12-03 20:11:06,187 Sent request to http://localhost:5001/list/sredna43/ports
+DEBUG: 2019-12-03 20:11:06,187 reponse: <Response [200]>
+INFO: 2019-12-03 20:11:06,187 node_ports: {'CS300': 'None', 'Go-Fish': 'None', 'Whist': 'None', 'launch': 'None', 'openemr': 'None', 'orch-sitev2': '31022', 'stoStow-UEC': 'None', 'test-deploy': '31769'}
+DEBUG: 2019-12-03 20:11:06,188 url_port=<re.Match object; span=(16, 21), match=':5000'>
+DEBUG: 2019-12-03 20:11:06,188 url=http://localhost:
+INFO: 2019-12-03 20:11:06,341 127.0.0.1 - - [03/Dec/2019 20:11:06] "GET /repo HTTP/1.1" 200 -
+INFO: 2019-12-03 20:27:15,802 127.0.0.1 - - [03/Dec/2019 20:27:15] "GET /help HTTP/1.1" 200 -
