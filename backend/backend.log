@@ -1,0 +1,5 @@
+INFO: 2019-12-04 13:26:23,845 mongodb set up complete
+WARNING: 2019-12-04 13:26:23,845 Docker username set by hard-coded value: stolaunch
+WARNING: 2019-12-04 13:26:23,876  * Debugger is active!
+INFO: 2019-12-04 13:26:23,949  * Debugger PIN: 670-921-078
+INFO: 2019-12-04 13:26:23,980  * Running on http://0.0.0.0:5001/ (Press CTRL+C to quit)
