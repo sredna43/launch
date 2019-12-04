@@ -22,6 +22,9 @@ $('#deploy').submit(function() {
 #help {
     
 }
+#content {
+    max-width: 66%;
+}
 </style>
 {{super()}}
 {% endblock %}
@@ -33,6 +36,18 @@ $('#deploy').submit(function() {
     <div class="jumbotron">
         <div class="container-fluid" id="content">
             <div class="row">
+                <div class="col">
+                    {% if node_ports %}
+                        <h2>Deployments associated with this username:</h2>
+                        {% for item in node_ports %}
+                            <ul class="list-group">
+                            {% if node_ports[item] != "None" %}
+                                <li class="list-group-item"><a target="_blank" href="{{"%s%s"|format(url, node_ports[item])}}">{{item}}, running on port: {{node_ports[item]}}</a></li>
+                            {% endif %}
+                            </ul>
+                        {% endfor %}
+                    {% endif %}
+                </div>
                 <div class="col-xs-10">
                     <h2>Enter your info:</h2>
                 </div>
@@ -40,12 +55,12 @@ $('#deploy').submit(function() {
                     <h2><a title="Help!" href="/help" style="cursor: help; color: inherit;"><i class="material-icons help">help</i></a></h2>
                 </div>            
             </div>  
-                {{ wtf.quick_form(form, id="deploy") }}
+            {{ wtf.quick_form(form, id="deploy") }}
+            
         </div>
         <div class="container" id="loading" style="cursor: wait;">
             <img class="media-object" src={{url_for('static',filename='loadingspinner.gif')}}/>
             <h2>Loading...</h2>
         </div>
     </div>
-    
 {%- endblock %}

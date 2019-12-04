@@ -1,0 +1,52 @@
+<!-- index.html -->
+{% extends 'layout.html' %}
+
+{% block styles %}
+<style>
+img {
+    max-width: 20%;
+}
+</style>
+{{super()}}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Launch UI - Help!</h1>
+</div>
+<div class="container">
+    <ul class="nav nav-pills">
+        <li role="presentation"><a href="#Quickstart">Quickstart</a></li>
+        <li role="presentation"><a href="#Walkthrough">UI Walkthrough</a></li>
+        <li role="presentation"><a href="#Create">Create a Project</a></li>
+    </ul>
+</div>
+<div class="jumbotron">
+    <a name="Quickstart"></a>
+    <div class="container">
+        <h2>How to use Launch - Quickstart Guide</h2>
+        <p>You've gotten to the web-page, now what? This tutorial will walk you through the basics of how to use Launch.</p>
+        <ol>
+            <li>When you first navigate to Launch, you are met with a screen that looks like this:</li>
+            <img src="../static/enterinfo.png">
+            <li>Enter in your GitHub username, or the username under which the project you are trying to deploy has been stored.</li>
+            <li>Click the 'Begin' button, and the next page will auto-populate with your repositories.</li>
+            <li>The next page should look like this:</li>
+            <img src="../static/repo.png">
+            <li>Select your project's repository from the drop-down, and make sure the 'Create' option is selected, then press the 'Go' button</li>
+            <li>After a few seconds, you should see a message saying your application has been deployed</li>
+            <li>Make a note of the port it is running on, and navigate to the IP address of your cluster, followed by the port you noted earlier.</li>
+            <li>For example, if your project is running on port 32123, and your cluster IP address is 192.168.90.100, your project lives at http://192.168.90.100:32123</li>
+        </ol>
+    </div>
+    <a name="Walkthrough"></a>
+    <div class="container">
+        <h2>UI Walkthrough</h2>
+    </div>
+    <a name="Create"></a>
+    <div class="container">
+        <h2>Create a Launch-Friendly Application</h2>
+    </div>
+</div>
+
+{% endblock %}

@@ -102,12 +102,13 @@ def delete_deployment(deployment_name, config_location): # deployment_name is ju
     else:
         config.load_kube_config()
     v1 = client.AppsV1Api()
+    corev1 = client.CoreV1Api()
     api_resp = v1.delete_namespaced_deployment(
         name=deployment_name,
         namespace=namespace
     )
     try:
-        serv = v1.delete_namespaced_service(
+        serv = corev1.delete_namespaced_service(
             name=deployment_name+"-exp",
             namespace=namespace
         )
@@ -155,3 +156,38 @@ def create_service(deployment_name, port, config_location): # Returns the port t
         return node_port.group(1)
     except:
         return 1
+
+# returns the port that you can access the deployment at, if the deployment has been created
+def get_node_port_from_repo(repo, config_location):
+    if 'DEPLOYED' in os.environ:
+        logger.info("Running in a k8s cluster")
+        config.load_incluster_config()
+    elif config_location != None:
+        logger.info("Loading k8s config from {}".format(config_location))
+        config.load_kube_config(config_location)
+    else:
+        config.load_kube_config()
+    v1 = client.CoreV1Api()
+    services = v1.list_namespaced_service(namespace=namespace)
+    for service in services.items:
+        logger.debug("service name: {}".format(service.metadata.name))
+        logger.debug("repo+exp: {}".format(repo + '-exp'))
+        if service.metadata.name == repo + '-exp':
+            return str(service.spec.ports[0].node_port)
+    return "None"
+
+def get_deployments_from_username(user, config_location):
+    if 'DEPLOYED' in os.environ:
+        logger.info("Running in a k8s cluster")
+        config.load_incluster_config()
+    elif config_location != None:
+        logger.info("Loading k8s config from {}".format(config_location))
+        config.load_kube_config(config_location)
+    else:
+        config.load_kube_config()
+    v1 = client.CoreV1Api()
+    deployments = v1.list_namespaced_deployment(namespace=namespace)
+    ret_val = []
+    for deployment in deployments.items:
+        ret_val.append(deployment.metadata.name)
+    return ret_val
