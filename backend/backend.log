@@ -1,8 +1,0 @@
-DEBUG: 2019-11-18 20:45:08,007 response body: {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Success","details":{"name":"test-deploy-exp","kind":"services","uid":"35dc4594-0a4d-11ea-b9dd-003048fe5672"}}
-
-DEBUG: 2019-11-18 20:45:08,104 response body: {"kind":"Service","apiVersion":"v1","metadata":{"name":"test-deploy-exp","namespace":"cir-anders-namespace","selfLink":"/api/v1/namespaces/cir-anders-namespace/services/test-deploy-exp","uid":"d3e6d5f8-0a4d-11ea-b9dd-003048fe5672","resourceVersion":"40972096","creationTimestamp":"2019-11-18T21:53:17Z"},"spec":{"ports":[{"protocol":"TCP","port":5000,"targetPort":5000,"nodePort":31529}],"selector":{"app":"test-deploy"},"clusterIP":"10.105.255.228","type":"NodePort","sessionAffinity":"None","externalTrafficPolicy":"Cluster"},"status":{"loadBalancer":{}}}
-
-DEBUG: 2019-11-18 20:45:14,003 response body: {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Success","details":{"name":"test-deploy-exp","kind":"services","uid":"d3e6d5f8-0a4d-11ea-b9dd-003048fe5672"}}
-
-DEBUG: 2019-11-18 20:45:14,120 response body: {"kind":"Service","apiVersion":"v1","metadata":{"name":"test-deploy-exp","namespace":"cir-anders-namespace","selfLink":"/api/v1/namespaces/cir-anders-namespace/services/test-deploy-exp","uid":"d77918a2-0a4d-11ea-b9dd-003048fe5672","resourceVersion":"40972127","creationTimestamp":"2019-11-18T21:53:23Z"},"spec":{"ports":[{"protocol":"TCP","port":5000,"targetPort":5000,"nodePort":32665}],"selector":{"app":"test-deploy"},"clusterIP":"10.99.124.98","type":"NodePort","sessionAffinity":"None","externalTrafficPolicy":"Cluster"},"status":{"loadBalancer":{}}}
-
