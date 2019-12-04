@@ -76,7 +76,7 @@ def RepoForm():
     if request.method == 'POST': # Once the user has hit 'submit'
         # Set the Session variables 'user' and 'repo' so that we can use them later
         session['repo'] = form.repo.data
-        session['db'] = form.db.data
+        session['db'] = None
         session['crud'] = form.crud.data
         logger.info("User entered repo: {} database: {} and crud: {}".format(session['repo'], session['db'], session['crud']))
         return redirect('/submit')
@@ -93,11 +93,19 @@ def RepoForm():
 def Submit():
     # This is where we can reach out to the tool and start spinning up a container!
     send_data = {'user': session.get('user'), 'repo': session.get('repo'), 'db': session.get('db')}
+    url = None
     try:
         if session.get('crud') != 'delete':
             logger.info("Sending {} to {}:{}".format(send_data, backend_host, backend_port))
             res = requests.post('http://{}:{}/deploy'.format(backend_host, backend_port), json=send_data)
             message = "Thanks {}, {} has been spun up. Here's the response from the server: {}!".format(session['user'], session['repo'], res.content.decode('utf-8'))
+            url_port = re.search(':(\d+)',request.url_root)
+            try:
+                url = request.url_root.split(url_port.group(1), 1)[0]
+            except:
+                url = '#'
+            proj_port = re.search('(\d+)',res.content.decode('utf-8'))
+            url = url + proj_port.group(1)
         else:
             logger.info("Sending a request to delete {}".format(session.get('repo')))
             res = requests.post('http://{}:{}/delete/{}'.format(backend_host, backend_port, session.get('repo')))
@@ -106,14 +114,6 @@ def Submit():
         logger.debug("Backend was either disconnected, or never connected to in the first place.")
         logger.error("Connection error to backend at {}:{}".format(backend_host, backend_port))
         return render_template('index.html', title="Launch UI - Error", message="Oops, looks like someone stepped on a crack and broke our back(end)...\nMessage from server: {}".format(str(e)), btn="Home")
-    
-    url_port = re.search(':(\d+)',request.url_root)
-    try:
-        url = request.url_root.split(url_port.group(1), 1)[0]
-    except:
-        url = '#'
-    proj_port = re.search('(\d+)',res.content.decode('utf-8'))
-    url = url + proj_port.group(1)
     return render_template('index.html', title="Launch UI - Spinning Up", message=message, link=url, btn="Start Over")
 
 @app.route('/help')

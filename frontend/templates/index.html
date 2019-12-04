@@ -8,7 +8,9 @@
 <div class="jumbotron">
     <div class="container">
         <p>{{message}}</p>
+        {% if link %}
         <p>Check it out <a target="_blank" href={{link}}>here!</a></p>
+        {% endif %}
         <br />
         {% if btn %}
             <a class="button btn-primary btn-lg" href="/repo">{{btn}}</a>
