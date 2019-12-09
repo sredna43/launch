@@ -1,24 +1,29 @@
 from flask import Flask, request
 from pymongo import MongoClient, errors
 from flask_pymongo  import PyMongo
-from flask_bcrypt import Bcrypt
 import os, sys, subprocess
 from docker_helper import clone_repo, create_image, find_dockerfiles
-from kubernetes_helper import create_deployment_object, create_deployment, delete_deployment, update_deployment, create_service
+from kubernetes_helper import *
 import logging
 import config
+import requests
+
 app = Flask(__name__)
-bcrypt = Bcrypt(app)
 app.secret_key = "SUPER SECRET KEY"
-bcrypt_pw = bcrypt.generate_password_hash(config.password)
-app.config["MONGO_DBNAME"] = 'LaunchDB'
-app.config["MONGO_URI"] = "mongodb+srv://{}:{}@launch-emlpr.gcp.mongodb.net/LaunchDB?retryWrites=true&w=majority".format(config.username,config.password)
 
 
-mongo = PyMongo(app)
 logging.basicConfig(filename="backend.log", format='%(levelname)s: %(asctime)s %(message)s', filemode='w')
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
+
+
+try:
+    app.config["MONGO_URI"] = "mongodb+srv://{}:{}@launch-emlpr.gcp.mongodb.net/LaunchDB?retryWrites=true&w=majority".format(config.username,config.password)
+    mongo = PyMongo(app)
+    logger.info("mongodb set up complete")
+except:
+    logger.warning("no connection to mongodb")
+
 try:
     logger.info("Docker username set by environment variables: {}".format(os.environ['DOCKERUSER']))
 except:
@@ -110,6 +115,7 @@ def deploy():
             logger.critical("Could not create a service for this application.")
         #MongoDB stuff
         try:
+            logger.info("inside try for mongo")
             if repo is not None and user is not None:
                 user_param = mongo.db.users.find({'username': {"$in" :[user]}})
                 if user_param:
@@ -121,8 +127,8 @@ def deploy():
                     }
                 # Attempt to connect to the db
                 result = mongo.db.users.insert_one(user)
-        except errors.ServerSelectionTimeoutError:
-            print("MongoDB could not be found")
+        except:
+            logger.info("MongoDB could not be found")
     return("Running on port {}".format(node_port))
 
 @app.route("/delete/<deployment>", methods=["POST"])
@@ -132,6 +138,31 @@ def delete(deployment):
         return("Deleted {}".format(deployment))
     except:
         return("Error trying to delete deployment {}. Does it exist?".format(deployment))
+
+@app.route("/list/<user>/<list_type>")
+def list_items(user, list_type):
+    URL = "https://api.github.com/users/{}/repos".format(user)
+    try:
+        r = requests.get(URL)        
+    except:
+        return "Error getting to GitHub pulling data for user: {}".format(user)
+    repo_json = r.json()
+    repo_ports = {}
+    if list_type == 'ports':
+        try:
+            for repo in repo_json:
+                repo_ports[repo['name']] = get_node_port_from_repo(repo=repo['name'], config_location=config_location)
+            return repo_ports
+        except:
+            return "Error occured pulling data"
+    if list_type == 'deployments':
+        try:
+            return get_deployments_from_username(user=user, config_location=config_location)
+        except:
+            return "Error, there either are no deployments for this user or there's a deeper issue..."
+
+
+
         
 if __name__ == '__main__':
     app.debug = True
