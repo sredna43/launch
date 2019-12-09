@@ -1,6 +1,5 @@
 from flask import Flask, request
-from pymongo import MongoClient, errors
-from flask_pymongo  import PyMongo
+from pymongo import MongoClient, errors, *
 import os, sys, subprocess
 from docker_helper import clone_repo, create_image, find_dockerfiles
 from kubernetes_helper import *
@@ -18,9 +17,11 @@ logger.setLevel(logging.DEBUG)
 
 
 try:
-    app.config["MONGO_URI"] = "mongodb+srv://{}:{}@launch-emlpr.gcp.mongodb.net/LaunchDB?retryWrites=true&w=majority".format(config.username,config.password)
-    mongo = PyMongo(app)
+    client = MongoClient("mongodb+srv://{}:{}@launch-emlpr.gcp.mongodb.net/LaunchDB?retryWrites=true&w=majority".format(config.username,config.password))
+    db = client['LaunchDB']
+    users = db.users
     logger.info("mongodb set up complete")
+    logger.info("setup users collection")
 except:
     logger.warning("no connection to mongodb")
 
@@ -47,7 +48,7 @@ def api(query):
 @app.route('/api/getAll',methods=['GET'])
 def getAllObj():
     logger.debug("GET request to '/api/getAll")
-    json_data = mongo.db.users.find()
+    json_data = db.users.find()
     writeTOJSONFile(json_data)
 def writeTOJSONFile(json_data):
     file = open("all_objects.json", "w")
@@ -117,16 +118,16 @@ def deploy():
         try:
             logger.info("inside try for mongo")
             if repo is not None and user is not None:
-                user_param = mongo.db.users.find({'username': {"$in" :[user]}})
+                user_param = db.users.find({'username': user})
                 if user_param:
-                   mongo.db.users.update({'username':user},{"$push" :{'git-repo':{"$each" :[repo]}}})
+                   db.users.update({'username':user},{$push:{'git-repo':repo}})
                 else:
                     user = {
                         'username': user,
                         'git-repo': [repo]
                     }
                 # Attempt to connect to the db
-                result = mongo.db.users.insert_one(user)
+                result = db.users.insert_one(user)
         except:
             logger.info("MongoDB could not be found")
     return("Running on port {}".format(node_port))
