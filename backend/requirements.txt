@@ -3,5 +3,5 @@ flask
 kubernetes
 pymongo[tls, srv]
 pyyaml
-Flask-PyMongo
+
 
