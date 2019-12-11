@@ -1,40 +1,30 @@
-INFO: 2019-12-04 13:27:47,613 Backend IP is: localhost:5001
-WARNING: 2019-12-04 13:27:47,640  * Debugger is active!
-INFO: 2019-12-04 13:27:47,665  * Debugger PIN: 670-921-078
-INFO: 2019-12-04 13:27:47,687  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
-INFO: 2019-12-04 13:27:58,184 127.0.0.1 - - [04/Dec/2019 13:27:58] "GET / HTTP/1.1" 200 -
-INFO: 2019-12-04 13:27:58,257 127.0.0.1 - - [04/Dec/2019 13:27:58] "GET /static/loadingspinner.gif/ HTTP/1.1" 304 -
-INFO: 2019-12-04 13:28:00,506 127.0.0.1 - - [04/Dec/2019 13:28:00] "POST / HTTP/1.1" 302 -
-DEBUG: 2019-12-04 13:28:00,843 Starting new HTTPS connection (1): api.github.com:443
-DEBUG: 2019-12-04 13:28:01,204 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
-DEBUG: 2019-12-04 13:28:01,226 Starting new HTTP connection (1): localhost:5001
-DEBUG: 2019-12-04 13:28:04,734 http://localhost:5001 "GET /list/sredna43/ports HTTP/1.1" 200 186
-INFO: 2019-12-04 13:28:04,736 Sent request to http://localhost:5001/list/sredna43/ports
-DEBUG: 2019-12-04 13:28:04,736 reponse: <Response [200]>
-INFO: 2019-12-04 13:28:04,737 node_ports: {'CS300': 'None', 'Go-Fish': 'None', 'Whist': 'None', 'launch': 'None', 'openemr': 'None', 'orch-sitev2': 'None', 'stoStow-UEC': 'None', 'test-deploy': '32278'}
-DEBUG: 2019-12-04 13:28:04,739 url_port=<re.Match object; span=(16, 21), match=':5000'>
-DEBUG: 2019-12-04 13:28:04,739 url=http://localhost:
-INFO: 2019-12-04 13:28:04,747 127.0.0.1 - - [04/Dec/2019 13:28:04] "GET /repo HTTP/1.1" 200 -
-DEBUG: 2019-12-04 13:28:24,956 Starting new HTTPS connection (1): api.github.com:443
-DEBUG: 2019-12-04 13:28:25,343 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
-DEBUG: 2019-12-04 13:28:25,355 Starting new HTTP connection (1): localhost:5001
-DEBUG: 2019-12-04 13:28:28,268 http://localhost:5001 "GET /list/sredna43/ports HTTP/1.1" 200 186
-INFO: 2019-12-04 13:28:28,268 Sent request to http://localhost:5001/list/sredna43/ports
-DEBUG: 2019-12-04 13:28:28,268 reponse: <Response [200]>
-INFO: 2019-12-04 13:28:28,271 node_ports: {'CS300': 'None', 'Go-Fish': 'None', 'Whist': 'None', 'launch': 'None', 'openemr': 'None', 'orch-sitev2': 'None', 'stoStow-UEC': 'None', 'test-deploy': '32278'}
-INFO: 2019-12-04 13:28:28,273 User entered repo: orch-sitev2 database: None and crud: create
-INFO: 2019-12-04 13:28:28,273 127.0.0.1 - - [04/Dec/2019 13:28:28] "POST /repo HTTP/1.1" 302 -
-INFO: 2019-12-04 13:28:28,322 Sending {'user': 'sredna43', 'repo': 'orch-sitev2', 'db': None} to localhost:5001
-DEBUG: 2019-12-04 13:28:28,329 Starting new HTTP connection (1): localhost:5001
-DEBUG: 2019-12-04 13:28:30,349 http://localhost:5001 "POST /deploy HTTP/1.1" 200 24
-INFO: 2019-12-04 13:28:30,362 127.0.0.1 - - [04/Dec/2019 13:28:30] "GET /submit HTTP/1.1" 200 -
-DEBUG: 2019-12-04 13:28:59,525 Starting new HTTPS connection (1): api.github.com:443
-DEBUG: 2019-12-04 13:28:59,767 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
-DEBUG: 2019-12-04 13:28:59,777 Starting new HTTP connection (1): localhost:5001
-DEBUG: 2019-12-04 13:29:02,856 http://localhost:5001 "GET /list/sredna43/ports HTTP/1.1" 200 186
-INFO: 2019-12-04 13:29:02,859 Sent request to http://localhost:5001/list/sredna43/ports
-DEBUG: 2019-12-04 13:29:02,859 reponse: <Response [200]>
-INFO: 2019-12-04 13:29:02,859 node_ports: {'CS300': 'None', 'Go-Fish': 'None', 'Whist': 'None', 'launch': 'None', 'openemr': 'None', 'orch-sitev2': 'None', 'stoStow-UEC': 'None', 'test-deploy': '32278'}
-DEBUG: 2019-12-04 13:29:02,860 url_port=<re.Match object; span=(16, 21), match=':5000'>
-DEBUG: 2019-12-04 13:29:02,862 url=http://localhost:
-INFO: 2019-12-04 13:29:02,868 127.0.0.1 - - [04/Dec/2019 13:29:02] "GET /repo HTTP/1.1" 200 -
+INFO: 2019-12-11 12:38:50,619 Backend IP is: localhost:5001
+WARNING: 2019-12-11 12:38:50,646  * Debugger is active!
+INFO: 2019-12-11 12:38:50,688  * Debugger PIN: 670-921-078
+INFO: 2019-12-11 12:38:50,712  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO: 2019-12-11 12:39:03,096 127.0.0.1 - - [11/Dec/2019 12:39:03] "GET / HTTP/1.1" 200 -
+INFO: 2019-12-11 12:39:03,124 127.0.0.1 - - [11/Dec/2019 12:39:03] "GET /static/loadingspinner.gif/ HTTP/1.1" 304 -
+INFO: 2019-12-11 12:39:06,756 127.0.0.1 - - [11/Dec/2019 12:39:06] "GET /help HTTP/1.1" 200 -
+INFO: 2019-12-11 12:39:06,811 127.0.0.1 - - [11/Dec/2019 12:39:06] "GET /static/enterinfo.png HTTP/1.1" 304 -
+INFO: 2019-12-11 12:39:07,113 127.0.0.1 - - [11/Dec/2019 12:39:07] "GET /static/repo.png HTTP/1.1" 304 -
+INFO: 2019-12-11 12:40:05,147 127.0.0.1 - - [11/Dec/2019 12:40:05] "GET /help HTTP/1.1" 200 -
+INFO: 2019-12-11 12:40:16,662 127.0.0.1 - - [11/Dec/2019 12:40:16] "GET /help HTTP/1.1" 200 -
+INFO: 2019-12-11 12:46:28,236 127.0.0.1 - - [11/Dec/2019 12:46:28] "GET /help HTTP/1.1" 200 -
+INFO: 2019-12-11 12:47:35,252 127.0.0.1 - - [11/Dec/2019 12:47:35] "GET /help HTTP/1.1" 200 -
+INFO: 2019-12-11 12:47:48,582 127.0.0.1 - - [11/Dec/2019 12:47:48] "POST / HTTP/1.1" 302 -
+DEBUG: 2019-12-11 12:47:48,926 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-12-11 12:47:49,620 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+DEBUG: 2019-12-11 12:47:49,635 Starting new HTTP connection (1): localhost:5001
+DEBUG: 2019-12-11 12:47:53,664 url_port=<re.Match object; span=(16, 21), match=':5000'>
+DEBUG: 2019-12-11 12:47:53,664 url=http://localhost:
+INFO: 2019-12-11 12:47:53,673 127.0.0.1 - - [11/Dec/2019 12:47:53] "GET /repo HTTP/1.1" 200 -
+INFO: 2019-12-11 13:22:10,369 127.0.0.1 - - [11/Dec/2019 13:22:10] "GET /help HTTP/1.1" 200 -
+INFO: 2019-12-11 13:22:10,438 127.0.0.1 - - [11/Dec/2019 13:22:10] "GET /static/repodrop.png HTTP/1.1" 200 -
+INFO: 2019-12-11 13:22:10,602 127.0.0.1 - - [11/Dec/2019 13:22:10] "GET /static/cdgo.png HTTP/1.1" 200 -
+INFO: 2019-12-11 13:47:10,365 127.0.0.1 - - [11/Dec/2019 13:47:10] "GET /help HTTP/1.1" 200 -
+INFO: 2019-12-11 14:20:36,247 127.0.0.1 - - [11/Dec/2019 14:20:36] "GET /help HTTP/1.1" 200 -
+DEBUG: 2019-12-11 14:25:51,015 Starting new HTTPS connection (1): api.github.com:443
+DEBUG: 2019-12-11 14:25:51,798 https://api.github.com:443 "GET /users/sredna43/repos HTTP/1.1" 200 None
+DEBUG: 2019-12-11 14:25:51,809 Starting new HTTP connection (1): localhost:5001
+INFO: 2019-12-11 14:25:55,831 User entered repo: test-deploy database: None and crud: create
+INFO: 2019-12-11 14:25:55,834 127.0.0.1 - - [11/Dec/2019 14:25:55] "POST /repo HTTP/1.1" 302 -
