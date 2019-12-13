@@ -22,6 +22,54 @@ Deploy custom web applications using a simple user interface that connects to Gi
 
 - At this point, Launch is up and running! Go ahead and test to see if it is working correctly by entering the details of your first project! To see more about how to create a Launch-friendly application, see below.
 
+## Installing Launch with AWS EKS
+- Before deploying Launch, you must have an AWS account. For students, this is availible free for a year, or check if your school uses AWS as their primary kubernetes service.
+
+- The aws command line tool is required, to install use 
+`pip install awscli --upgrade --user`
+
+- Once installed, run `aws configure` after the command line will take the following input
+AWS Access Key ID [None]: KEY
+AWS Secret Access Key [None]: ACCESSKEY
+Default region name [None]: REGION OF CLUSTER
+Default output format [None]: FORMAT
+
+- To install EKS for your OS
+MacOS | Linux | Windows
+------|-------|--------
+`brew install weaveworks/tap/eksctl` | `curl --silent --location "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp` `sudo mv /tmp/eksctl /usr/local/bin` | `chocolatey install -y eksctl aws-iam-authenticator`
+
+- To create Cluster
+    - Use command:
+        - eksctl create cluster
+    - Or to specify:
+        -	eksctl create cluster -f cluster.yaml
+	    -   examples shown at https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html
+
+- To match to our namespace
+	`kubectl get namespaces`
+	(check the usable namespaces, if cir-anders-namespace is not there) call
+	`kubectl create namespace <insert namespace here>`
+	(then call preivous command to check)
+	`kubectl config set-context --current --namespace=<insert namespace name here>`
+	(to not have to always call namespace if need be)
+
+- Steps for Deploying Launch can be referred to beginning of documentation
+
+- To find and Expose IP to view Launch on AWS
+
+	`kubectl get deployments launch`
+	`kubectl describe deployments launch`
+		-gets info on deployments
+	`kubectl expose deployment hello-world --type=LoadBalancer --name=my-service`
+		-creates services file for exposing ip, in this case its LoadBalancer
+	`kubectl get services my-service`
+		-will reveal cluster ip and external ip and port
+	`kubectl describe services my-service`
+		-will display all of the information of the service
+	Finally,  enter http://<external-ip>:<port> in browser to access Launch
+
+- For more information, go to https://kubernetes.io/docs/tutorials/stateless-application/expose-external-ip-address/
 ## Make Your Application Launch-Friendly
 
 - Because Launch relies upon Docker to function properly, your repository must also contain a Dockerfile. There are detailed instructions on how to create a Dockerfile [here](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/).
