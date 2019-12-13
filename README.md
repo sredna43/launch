@@ -35,9 +35,13 @@ Default region name [None]: REGION OF CLUSTER
 Default output format [None]: FORMAT
 
 - To install EKS for your OS
-MacOS | Linux | Windows
-------|-------|--------
-`brew install weaveworks/tap/eksctl` | `curl --silent --location "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp` `sudo mv /tmp/eksctl /usr/local/bin` | `chocolatey install -y eksctl aws-iam-authenticator`
+- MacOS
+    - `brew install weaveworks/tap/eksctl`
+- Linux 
+    - `curl --silent --location "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp`
+    - `sudo mv /tmp/eksctl /usr/local/bin`
+- Windows
+    - `chocolatey install -y eksctl aws-iam-authenticator`
 
 - To create Cluster
     - Use command:
