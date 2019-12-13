@@ -3,3 +3,4 @@ __pychache__/
 backend/config
 frontend/backend_ip
 *.log
+backend/secret.py

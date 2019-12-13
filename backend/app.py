@@ -1,11 +1,10 @@
 from flask import Flask, request
-from pymongo import MongoClient, errors, *
 import os, sys, subprocess
 from docker_helper import clone_repo, create_image, find_dockerfiles
 from kubernetes_helper import *
 import logging
-import config
 import requests
+import database
 
 app = Flask(__name__)
 app.secret_key = "SUPER SECRET KEY"
@@ -17,13 +16,23 @@ logger.setLevel(logging.DEBUG)
 
 
 try:
-    client = MongoClient("mongodb+srv://{}:{}@launch-emlpr.gcp.mongodb.net/LaunchDB?retryWrites=true&w=majority".format(config.username,config.password))
-    db = client['LaunchDB']
-    users = db.users
+    db = database.connect()
+    if db == None:
+        logger.debug("failed to connect")
+    else:
+        logger.info("connection success")
+except:
+    logger.debug("failed to connect")
+
+
+try:
+    test = db['test']
+    users = db['users']
     logger.info("mongodb set up complete")
     logger.info("setup users collection")
 except:
-    logger.warning("no connection to mongodb")
+    logger.debug("setup failed for collections")
+
 
 try:
     logger.info("Docker username set by environment variables: {}".format(os.environ['DOCKERUSER']))
@@ -38,6 +47,7 @@ except:
 @app.route('/')
 def home():
     logger.debug("GET request to '/'")
+    test.insert({"test":True})
     return ("<h1>Hello, World!</h1>")
 
 @app.route('/api/<query>')
@@ -61,6 +71,9 @@ def writeTOJSONFile(json_data):
         file.write(',')
     file.write(']')
     return json_docs
+@app.route('/api/authenticate', methods=['GET'])
+def auth():
+    pass
 # Responds to POST requests that contain JSON data
 @app.route('/deploy', methods=['POST'])
 def deploy():
@@ -70,6 +83,12 @@ def deploy():
         repo = json_data['repo']
         db = json_data['db']
         logger.debug("User selected database: {}".format(db))
+        user = {
+                    'username': user,
+                    'git-repo': [repo]
+                }
+                # Attempt to connect to the db
+        result = users.insert_one(user)
         images = []     
         if clone_repo(user, repo):
             dockerfiles = find_dockerfiles(user, repo)
@@ -120,7 +139,7 @@ def deploy():
             if repo is not None and user is not None:
                 user_param = db.users.find({'username': user})
                 if user_param:
-                   db.users.update({'username':user},{$push:{'git-repo':repo}})
+                   db.users.update({'username':user},{'git-repo':repo})
                 else:
                     user = {
                         'username': user,
