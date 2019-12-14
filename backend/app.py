@@ -1,5 +1,5 @@
 from flask import Flask, request
-from pymongo import MongoClient, errors, *
+from pymongo import *
 import os, sys, subprocess
 from docker_helper import clone_repo, create_image, find_dockerfiles
 from kubernetes_helper import *
