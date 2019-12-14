@@ -63,7 +63,8 @@ def writeTOJSONFile(json_data):
     return json_docs
 # Responds to POST requests that contain JSON data
 @app.route('/deploy', methods=['POST'])
-def deploy():
+@app.route('/deploy/<update>')
+def deploy(update):
     if request.method == "POST":
         json_data = request.get_json()
         user = json_data['user']
@@ -92,7 +93,10 @@ def deploy():
             logger.info("Should be returning...")
             return "No Dockerfiles found, please try again"
         try:
-            delete_deployment(deployment_name, config_location)
+            if update:      
+                delete_deployment(deployment_name, config_location, True)
+            else:
+                delete_deployment(deployment_name, config_location)
         except:
             logger.error("Tried to delete deployment, but threw an error")
             pass

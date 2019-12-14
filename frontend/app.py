@@ -50,7 +50,7 @@ def RepoForm():
         r = requests.get(URL)
         repo_json = r.json()
         select_field_repos = [(repo['name'], repo['name']) for repo in repo_json]
-        select_field_repos.insert(0,('','Select a Repository'))     
+        select_field_repos.insert(0,('','Select a Repository'))   
     except:
         return render_template('index.html', message='We had some trouble getting to Github...', title='Launch UI - Connection Error', btn="Try again")
     deployments = None
@@ -109,6 +109,10 @@ def Submit():
                 url = url + proj_port.group(1)
             except:
                 url = '#'
+        elif session.get('crud') == 'update':
+            logger.info("Sending request to update {}".format(session['repo']))
+            res = requests.post('http://{}:{}/update/{}'.format(backend_host, backend_port, session['repo']))
+            message = "Request to update deployment {} has been sent, here is the response from the server: {}".format(session['repo'], res.contend.decode('utf-8'))
         else:
             logger.info("Sending a request to delete {}".format(session.get('repo')))
             res = requests.post('http://{}:{}/delete/{}'.format(backend_host, backend_port, session.get('repo')))

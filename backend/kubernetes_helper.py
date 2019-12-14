@@ -94,7 +94,7 @@ def update_deployment(deployment, deployment_name, config_location):
     logger.info("Deployment updated. Status={}".format(api_resp.status))
     return
 
-def delete_deployment(deployment_name, config_location): # deployment_name is just <repo>
+def delete_deployment(deployment_name, config_location, update=False): # deployment_name is just <repo>
     if 'DEPLOYED' in os.environ:
         logger.info("Running in a k8s cluster")
         config.load_incluster_config()
@@ -110,14 +110,15 @@ def delete_deployment(deployment_name, config_location): # deployment_name is ju
         name=deployment_name,
         namespace=namespace
     )
-    try:
-        serv = corev1.delete_namespaced_service(
-            name=deployment_name+"-exp",
-            namespace=namespace
-        )
-        logger.info("Delete service status: {}".format(str(serv.status)))
-    except:
-        logger.error("Could not delete existing service tied to this deployment.")
+    if not update:
+        try:
+            serv = corev1.delete_namespaced_service(
+                name=deployment_name+"-exp",
+                namespace=namespace
+            )
+            logger.info("Delete service status: {}".format(str(serv.status)))
+        except:
+            logger.error("Could not delete existing service tied to this deployment.")
     logger.info("Deployment deleted. Status={}".format(str(api_resp.status)))
     return
 
