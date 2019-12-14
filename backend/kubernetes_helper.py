@@ -15,7 +15,10 @@ except:
     namespace = 'cir-anders-namespace'
 
 def create_deployment_object(images, app_name, config_location):
-    username = os.environ['DOCKERUSER']
+    try:
+        username = os.environ['DOCKERUSER']
+    except:
+        username = 'stolaunch'
     if 'DEPLOYED' in os.environ:
         logger.info("Running in a k8s cluster")
         config.load_incluster_config()

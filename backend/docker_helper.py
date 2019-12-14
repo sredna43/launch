@@ -52,7 +52,6 @@ def create_image(repo, user, path_to_dockerfile, is_frontend=False):
     except: # Hard coded for now
         username = 'stolaunch'
         password = 'launchpass'
-        return
     # Get the port from the Dockerfile
     try:
         with open(path_to_dockerfile, 'r') as file:

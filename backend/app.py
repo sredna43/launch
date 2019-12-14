@@ -64,7 +64,7 @@ def writeTOJSONFile(json_data):
 # Responds to POST requests that contain JSON data
 @app.route('/deploy', methods=['POST'])
 @app.route('/deploy/<update>')
-def deploy(update):
+def deploy(update=None):
     if request.method == "POST":
         json_data = request.get_json()
         user = json_data['user']
@@ -93,20 +93,16 @@ def deploy(update):
             logger.info("Should be returning...")
             return "No Dockerfiles found, please try again"
         try:
-            if update:      
+            if update:
+                logger.info("Update exists: {}".format(update))
                 delete_deployment(deployment_name, config_location, True)
             else:
+                ("Update doesn't exist: {}".format(update))
                 delete_deployment(deployment_name, config_location)
         except:
             logger.error("Tried to delete deployment, but threw an error")
-            pass
-        try:
-            create_deployment(create_deployment_object(images, deployment_name, config_location=config_location), config_location=config_location)
-        except: # This deployment likely already exists
-            try:
-                update_deployment(create_deployment_object(images, deployment_name, config_location=config_location), deployment_name, config_location=config_location)
-            except:
-                logger.error("Could not create or update a deployment object, check the status of the cluster.")
+        create_deployment(create_deployment_object(images, deployment_name, config_location=config_location), config_location=config_location)
+        logger.info("Creating deployment")
         try:
             port = -1
             for image in images:
@@ -124,7 +120,8 @@ def deploy(update):
             if repo is not None and user is not None:
                 user_param = db.users.find({'username': user})
                 if user_param:
-                   db.users.update({'username':user},{$push:{'git-repo':repo}})
+                   #db.users.update({'username':user},{$push:{'git-repo':repo}})
+                   pass
                 else:
                     user = {
                         'username': user,
